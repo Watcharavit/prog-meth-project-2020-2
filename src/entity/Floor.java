@@ -1,8 +1,9 @@
 package entity;
 
+import entity.base.StillObject;
 import gui.Sprite;
 
-public class PermWall extends Block{
+public class Floor extends StillObject{
 
 	@Override
 	public Sprite getSprite() {

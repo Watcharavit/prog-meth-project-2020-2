@@ -1,10 +1,12 @@
 package entity;
 
+import entity.base.Being;
 import entity.base.Collidable;
+import entity.base.Equipment;
+import gui.Sprite;
 import logic.Direction;
-import logic.Sprite;
 
-public class Player extends Character implements Collidable {
+public class Player extends Being implements Collidable {
 	private Equipment equipment; // ?? จะเป็นequipment หรือ hasMitt / hasBombKicker
 	private int bombNumber;
 	private int bombRadius;
@@ -18,7 +20,7 @@ public class Player extends Character implements Collidable {
 	}
 
 	@Override
-	public void collide(Character otherCharacter) {
+	public void collide(Being otherCharacter) {
 		// TODO Auto-generated method stub
 
 	}

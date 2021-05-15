@@ -1,19 +1,20 @@
 package entity;
 
+import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Updatable;
+import gui.Sprite;
 import logic.Direction;
-import logic.Sprite;
 
-public class WallThornMonster extends Character implements Updatable, Collidable {
+public class WallThornMonster extends Being implements Updatable, Collidable {
 
 	public WallThornMonster() {
 		this.setAlive(true);
 	}
 
 	@Override
-	public void collide(Character otherCharacter) {
+	public void collide(Being otherCharacter) {
 		otherCharacter.setAlive(false);
 	}
 

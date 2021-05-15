@@ -1,12 +1,13 @@
 package entity;
 
+import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Updatable;
+import gui.Sprite;
 import logic.Direction;
-import logic.Sprite;
 
-public class BalloonMonster extends Character implements Collidable, Updatable {
+public class BalloonMonster extends Being implements Collidable, Updatable {
 
 	public BalloonMonster() {
 		this.isAlive = true;
@@ -24,7 +25,7 @@ public class BalloonMonster extends Character implements Collidable, Updatable {
 	}
 
 	@Override
-	public void collide(Character otherCharacter) {
+	public void collide(Being otherCharacter) {
 
 		// Balloon win player
 		if (otherCharacter instanceof Player) {

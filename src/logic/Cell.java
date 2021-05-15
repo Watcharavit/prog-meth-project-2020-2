@@ -1,8 +1,9 @@
 package logic;
 
+import entity.base.Being;
 
 public class Cell {
-	private entity.Character myCharacter;
+	private Being myCharacter;
 	private boolean isEmpty;
 
 	public Cell() {
@@ -13,11 +14,11 @@ public class Cell {
 		return isEmpty;
 	}
 
-	public entity.Character getMyCharacter() {
+	public Being getMyCharacter() {
 		return myCharacter;
 	}
 
-	public void setMyCharacter(entity.Character myCharacter) {
+	public void setMyCharacter(Being myCharacter) {
 		this.myCharacter = myCharacter;
 	}
 

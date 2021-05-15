@@ -1,5 +1,7 @@
 package entity;
 
-public abstract class Block extends Object{
+import entity.base.StillObject;
+
+public abstract class Block extends StillObject{
 	
 }

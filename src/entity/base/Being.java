@@ -1,11 +1,11 @@
-package entity;
+package entity.base;
 
-import entity.base.Entity;
 import logic.Direction;
 
-public abstract class Character extends Entity {
+public abstract class Being extends Entity {
 	protected boolean isAlive;
 	protected Direction direction;
+	private double x, y;
 
 	
 	// not sure
@@ -24,5 +24,10 @@ public abstract class Character extends Entity {
 		this.isAlive = isAlive;
 	}
 	
-	
+	public double getX() {
+		return this.x;
+	}
+	public double getY() {
+		return this.y;
+	}
 }

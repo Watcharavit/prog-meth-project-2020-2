@@ -1,6 +1,6 @@
 package entity.base;
 
-import logic.Sprite;  
+import gui.Sprite;  
 
 public abstract class Entity {
 
