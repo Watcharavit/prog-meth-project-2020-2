@@ -26,7 +26,7 @@ public class Player extends Being implements Collidable,Updatable {
 		super.size = 0.6;
 		this.equipment = null;
 		this.bombNumber = 1;
-		this.bombRadius = 1;
+		this.bombRadius = 5;
 		this.name = name;
 		this.keyMap = keyMap;
 	}

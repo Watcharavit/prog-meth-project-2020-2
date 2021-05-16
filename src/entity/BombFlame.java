@@ -12,9 +12,11 @@ import gui.Sprite;
 public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
 	final Player placer;
 	double remainingFrame;
-	public BombFlame(Player placer) {
+	boolean stopBlast;
+	public BombFlame(Player placer, boolean stopBlast) {
 		this.placer = placer;
 		this.remainingFrame = 60;
+		this.stopBlast = stopBlast;
 	}
 	@Override
 	public void pass(Being character, Tile currentTile) {
@@ -37,6 +39,11 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 		int x = tile.x;
 		int y = tile.y;
 		GameSingleton.world.setTileObject(x, y, new Floor());
+	}
+	
+	@Override
+	public boolean getCanStopBlast() {
+		return this.stopBlast;
 	}
 
 }

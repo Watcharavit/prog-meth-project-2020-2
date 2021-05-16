@@ -2,7 +2,6 @@ package entity;
 
 import application.GameSingleton;
 import application.Tile;
-import entity.base.BlastBlockable;
 import entity.base.Bombable;
 import entity.base.Entity;
 import entity.base.Pushable;
@@ -52,11 +51,12 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 		Tile tile = GameSingleton.world.getTile(x, y);
 		StillObject tileObject = tile.getObject();
 		if (tileObject instanceof Bombable) {
-			GameSingleton.world.setTileObject(x, y, new BombFlame(placer));
-			((Bombable) tileObject).bombed();
-			if (!(tileObject instanceof BlastBlockable)) {
-				return false;
-			}
+			Bombable casted = ((Bombable) tileObject);
+			boolean stopBlast = casted.getCanStopBlast();
+			BombFlame flame = new BombFlame(placer, stopBlast);
+			GameSingleton.world.setTileObject(x, y, flame);
+			casted.bombed();
+			if (!stopBlast) return false;
 		}
 		return true;
 	}
