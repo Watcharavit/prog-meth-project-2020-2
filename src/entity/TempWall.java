@@ -3,10 +3,10 @@ package entity;
 import application.Tile;
 import entity.base.Destroyable;
 import entity.base.Passable;
-import entity.base.Terrain;
+import entity.base.StillObject;
 import gui.Sprite;
 
-public class TempWall extends Terrain implements Destroyable {
+public class TempWall extends StillObject implements Destroyable {
 	private static final Sprite sprite = new Sprite(3);
 	@Override
 	public Sprite getSprite() {

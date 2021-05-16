@@ -69,8 +69,12 @@ public class GameSingleton {
 		GameSingleton.initializeGameLoop();
 	}
 	private static void initializePlayers() {
-		initializePlayer("Player 1", player1Control, 1, 1);
-		initializePlayer("Player 2", player2Control, WIDTH - 1, HEIGHT- 1);
+		initializePlayer("Player 1", player1Control, 2.5, 2.5);
+		initializePlayer("Player 2", player2Control, WIDTH - 2.5, HEIGHT- 2.5);
+	}
+	private static void initializePlayer(String name, Map<PlayerControl, KeyCode> keyMap, double posX, double posY) {
+		Player player = new Player(name, posX, posY, keyMap);
+		GameSingleton.world.addBeing(player);
 	}
 	private static void initializeListeners() {
 		GameSingleton.canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -102,8 +106,5 @@ public class GameSingleton {
 	public static HashSet<KeyCode> getActiveKeys() {
 		return GameSingleton.activeKeys;
 	}
-	private static void initializePlayer(String name, Map<PlayerControl, KeyCode> keyMap, int posX, int posY) {
-		Player player = new Player(name, posX, posY, keyMap);
-		GameSingleton.world.addBeing(player);
-	}
+	
 }

@@ -50,6 +50,10 @@ public class World {
 		}
 	}
 	
+	public Tile getTile(int x, int y) {
+		return this.tiles[x][y];
+	}
+	
 	private void redrawTile(int x, int y) {
 		StillObject object = this.tiles[x][y].getObject();
 		object.getSprite().drawTopLeft(gc, x*tileSize, y*tileSize);
@@ -77,8 +81,8 @@ public class World {
 		int floorY = (int) Math.floor(centerY);
 		int y = (centerY - floorY > 0.5) ? floorY : floorY - 1;
 		
-		for (int i = Math.max(0, x); i <= Math.min(width-1, x+1); i++) {
-			for (int j = Math.max(0, y); j <= Math.min(height-1, y+1); j++) {
+		for (int i = x; i <= x+1; i++) {
+			for (int j = y; j <= y+1; j++) {
 				this.redrawTile(i, j);
 			}
 		}

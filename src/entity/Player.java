@@ -22,7 +22,9 @@ public class Player extends Being implements Collidable,Updatable {
 	private final Map<PlayerControl, KeyCode> keyMap;
 
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
-		super(posX, posY);
+		super.x = posX;
+		super.y = posY;
+		super.size = 0.6;
 		this.equipment = null;
 		this.bombNumber = 1;
 		this.bombRadius = 1;
@@ -100,5 +102,6 @@ public class Player extends Being implements Collidable,Updatable {
 		}
 		
 	}
+
 
 }
