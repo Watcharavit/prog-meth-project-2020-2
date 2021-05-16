@@ -96,8 +96,9 @@ public class GameSingleton {
 		GameLoopTimer timer = new GameLoopTimer() {
 			@Override
 			public void tick(long frameTimeNano) {
+				double frameTimeRatio = frameTimeNano * 3 / (5e7); // 60fps = 16.67ms = 1.00
 				for (Updatable updatable : GameSingleton.updatableEntities) {
-					updatable.update(frameTimeNano);
+					updatable.update(frameTimeRatio);
 				}
 			}
 		};
