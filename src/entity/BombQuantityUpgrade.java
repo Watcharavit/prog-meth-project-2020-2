@@ -1,8 +1,8 @@
 package entity;
 
+import application.Tile;
 import entity.base.Being;
 import gui.Sprite;
-import gui.Tile;
 
 public class BombQuantityUpgrade extends ItemDrop {
 

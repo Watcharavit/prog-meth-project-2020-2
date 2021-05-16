@@ -1,8 +1,8 @@
 package entity;
 
+import application.Tile;
 import entity.base.Being;
 import entity.base.Passable;
-import gui.Tile;
 
 public class BombFlame implements Passable {
 

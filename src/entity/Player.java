@@ -1,22 +1,33 @@
 package entity;
 
+import java.util.Map;
+import java.util.Set;
+
+import application.GameSingleton;
 import entity.base.Being;
 import entity.base.Collidable;
+import entity.base.Entity;
 import entity.base.Equipment;
+import entity.base.Updatable;
 import gui.Sprite;
+import javafx.scene.input.KeyCode;
 import logic.Direction;
+import logic.PlayerControl;
 
-public class Player extends Being implements Collidable {
-	private Equipment equipment; // ?? จะเป็นequipment หรือ hasMitt / hasBombKicker
+public class Player extends Being implements Collidable,Updatable {
+	private Equipment equipment; // this is good already; hasMitt/hasBombKicker makes for worse abstraction
 	private int bombNumber;
 	private int bombRadius;
+	private final String name;
+	private final Map<PlayerControl, KeyCode> keyMap;
 
-	public Player() {
+	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
+		super(posX, posY);
 		this.equipment = null;
-		this.isAlive = true;
 		this.bombNumber = 1;
 		this.bombRadius = 1;
-
+		this.name = name;
+		this.keyMap = keyMap;
 	}
 
 	@Override
@@ -25,40 +36,12 @@ public class Player extends Being implements Collidable {
 
 	}
 
+	private static final Sprite sprite = new Sprite(4);
 	@Override
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
-
-	public boolean move(Direction dir) {
-		double targetx = x;
-		double targety = y;
-
-		this.direction = dir; // Update move position
-
-		// one player ยังไม่ได้เพิ่ม player2,3
-		switch (dir) {
-		case LEFT:
-			targetx -= 1;
-			break;
-		case UP:
-			targety -= 1;
-			break;
-		case RIGHT:
-			targetx += 1;
-			break;
-		case DOWN:
-			targety += 1;
-			break;
-		default:
-			break;
-
-		}
-		// if character can walk return true, else return false
-
-	}
-
+	
 	/*
 	 * 2 player ใช้ได้ แต่ ถ้ามี3player น่าจะต้องเขียนในเกม public void
 	 * equip(Equipment BombKicker, Player leastScorePlayer, Equipment mitt) { //
@@ -88,6 +71,34 @@ public class Player extends Being implements Collidable {
 
 	public void setBombRadius(int bombRadius) {
 		this.bombRadius = bombRadius;
+	}
+
+	@Override
+	public void update(long frameTimeNano) {
+		Set<KeyCode> activeKeys = GameSingleton.getActiveKeys();
+		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_LEFT))) {
+			super.setFacing(Direction.LEFT);
+			super.move(-0.1, 0);
+		}
+		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_RIGHT))) {
+			super.setFacing(Direction.RIGHT);
+			super.move(0.1, 0);
+		}
+		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_DOWN))) {
+			super.setFacing(Direction.DOWN);
+			super.move(0, 0.1);
+		}
+		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_UP))) {
+			super.setFacing(Direction.UP);
+			super.move(0, -0.1);
+		}
+		if (activeKeys.contains(keyMap.get(PlayerControl.PLACE_BOMB))) {
+			// TODO
+		}
+		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
+			// TODO
+		}
+		
 	}
 
 }

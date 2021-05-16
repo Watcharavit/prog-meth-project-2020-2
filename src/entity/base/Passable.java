@@ -1,6 +1,6 @@
 package entity.base;
 
-import gui.Tile;
+import application.Tile;
 
 public interface Passable {
 	public void pass(entity.base.Being character, Tile currentTile);

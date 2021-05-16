@@ -1,33 +1,34 @@
 package entity.base;
 
+import application.GameSingleton;
 import logic.Direction;
 
 public abstract class Being extends Entity {
-	protected boolean isAlive;
-	protected Direction direction;
+	protected Direction facing;
 	private double x, y;
-
 	
-	// not sure
-	/*public void Character() {
-		direction = Direction.NONE;
-	}*/
-	public abstract boolean move(Direction dir); 
-	// move player the same direction as input and move balloon/wall monster randomly
-
-
-	public boolean isAlive() {
-		return isAlive;
+	public Being(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 
-	public void setAlive(boolean isAlive) {
-		this.isAlive = isAlive;
-	}
+	public void move(double dx, double dy) {
+		double oldX = this.x;
+		double oldY = this.y;
+		this.x += dx;
+		this.y += dy;
+		GameSingleton.world.rerenderAround(oldX, oldY);
+		GameSingleton.world.rerenderBeing(this);
+	};
 	
 	public double getX() {
 		return this.x;
 	}
 	public double getY() {
 		return this.y;
+	}
+	
+	public void setFacing(Direction facing) {
+		this.facing = facing;
 	}
 }

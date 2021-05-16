@@ -1,6 +1,6 @@
 package entity.base;
 
-import gui.Tile;
+import application.Tile;
 
 public interface Destroyable {
 	public abstract void bombed(Tile currentTile);
