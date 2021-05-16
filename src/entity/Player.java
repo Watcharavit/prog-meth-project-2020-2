@@ -22,8 +22,7 @@ public class Player extends Being implements Collidable,Updatable {
 	private final Map<PlayerControl, KeyCode> keyMap;
 
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
-		super.x = posX;
-		super.y = posY;
+		super(posX, posY);
 		super.size = 0.6;
 		this.equipment = null;
 		this.bombNumber = 1;
@@ -95,13 +94,14 @@ public class Player extends Being implements Collidable,Updatable {
 			super.move(0, -0.1 * frameTimeRatio);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.PLACE_BOMB))) {
-			// TODO
+			this.placeBomb();
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
 			// TODO
 		}
-		
 	}
-
-
+	
+	private void placeBomb() {
+		GameSingleton.world.setTileObject((int)super.x, (int)super.y, new Bomb());
+	}
 }

@@ -1,5 +1,9 @@
 package entity.base;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import application.GameSingleton;
 import application.Tile;
 import logic.Direction;
@@ -7,37 +11,53 @@ import logic.Direction;
 public abstract class Being extends Entity {
 	protected Direction facing;
 	protected double x, y, size;
-	protected boolean isAlive;
+	
+	public Being(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
 
-	public void move(double dx, double dy) {
-		double oldX = this.x;
-		double oldY = this.y;
-		double nX = oldX + dx;
-		double nY = oldY + dy;
+	private Tile[] getCornerTiles(double x, double y) {
 		double halfSize = size / 2;
-		int l = (int) Math.floor(nX - halfSize);
-		int r = (int) Math.floor(nX + halfSize);
-		int u = (int) Math.floor(nY - halfSize);
-		int d = (int) Math.floor(nY + halfSize);
+		int l = (int) (x - halfSize);
+		int r = (int) (x + halfSize);
+		int u = (int) (y - halfSize);
+		int d = (int) (y + halfSize);
 		Tile lu = GameSingleton.world.getTile(l, u);
 		Tile ld = GameSingleton.world.getTile(l, d);
 		Tile ru = GameSingleton.world.getTile(r, u);
 		Tile rd = GameSingleton.world.getTile(r, d);
-		StillObject slu = lu.getObject();
-		StillObject sld = ld.getObject();
-		StillObject sru = ru.getObject();
-		StillObject srd = rd.getObject();
-		if (slu instanceof Passable && sld instanceof Passable && sru instanceof Passable && srd instanceof Passable) {
-			((Passable) slu).pass(this, lu);
-			((Passable) sld).pass(this, ld);
-			((Passable) sru).pass(this, ru);
-			((Passable) srd).pass(this, rd);
+		Tile[] s = {lu, ld, ru, rd};
+		return s;
+	}
+	public boolean move(double dx, double dy) {
+		double oldX = this.x;
+		double oldY = this.y;
+		double nX = oldX + dx;
+		double nY = oldY + dy;
+		Tile[] cornerTiles = getCornerTiles(nX, nY);
+		HashSet<Tile> currentCornerTiles = new HashSet<Tile>(Arrays.asList(getCornerTiles(oldX, oldY)));
+		boolean allPassable = true;
+		for (Tile tile : cornerTiles) {
+			if (!(tile.getObject() instanceof Passable) && !currentCornerTiles.contains(tile)) {
+				allPassable = false;
+				break;
+			}
+		}
+		if (allPassable) {
+			for (Tile tile : cornerTiles) {
+				StillObject so = tile.getObject();
+				if (so instanceof Passable) ((Passable) so).pass(this, tile);
+			}
 			this.x += dx;
 			this.y += dy;
 			GameSingleton.world.rerenderAround(oldX, oldY);
 			GameSingleton.world.rerenderBeing(this);
+			return true;
 		}
-		
+		else {
+			return false;
+		}
 	}
 	
 	public double getX() {
@@ -49,14 +69,6 @@ public abstract class Being extends Entity {
 	
 	public void setFacing(Direction facing) {
 		this.facing = facing;
-	}
-
-	public boolean isAlive() {
-		return isAlive;
-	}
-
-	public void setAlive(boolean isAlive) {
-		this.isAlive = isAlive;
 	}
 	
 }

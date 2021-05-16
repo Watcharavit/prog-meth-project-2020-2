@@ -3,6 +3,7 @@ package application;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -33,11 +34,13 @@ public class GameSingleton {
 		player1Control.put(PlayerControl.MOVE_LEFT, KeyCode.A);
 		player1Control.put(PlayerControl.MOVE_DOWN, KeyCode.S);
 		player1Control.put(PlayerControl.MOVE_RIGHT, KeyCode.D);
+		player1Control.put(PlayerControl.PLACE_BOMB, KeyCode.SPACE);
 		
 		player2Control.put(PlayerControl.MOVE_UP, KeyCode.UP);
 		player2Control.put(PlayerControl.MOVE_LEFT, KeyCode.LEFT);
 		player2Control.put(PlayerControl.MOVE_DOWN, KeyCode.DOWN);
 		player2Control.put(PlayerControl.MOVE_RIGHT, KeyCode.RIGHT);
+		player2Control.put(PlayerControl.PLACE_BOMB, KeyCode.ENTER);
 		
 	}
 	
@@ -46,12 +49,14 @@ public class GameSingleton {
 	
 	public static void addEntity(Entity entity) {
 		GameSingleton.allEntities.add(entity);
+		System.out.println("Added entity" + entity);
 		if (entity instanceof Updatable) {
 			GameSingleton.updatableEntities.add((Updatable) entity);
 		}
 	}
 	public static void removeEntity(Entity entity) {
 		GameSingleton.allEntities.remove(entity);
+		System.out.println("Removed entity" + entity);
 		if (entity instanceof Updatable) {
 			GameSingleton.updatableEntities.remove((Updatable) entity);
 		}
@@ -64,7 +69,6 @@ public class GameSingleton {
 		canvas.setWidth(WIDTH*TILE_SIZE);
 		GameSingleton.world= new World(WIDTH, HEIGHT, TILE_SIZE, canvas);
 		GameSingleton.initializePlayers();
-		GameSingleton.world.rerenderAll();
 		GameSingleton.initializeListeners();
 		GameSingleton.initializeGameLoop();
 	}
@@ -97,7 +101,9 @@ public class GameSingleton {
 			@Override
 			public void tick(long frameTimeNano) {
 				double frameTimeRatio = frameTimeNano * 3 / (5e7); // 60fps = 16.67ms = 1.00
-				for (Updatable updatable : GameSingleton.updatableEntities) {
+				Set<Updatable> updatableClone = new HashSet<Updatable>();
+				updatableClone.addAll(GameSingleton.updatableEntities);
+				for (Updatable updatable : updatableClone) {
 					updatable.update(frameTimeRatio);
 				}
 			}

@@ -23,8 +23,8 @@ public class World {
 	
 	public World(int width, int height, int tileSize, Canvas canvas) {
 		
-		Tile[][] tiles = new Tile[width][height];
-		MapGenerator.generateMap(tiles);
+		this.tiles = new Tile[width][height];
+		MapGenerator.generateMap(this.tiles);
 		
 		this.width = width;
 		this.height = height;
@@ -33,8 +33,9 @@ public class World {
 		this.canvas = canvas;
 		this.gc = this.canvas.getGraphicsContext2D();
 		
-		this.tiles = tiles;
 		this.beings = new HashSet<Being>();
+		
+		this.rerenderAll();
 	}
 	
 	public void addBeing(Being being) {
@@ -52,6 +53,11 @@ public class World {
 	
 	public Tile getTile(int x, int y) {
 		return this.tiles[x][y];
+	}
+	
+	public void setTileObject(int x, int y, StillObject object) {
+		this.tiles[x][y].setObject(object);
+		this.rerenderTile(x, y);
 	}
 	
 	private void redrawTile(int x, int y) {
