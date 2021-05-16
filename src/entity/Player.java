@@ -102,6 +102,9 @@ public class Player extends Being implements Collidable,Updatable {
 	}
 	
 	private void placeBomb() {
-		GameSingleton.world.setTileObject((int)super.x, (int)super.y, new Bomb());
+		if (GameSingleton.world.getTile((int)super.x, (int)super.y).getObject() instanceof Floor) {
+			Bomb bomb = new Bomb(this);
+			GameSingleton.world.setTileObject((int)super.x, (int)super.y, bomb);
+		}
 	}
 }

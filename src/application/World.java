@@ -75,7 +75,7 @@ public class World {
 		for (Being being : this.beings) {
 			double beingX = being.getX();
 			double beingY = being.getY();
-			if (beingX > x - 0.5 && beingX < x + 0.5 && beingY > y - 0.5 && beingY < y + 0.5) {
+			if (beingX > x - 1 && beingX < x + 2 && beingY > y - 1 && beingY < y + 2) {
 				this.redrawBeing(being);
 			}
 		}

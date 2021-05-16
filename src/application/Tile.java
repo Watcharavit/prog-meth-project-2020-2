@@ -4,7 +4,7 @@ import entity.base.StillObject;
 
 public class Tile {
 	StillObject object;
-	private final int x, y;
+	public final int x, y;
 	public Tile(int x, int y) {
 		this.x = x;
 		this.y = y;

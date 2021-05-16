@@ -1,17 +1,42 @@
 package entity;
 
+import application.GameSingleton;
 import application.Tile;
 import entity.base.Being;
+import entity.base.Bombable;
 import entity.base.Passable;
+import entity.base.StillObject;
+import entity.base.Updatable;
+import gui.Sprite;
 
-public class BombFlame implements Passable {
-
+public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
+	final Player placer;
+	double remainingFrame;
+	public BombFlame(Player placer) {
+		this.placer = placer;
+		this.remainingFrame = 60;
+	}
 	@Override
 	public void pass(Being character, Tile currentTile) {
-		// TODO Auto-generated method stub
-		if (character instanceof Player ||character instanceof BalloonMonster) {
-			character.setAlive(false);
+		
+	}
+	private static final Sprite sprite = new Sprite(6);
+	@Override
+	public Sprite getSprite() {
+		return sprite;
+	}
+	@Override
+	public void update(double frameTimeRatio) {
+		this.remainingFrame -= frameTimeRatio;
+		if (this.remainingFrame <= 0) {
+			this.remove();
 		}
+	}
+	private void remove() {
+		Tile tile = super.getTile();
+		int x = tile.x;
+		int y = tile.y;
+		GameSingleton.world.setTileObject(x, y, new Floor());
 	}
 
 }

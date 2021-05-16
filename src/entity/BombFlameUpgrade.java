@@ -2,6 +2,7 @@ package entity;
 
 import application.Tile;
 import entity.base.Being;
+import entity.base.ItemDrop;
 import gui.Sprite;
 
 public class BombFlameUpgrade extends ItemDrop {
