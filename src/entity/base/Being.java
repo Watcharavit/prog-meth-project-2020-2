@@ -7,6 +7,7 @@ import logic.Direction;
 public abstract class Being extends Entity {
 	protected Direction facing;
 	protected double x, y, size;
+	protected boolean isAlive;
 
 	public void move(double dx, double dy) {
 		double oldX = this.x;
@@ -49,4 +50,13 @@ public abstract class Being extends Entity {
 	public void setFacing(Direction facing) {
 		this.facing = facing;
 	}
+
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+	
 }

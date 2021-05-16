@@ -2,20 +2,13 @@ package entity;
 
 import entity.base.Being;
 import entity.base.Collidable;
-import entity.base.Entity;
 import entity.base.Updatable;
 import gui.Sprite;
-import logic.Direction;
 
 public class BalloonMonster extends Being implements Collidable, Updatable {
 
 	public BalloonMonster() {
 		this.isAlive = true;
-	}
-
-	@Override
-	public void update(Entity entity) {
-
 	}
 
 	@Override
@@ -38,9 +31,9 @@ public class BalloonMonster extends Being implements Collidable, Updatable {
 	}
 
 	@Override
-	public boolean move(Direction dir) {
+	public void update(double frameTimeRatio) {
 		// TODO Auto-generated method stub
-		return false;
+
 	}
 
 }

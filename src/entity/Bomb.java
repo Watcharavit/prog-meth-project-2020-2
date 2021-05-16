@@ -7,13 +7,13 @@ import entity.base.Updatable;
 public class Bomb implements Pushable, Updatable {
 
 	@Override
-	public void update(Entity entity) {
+	public void push(Player player) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void push(Player player) {
+	public void update(double frameTimeRatio) {
 		// TODO Auto-generated method stub
 
 	}

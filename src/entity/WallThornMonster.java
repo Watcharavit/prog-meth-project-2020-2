@@ -18,11 +18,7 @@ public class WallThornMonster extends Being implements Updatable, Collidable {
 		otherCharacter.setAlive(false);
 	}
 
-	@Override
-	public void update(Entity entity) {
-		// TODO Auto-generated method stub
 
-	}
 
 	@Override
 	public Sprite getSprite() {
@@ -31,9 +27,10 @@ public class WallThornMonster extends Being implements Updatable, Collidable {
 	}
 
 	@Override
-	public boolean move(Direction dir) {
+	public void update(double frameTimeRatio) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
+
 
 }
