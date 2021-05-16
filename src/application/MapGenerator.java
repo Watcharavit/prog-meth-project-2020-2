@@ -2,6 +2,7 @@ package application;
 
 import entity.Floor;
 import entity.PermWall;
+import entity.TempWall;
 import entity.base.StillObject;
 
 public class MapGenerator {
@@ -19,7 +20,12 @@ public class MapGenerator {
 					tiles[i][j].setObject(new PermWall());
 				}
 				else {
-					tiles[i][j].setObject(new Floor());
+					if (Math.random() > 0.5) {
+						tiles[i][j].setObject(new TempWall());
+					}
+					else {
+						tiles[i][j].setObject(new Floor());
+					}
 				}
 			}
 		}
