@@ -37,14 +37,14 @@ public class Player extends Being implements Collidable,Updatable {
 
 	}
 
-	private static final Sprite sprite = new Sprite(4);
+	private static final Sprite sprite = new Sprite(5);
 	@Override
 	public Sprite getSprite() {
 		return sprite;
 	}
 	
 	/*
-	 * 2 player à¹ƒà¸Šà¹‰à¹„à¸”à¹‰ à¹�à¸•à¹ˆ à¸–à¹‰à¸²à¸¡à¸µ3player à¸™à¹ˆà¸²à¸ˆà¸°à¸•à¹‰à¸­à¸‡à¹€à¸‚à¸µà¸¢à¸™à¹ƒà¸™à¹€à¸�à¸¡ public void
+	 * 2 player Ã Â¹Æ’Ã Â¸Å Ã Â¹â€°Ã Â¹â€žÃ Â¸â€�Ã Â¹â€° Ã Â¹ï¿½Ã Â¸â€¢Ã Â¹Ë† Ã Â¸â€“Ã Â¹â€°Ã Â¸Â²Ã Â¸Â¡Ã Â¸Âµ3player Ã Â¸â„¢Ã Â¹Ë†Ã Â¸Â²Ã Â¸Ë†Ã Â¸Â°Ã Â¸â€¢Ã Â¹â€°Ã Â¸Â­Ã Â¸â€¡Ã Â¹â‚¬Ã Â¸â€šÃ Â¸ÂµÃ Â¸Â¢Ã Â¸â„¢Ã Â¹Æ’Ã Â¸â„¢Ã Â¹â‚¬Ã Â¸ï¿½Ã Â¸Â¡ public void
 	 * equip(Equipment BombKicker, Player leastScorePlayer, Equipment mitt) { //
 	 * method to equip bombkicker for highest score player and mitt for least score
 	 * player setEquipment(BombKicker); leastScorePlayer.setEquipment(mitt); }
