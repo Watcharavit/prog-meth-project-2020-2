@@ -10,12 +10,13 @@ import entity.base.Updatable;
 import gui.Sprite;
 
 public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
+	static final int DEFAULT_REMAINING_FRAME = 60;
 	final Player placer;
 	double remainingFrame;
 	boolean stopBlast;
 	public BombFlame(Player placer, boolean stopBlast) {
 		this.placer = placer;
-		this.remainingFrame = 60;
+		this.remainingFrame = DEFAULT_REMAINING_FRAME;
 		this.stopBlast = stopBlast;
 	}
 	@Override

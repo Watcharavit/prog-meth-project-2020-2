@@ -80,6 +80,7 @@ class GameController {
 		renderQueueStage.add(tile);
 	}
 	private void onTick(double frameTimeRatio) {
+		if (frameTimeRatio > 1.1) System.out.println("Slow Update: " + frameTimeRatio);
 		updateUpdatables(frameTimeRatio);
 		render();
 	}

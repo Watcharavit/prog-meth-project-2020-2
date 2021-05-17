@@ -54,12 +54,6 @@ public class GameSingleton {
 		tile.setObject(object);
 		controller.queueTileRender(tile);
 	}
-	public static void addGhostEntity(Entity entity) {
-		controller.addEntity(entity);
-	}
-	public static void removeGhostEntity(Entity entity) {
-		controller.removeEntity(entity);
-	}
 	public static HashSet<KeyCode> getActiveKeys() {
 		return inputManager.getActiveKeys();
 	}
