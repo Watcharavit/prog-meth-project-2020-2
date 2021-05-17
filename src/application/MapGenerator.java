@@ -20,7 +20,7 @@ class MapGenerator {
 					GameSingleton.setTileObject(i, j, new PermWall());
 				}
 				else {
-					if (Math.random() > 0.95) {
+					if (Math.random() > 0.5) {
 						GameSingleton.setTileObject(i, j, new TempWall());
 					}
 					else {
