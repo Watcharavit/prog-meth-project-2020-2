@@ -23,7 +23,7 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 	public void pass(Being character) {
 		
 	}
-	private static final Sprite sprite = new Sprite(6);
+	private static final Sprite sprite = new Sprite(1);
 	@Override
 	public Sprite getSprite() {
 		return sprite;

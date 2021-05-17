@@ -40,10 +40,12 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 		GameSingleton.setTileObject(x, y, new BombCenter(placer, radius));
 	}
 
-	private static final Sprite sprite = new Sprite(5);
+	private static final Sprite firstSprite = new Sprite(4);
+	private static final Sprite secondSprite = new Sprite(3);
+	private static final Sprite thirdSprite = new Sprite(0);
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		return firstSprite;
 	}
 
 	@Override
