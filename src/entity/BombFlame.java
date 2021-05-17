@@ -12,11 +12,11 @@ import gui.Sprite;
 public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
 	static final int DEFAULT_REMAINING_FRAME = 60;
 	final Player placer;
-	double remainingFrame;
+	double remainingTicks;
 	boolean stopBlast;
 	public BombFlame(Player placer, boolean stopBlast) {
 		this.placer = placer;
-		this.remainingFrame = DEFAULT_REMAINING_FRAME;
+		this.remainingTicks = DEFAULT_REMAINING_FRAME;
 		this.stopBlast = stopBlast;
 	}
 	@Override
@@ -29,9 +29,9 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 		return sprite;
 	}
 	@Override
-	public void update(double frameTimeRatio) {
-		this.remainingFrame -= frameTimeRatio;
-		if (this.remainingFrame <= 0) {
+	public void update(double ticksPassed) {
+		this.remainingTicks -= ticksPassed;
+		if (this.remainingTicks <= 0) {
 			this.remove();
 		}
 	}

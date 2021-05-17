@@ -26,8 +26,8 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 	}
 
 	@Override
-	public void update(double frameTimeRatio) {
-		this.remainingTicks -= frameTimeRatio;
+	public void update(double ticksPassed) {
+		this.remainingTicks -= ticksPassed;
 		if (this.remainingTicks <= 0) {
 			startExplosion();
 		}

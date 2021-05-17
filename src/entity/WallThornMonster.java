@@ -27,7 +27,7 @@ public class WallThornMonster extends Being implements Updatable, Collidable {
 	}
 
 	@Override
-	public void update(double frameTimeRatio) {
+	public void update(double ticksPassed) {
 		// TODO Auto-generated method stub
 		
 	}

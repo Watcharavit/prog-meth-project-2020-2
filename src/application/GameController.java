@@ -37,11 +37,11 @@ class GameController {
 			this.updatableEntities.remove((Updatable) entity);
 		}
 	}
-	private void updateUpdatables(double frameTimeRatio) {
+	private void updateUpdatables(double ticksPassed) {
 		Set<Updatable> updatableCloned = new HashSet<Updatable>();
 		updatableCloned.addAll(updatableEntities);
 		for (Updatable updatable : updatableCloned) {
-			updatable.update(frameTimeRatio);
+			updatable.update(ticksPassed);
 		}
 	}
 	private void propagateTileRender(Tile tile) {
@@ -79,17 +79,17 @@ class GameController {
 	protected void queueTileRender(Tile tile) {
 		renderQueueStage.add(tile);
 	}
-	private void onTick(double frameTimeRatio) {
-		if (frameTimeRatio > 1.1) System.out.println("Slow Update: " + frameTimeRatio);
-		updateUpdatables(frameTimeRatio);
+	private void onTick(double ticksPassed) {
+		if (ticksPassed > 1.1) System.out.println("Slow Update: " + ticksPassed);
+		updateUpdatables(ticksPassed);
 		render();
 	}
 	protected void initializeLoop() {
 		GameLoopTimer timer = new GameLoopTimer() {
 			@Override
 			protected void tick(long frameTimeNano) {
-				double frameTimeRatio = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
-				onTick(frameTimeRatio);
+				double ticksPassed = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
+				onTick(ticksPassed);
 			}
 		};
 		timer.start();

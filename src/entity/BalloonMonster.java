@@ -31,7 +31,7 @@ public class BalloonMonster extends Being implements Collidable, Updatable {
 	}
 
 	@Override
-	public void update(double frameTimeRatio) {
+	public void update(double ticksPassed) {
 		// TODO Auto-generated method stub
 
 	}

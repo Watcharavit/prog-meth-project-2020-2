@@ -20,12 +20,12 @@ public class BombCenter extends BombFlame implements Updatable {
 	}
 	
 	@Override
-	public void update(double frameTimeRatio) {
-		super.update(frameTimeRatio);
-		this.explodedTicks += frameTimeRatio;
+	public void update(double ticksPassed) {
+		super.update(ticksPassed);
+		this.explodedTicks += ticksPassed;
 		this.explodedRadius = (int) (this.explodedTicks);
 		if (!explosionFinished) {
-			super.remainingFrame = BombFlame.DEFAULT_REMAINING_FRAME;
+			super.remainingTicks = BombFlame.DEFAULT_REMAINING_FRAME;
 			this.explode(Math.min(radius, explodedRadius));
 			if (radius <= explodedRadius) {
 				explosionFinished = true;

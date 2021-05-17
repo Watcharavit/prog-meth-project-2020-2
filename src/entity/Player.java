@@ -75,23 +75,23 @@ public class Player extends Being implements Collidable,Updatable {
 	}
 
 	@Override
-	public void update(double frameTimeRatio) {
+	public void update(double ticksPassed) {
 		Set<KeyCode> activeKeys = GameSingleton.getActiveKeys();
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_LEFT))) {
 			super.setFacing(Direction.LEFT);
-			GameSingleton.moveBeing(this, -0.1 * frameTimeRatio, 0);
+			GameSingleton.moveBeing(this, -0.1 * ticksPassed, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_RIGHT))) {
 			super.setFacing(Direction.RIGHT);
-			GameSingleton.moveBeing(this, 0.1 * frameTimeRatio, 0);
+			GameSingleton.moveBeing(this, 0.1 * ticksPassed, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_DOWN))) {
 			super.setFacing(Direction.DOWN);
-			GameSingleton.moveBeing(this, 0, 0.1 * frameTimeRatio);
+			GameSingleton.moveBeing(this, 0, 0.1 * ticksPassed);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_UP))) {
 			super.setFacing(Direction.UP);
-			GameSingleton.moveBeing(this, 0, -0.1 * frameTimeRatio);
+			GameSingleton.moveBeing(this, 0, -0.1 * ticksPassed);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.PLACE_BOMB))) {
 			this.placeBomb();
