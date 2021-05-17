@@ -15,6 +15,7 @@ import logic.Direction;
 import logic.PlayerControl;
 
 public class Player extends Being implements Collidable,Updatable {
+	public static final double SIZE = 0.6;
 	private Equipment equipment; // this is good already; hasMitt/hasBombKicker makes for worse abstraction
 	private int bombNumber;
 	private int bombRadius;
@@ -22,11 +23,10 @@ public class Player extends Being implements Collidable,Updatable {
 	private final Map<PlayerControl, KeyCode> keyMap;
 
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
-		super(posX, posY);
-		super.size = 0.6;
+		super(posX, posY, SIZE);
 		this.equipment = null;
 		this.bombNumber = 1;
-		this.bombRadius = 5;
+		this.bombRadius = 1;
 		this.name = name;
 		this.keyMap = keyMap;
 	}
@@ -79,19 +79,19 @@ public class Player extends Being implements Collidable,Updatable {
 		Set<KeyCode> activeKeys = GameSingleton.getActiveKeys();
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_LEFT))) {
 			super.setFacing(Direction.LEFT);
-			super.move(-0.1 * frameTimeRatio, 0);
+			GameSingleton.moveBeing(this, -0.1 * frameTimeRatio, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_RIGHT))) {
 			super.setFacing(Direction.RIGHT);
-			super.move(0.1 * frameTimeRatio, 0);
+			GameSingleton.moveBeing(this, 0.1 * frameTimeRatio, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_DOWN))) {
 			super.setFacing(Direction.DOWN);
-			super.move(0, 0.1 * frameTimeRatio);
+			GameSingleton.moveBeing(this, 0, 0.1 * frameTimeRatio);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_UP))) {
 			super.setFacing(Direction.UP);
-			super.move(0, -0.1 * frameTimeRatio);
+			GameSingleton.moveBeing(this, 0, -0.1 * frameTimeRatio);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.PLACE_BOMB))) {
 			this.placeBomb();
@@ -102,9 +102,9 @@ public class Player extends Being implements Collidable,Updatable {
 	}
 	
 	private void placeBomb() {
-		if (GameSingleton.world.getTile((int)super.x, (int)super.y).getObject() instanceof Floor) {
+		if (GameSingleton.getTileObject((int)super.x, (int)super.y) instanceof Floor) {
 			Bomb bomb = new Bomb(this);
-			GameSingleton.world.setTileObject((int)super.x, (int)super.y, bomb);
+			GameSingleton.setTileObject((int)super.x, (int)super.y, bomb);
 		}
 	}
 }

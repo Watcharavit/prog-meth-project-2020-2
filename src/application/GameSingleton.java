@@ -9,7 +9,9 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import entity.Player;
+import entity.base.Being;
 import entity.base.Entity;
+import entity.base.StillObject;
 import entity.base.Updatable;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -18,100 +20,72 @@ import javafx.scene.input.KeyEvent;
 import logic.PlayerControl;
 
 public class GameSingleton {
+	
+	
 	protected final static int WIDTH = 25;
 	protected final static int HEIGHT = 25;
 	protected final static int TILE_SIZE = 24;
 	
-	private final static HashMap<PlayerControl, KeyCode> player1Control = new HashMap<PlayerControl, KeyCode>();
-	private final static HashMap<PlayerControl, KeyCode> player2Control = new HashMap<PlayerControl, KeyCode>();
 	
-	private static Set<Entity> allEntities = new HashSet<Entity>();
-	private static Set<Updatable> updatableEntities = new HashSet<Updatable>();
+	private static Tile[][] tiles;
+	private static InputManager inputManager;
+	private static PlayersManager playersManager;
+	private static BeingsManager beingsManager;
+	private static GameController controller;
 	
-	private static HashSet<KeyCode> activeKeys = new HashSet<KeyCode>();
-	static {
-		player1Control.put(PlayerControl.MOVE_UP, KeyCode.W);
-		player1Control.put(PlayerControl.MOVE_LEFT, KeyCode.A);
-		player1Control.put(PlayerControl.MOVE_DOWN, KeyCode.S);
-		player1Control.put(PlayerControl.MOVE_RIGHT, KeyCode.D);
-		player1Control.put(PlayerControl.PLACE_BOMB, KeyCode.SPACE);
-		
-		player2Control.put(PlayerControl.MOVE_UP, KeyCode.UP);
-		player2Control.put(PlayerControl.MOVE_LEFT, KeyCode.LEFT);
-		player2Control.put(PlayerControl.MOVE_DOWN, KeyCode.DOWN);
-		player2Control.put(PlayerControl.MOVE_RIGHT, KeyCode.RIGHT);
-		player2Control.put(PlayerControl.PLACE_BOMB, KeyCode.ENTER);
-		
+	public static void addBeing(Being being) {
+		controller.addEntity(being);
+		beingsManager.addBeing(being);
 	}
-	
-	private static Canvas canvas;
-	public static World world;
-	
-	public static void addEntity(Entity entity) {
-		GameSingleton.allEntities.add(entity);
-		System.out.println("Added entity" + entity);
-		if (entity instanceof Updatable) {
-			GameSingleton.updatableEntities.add((Updatable) entity);
+	public static void removeBeing(Being being) {
+		controller.removeEntity(being);
+		beingsManager.removeBeing(being);
+	}
+	public static StillObject getTileObject(int x, int y) {
+		return tiles[x][y].getObject();
+	}
+	public static void setTileObject(int x, int y, StillObject object) {
+		Tile tile = tiles[x][y];
+		StillObject existing = tile.getObject();
+		if (existing != null) {
+			controller.removeEntity(existing);
 		}
+		controller.addEntity(object);
+		tile.setObject(object);
+		controller.queueTileRender(tile);
 	}
-	public static void removeEntity(Entity entity) {
-		GameSingleton.allEntities.remove(entity);
-		System.out.println("Removed entity" + entity);
-		if (entity instanceof Updatable) {
-			GameSingleton.updatableEntities.remove((Updatable) entity);
-		}
+	public static void addGhostEntity(Entity entity) {
+		controller.addEntity(entity);
 	}
-	
-	public static void initialize(Canvas canvas) {
-		GameSingleton.canvas = canvas;
-		canvas.setFocusTraversable(true);
-		canvas.setHeight(HEIGHT*TILE_SIZE);
-		canvas.setWidth(WIDTH*TILE_SIZE);
-		GameSingleton.world= new World(WIDTH, HEIGHT, TILE_SIZE, canvas);
-		GameSingleton.initializePlayers();
-		GameSingleton.initializeListeners();
-		GameSingleton.initializeGameLoop();
-	}
-	private static void initializePlayers() {
-		initializePlayer("Player 1", player1Control, 2.5, 2.5);
-		initializePlayer("Player 2", player2Control, WIDTH - 2.5, HEIGHT- 2.5);
-	}
-	private static void initializePlayer(String name, Map<PlayerControl, KeyCode> keyMap, double posX, double posY) {
-		Player player = new Player(name, posX, posY, keyMap);
-		GameSingleton.world.addBeing(player);
-	}
-	private static void initializeListeners() {
-		GameSingleton.canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				KeyCode code = e.getCode();
-				GameSingleton.activeKeys.add(code);
-			}
-		});
-		GameSingleton.canvas.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				KeyCode code = e.getCode();
-				GameSingleton.activeKeys.remove(code);
-			}
-		});
-	}
-	private static void initializeGameLoop() {
-		GameLoopTimer timer = new GameLoopTimer() {
-			@Override
-			public void tick(long frameTimeNano) {
-				double frameTimeRatio = frameTimeNano * 3 / (5e7); // 60fps = 16.67ms = 1.00
-				Set<Updatable> updatableClone = new HashSet<Updatable>();
-				updatableClone.addAll(GameSingleton.updatableEntities);
-				for (Updatable updatable : updatableClone) {
-					updatable.update(frameTimeRatio);
-				}
-			}
-		};
-		timer.start();
+	public static void removeGhostEntity(Entity entity) {
+		controller.removeEntity(entity);
 	}
 	public static HashSet<KeyCode> getActiveKeys() {
-		return GameSingleton.activeKeys;
+		return inputManager.getActiveKeys();
+	}
+	public static boolean moveBeing(Being being, double dx, double dy) {
+		boolean r = beingsManager.moveBeing(being, dx, dy);
+		if (r) controller.queueTileRender(tiles[(int) being.getX()][(int) being.getY()]);
+		return r;
+	}
+	
+	
+	protected static void initialize(Canvas canvas) {
+		canvas.setHeight(HEIGHT*TILE_SIZE);
+		canvas.setWidth(WIDTH*TILE_SIZE);
+		tiles = new Tile[WIDTH][HEIGHT];
+		for (int i = 0; i < WIDTH; i++) {
+			for (int j = 0; j < HEIGHT; j++) {
+				tiles[i][j] = new Tile(i, j);
+			}
+		}
+		inputManager = new InputManager(canvas);
+		controller = new GameController(canvas, tiles);
+		MapGenerator.generateMap(tiles);
+		beingsManager = new BeingsManager(tiles);
+		playersManager = new PlayersManager();
+		controller.initializeLoop();
+		
 	}
 	
 }

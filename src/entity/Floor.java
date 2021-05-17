@@ -14,8 +14,7 @@ public class Floor extends StillObject implements Passable,Bombable {
 		return sprite;
 	}
 	@Override
-	public void pass(Being character, Tile currentTile) {
-		// TODO Auto-generated method stub
+	public void pass(Being character) {
 		
 	}
 

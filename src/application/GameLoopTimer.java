@@ -2,7 +2,7 @@ package application;
 
 import javafx.animation.AnimationTimer;
 
-public class GameLoopTimer extends AnimationTimer {
+class GameLoopTimer extends AnimationTimer {
 	long lastFrameNano;
 	@Override
 	public void handle(long nowNano) {
@@ -10,7 +10,7 @@ public class GameLoopTimer extends AnimationTimer {
         this.lastFrameNano = nowNano;
         tick(animDuration);
 	}
-	public void tick(long frameTimeNano) {
+	protected void tick(long frameTimeNano) {
 		
 	}
 }

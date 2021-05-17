@@ -19,7 +19,7 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 		this.stopBlast = stopBlast;
 	}
 	@Override
-	public void pass(Being character, Tile currentTile) {
+	public void pass(Being character) {
 		
 	}
 	private static final Sprite sprite = new Sprite(6);
@@ -38,7 +38,7 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 		Tile tile = super.getTile();
 		int x = tile.x;
 		int y = tile.y;
-		GameSingleton.world.setTileObject(x, y, new Floor());
+		GameSingleton.setTileObject(x, y, new Floor());
 	}
 	
 	@Override

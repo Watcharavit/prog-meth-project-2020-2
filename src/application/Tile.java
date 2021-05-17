@@ -1,20 +1,34 @@
 package application;
 
+import java.util.HashSet;
+
+import entity.base.Being;
 import entity.base.StillObject;
 
 public class Tile {
-	StillObject object;
+	private StillObject object;
+	private HashSet<Being> beings;
 	public final int x, y;
 	public Tile(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.object = null;
+		this.beings = new HashSet<Being>();
 	}
-	public StillObject getObject() {
+	protected StillObject getObject() {
 		return this.object;
 	}
-	public void setObject(StillObject object) {
-		if (this.object != null) this.object.destroy();
+	protected HashSet<Being> getBeings() {
+		return this.beings;
+	}
+	protected void setObject(StillObject object) {
 		this.object = object;
 		object.setTile(this);
+	}
+	protected void addBeing(Being being) {
+		this.beings.add(being);
+	}
+	protected void removeBeing(Being being) {
+		this.beings.remove(being);
 	}
 }

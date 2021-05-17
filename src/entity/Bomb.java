@@ -32,9 +32,7 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 		if (!this.exploded) {
 			this.remainingFrames -= frameTimeRatio;
 			if (this.remainingFrames <= 0) {
-				this.exploded = true;
-				this.explode(0);
-				GameSingleton.addEntity(this);
+				startExplosion();
 			}
 		}
 		else {
@@ -42,19 +40,27 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 			this.explodedRadius = (int) (this.explodedFrames);
 			if (explodedRadius <= this.radius) this.explode(this.explodedRadius);
 			else {
-				GameSingleton.removeEntity(this);
+				endExplosion();
 			}
 		}
 	}
 	
+	private void startExplosion() {
+		this.exploded = true;
+		this.explode(0);
+		GameSingleton.addGhostEntity(this);
+	}
+	private void endExplosion() {
+		GameSingleton.removeGhostEntity(this);
+	}
+	
 	private boolean explodeAt(int x, int y) {
-		Tile tile = GameSingleton.world.getTile(x, y);
-		StillObject tileObject = tile.getObject();
+		StillObject tileObject = GameSingleton.getTileObject(x, y);
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
 			boolean stopBlast = casted.getCanStopBlast();
 			BombFlame flame = new BombFlame(placer, stopBlast);
-			GameSingleton.world.setTileObject(x, y, flame);
+			GameSingleton.setTileObject(x, y, flame);
 			casted.bombed();
 			if (!stopBlast) return false;
 		}
@@ -88,8 +94,7 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 
 	@Override
 	public void bombed() {
-		this.exploded = true;
-		GameSingleton.addEntity(this);
+		startExplosion();
 	}
 
 }
