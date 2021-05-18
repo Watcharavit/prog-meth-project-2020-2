@@ -9,16 +9,11 @@ import logic.Direction;
 
 public class WallThornMonster extends Being implements Updatable, Collidable {
 
-	public WallThornMonster() {
-		this.setAlive(true);
+
+	public WallThornMonster(double x, double y, double size) {
+		super(x, y, size);
+		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public void collide(Being otherCharacter) {
-		otherCharacter.setAlive(false);
-	}
-
-
 
 	@Override
 	public Sprite getSprite() {
@@ -28,6 +23,12 @@ public class WallThornMonster extends Being implements Updatable, Collidable {
 
 	@Override
 	public void update(double ticksPassed) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collide(Being otherCharacter) {
 		// TODO Auto-generated method stub
 		
 	}

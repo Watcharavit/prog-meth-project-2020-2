@@ -21,7 +21,11 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 	}
 	@Override
 	public void pass(Being character) {
-		
+		if(character instanceof Player) {
+			//remove player and create a new one
+		}else if (character instanceof Ghost) {
+			//remove ghost and create a new one after 5second
+		}
 	}
 	private static final Sprite sprite = new Sprite(1);
 	@Override

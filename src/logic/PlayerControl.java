@@ -1,6 +1,5 @@
 package logic;
 
-import javafx.scene.input.KeyCode;
 
 public enum PlayerControl {
 	MOVE_LEFT,
