@@ -18,7 +18,7 @@ public class Player extends Being implements Collidable, Updatable {
 	public static final double SIZE = 0.6;
 	private Equipment equipment; // this is good already; hasMitt/hasBombKicker makes for worse abstraction
 	private int bombNumber;
-	private int bombPlaceNumber;
+	private int bombPlacedNumber;
 	private int bombRadius;
 	private int kingTime;
 	private final String name;
@@ -32,7 +32,7 @@ public class Player extends Being implements Collidable, Updatable {
 		this.name = name;
 		this.keyMap = keyMap;
 		this.kingTime = 0;
-		this.bombPlaceNumber = 0;
+		this.bombPlacedNumber = 0;
 	}
 
 	@Override
@@ -83,10 +83,10 @@ public class Player extends Being implements Collidable, Updatable {
 
 	private void placeBomb() {
 		if (GameSingleton.getTileObject((int) super.x, (int) super.y) instanceof Floor) {
-			if(this.bombPlaceNumber<this.bombNumber) {
+			if(this.bombPlacedNumber<this.bombNumber) {
 				Bomb bomb = new Bomb(this);
 				GameSingleton.setTileObject((int) super.x, (int) super.y, bomb);
-				this.bombPlaceNumber++;
+				this.bombPlacedNumber++;
 			}
 		}
 	}
@@ -123,12 +123,12 @@ public class Player extends Being implements Collidable, Updatable {
 		this.kingTime = kingTime;
 	}
 
-	public int getBombPlaceNumber() {
-		return bombPlaceNumber;
+	public int getBombPlacedNumber() {
+		return bombPlacedNumber;
 	}
 
-	public void setBombPlaceNumber(int bombPlaceNumber) {
-		this.bombPlaceNumber = bombPlaceNumber;
+	public void setBombPlacedNumber(int bombPlacedNumber) {
+		this.bombPlacedNumber = bombPlacedNumber;
 	}
 	
 
