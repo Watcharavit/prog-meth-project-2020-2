@@ -68,10 +68,15 @@ class BeingsManager {
 			int fnX = (int) newX;
 			int fnY = (int) newY;
 			
+			int le = Math.max(fnX - 1, 0);
+			int re = Math.min(fnX + 1, GameSingleton.WIDTH - 1);
+			int ue = Math.max(fnY - 1, 0);
+			int de = Math.min(fnY + 1, GameSingleton.HEIGHT - 1);
+			
 			// Collide with other beings.
 			boolean hasCollision = false;
-			for (int i = fnX-1; i <= fnX+1; i++) {
-				for (int j = fnY-1; j <= fnY+1; j++) {
+			for (int i = le; i <= re; i++) {
+				for (int j = ue; j <= de; j++) {
 					Being[] beingsCloned = tiles[i][j].getBeings().toArray(emptyBeingsArray);
 					for (Being otherBeing : beingsCloned) {
 						if (otherBeing != being) {

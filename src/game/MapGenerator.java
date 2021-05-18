@@ -29,14 +29,19 @@ class MapGenerator {
 				}
 			}
 		}
-		for (int i = 0; i < width; i++) {
-			GameSingleton.setTileObject(i, 0, new PermWall());
-			GameSingleton.setTileObject(i, height - 1, new PermWall());
+
+		int[] ys = {0, height - 1};
+		for (int i=0; i<width; i++) {
+			for (int j : ys) {
+				GameSingleton.setTileObject(i, j, new PermWall());
+			}
 		}
-		for (int j = 0; j < height; j++) {
-			GameSingleton.setTileObject(0, j, new PermWall());
-			GameSingleton.setTileObject(width - 1, j, new PermWall());
+		int[] xs = {0, width - 1};
+		for (int j=0; j<height; j++) {
+			for (int i : xs) {
+				GameSingleton.setTileObject(i, j, new PermWall());
+			}
 		}
-		GameSingleton.setTileObject(width /2 , height/2 , new KingFloor());
+		GameSingleton.setTileObject(width / 2 , height / 2 , new KingFloor());
 	}
 }

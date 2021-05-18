@@ -53,7 +53,9 @@ class GameController {
 		}
 		beingsGc.clearRect(0, 0, GameSingleton.WIDTH*GameSingleton.TILE_SIZE, GameSingleton.HEIGHT*GameSingleton.TILE_SIZE);
 		for (Being being : allBeings) {
-			being.getSprite().drawCenter(beingsGc, being.getX()*GameSingleton.TILE_SIZE, being.getY()*GameSingleton.TILE_SIZE);
+			double x = being.getX();
+			double y = being.getY();
+			being.getSprite().drawCenter(beingsGc, x*GameSingleton.TILE_SIZE, y*GameSingleton.TILE_SIZE);
 		}
 		renderQueue = new HashSet<Tile>();
 	}
