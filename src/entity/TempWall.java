@@ -16,5 +16,10 @@ public class TempWall extends StillObject implements Bombable {
 	public boolean getCanStopBlast() {
 		return true;
 	}
+	
+	@Override
+	public boolean getShouldSpawnDrop() {
+		return true;
+	}
 
 }
