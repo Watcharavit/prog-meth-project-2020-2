@@ -5,12 +5,12 @@ import logic.Direction;
 public abstract class Being extends Entity {
 	protected Direction facing;
 	protected double x, y;
-	public final double size;
+	public final double halfSize;
 	
 	public Being(double x, double y, double size) {
 		this.x = x;
 		this.y = y;
-		this.size = size;
+		this.halfSize = size / 2;
 	}
 	public double getX() {
 		return this.x;

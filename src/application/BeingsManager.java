@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import entity.base.Being;
+import entity.base.Collidable;
 import entity.base.Passable;
 import entity.base.StillObject;
 
@@ -41,7 +42,7 @@ class BeingsManager {
 		double oldY = being.getY();
 		double newX = oldX + dx;
 		double newY = oldY + dy;
-		double beingRadius = being.size / 2;
+		double beingRadius = being.halfSize;
 		Tile[] cornerTiles = getCornerTiles(newX, newY, beingRadius);
 		HashSet<Tile> currentCornerTiles = new HashSet<Tile>(Arrays.asList(getCornerTiles(oldX, oldY, beingRadius )));
 		boolean allPassable = true;
@@ -52,23 +53,52 @@ class BeingsManager {
 			}
 		}
 		if (allPassable) {
-			for (Tile tile : cornerTiles) {
-				StillObject so = tile.getObject();
-				if (so instanceof Passable) ((Passable) so).pass(being);
-			}
-			being.setX(newX);
-			being.setY(newY);
+			// floor-old-X, floor-old-Y, floor-new-X, floor-new-Y. 
 			int foX = (int) oldX;
 			int foY = (int) oldY;
 			int fnX = (int) newX;
 			int fnY = (int) newY;
+			
+			// Collide with other beings.
+			boolean hasCollision = false;
+			for (int i = fnX-1; i <= fnX+1; i++) {
+				for (int j = fnY-1; j <= fnY+1; j++) {
+					for (Being otherBeing : tiles[i][j].getBeings()) {
+						if (otherBeing != being) {
+							double colDistance = being.halfSize + otherBeing.halfSize;
+							if (Math.abs(newX - otherBeing.getX()) <= colDistance && Math.abs(newY - otherBeing.getY()) <= colDistance) {
+								hasCollision = true;
+								if (being instanceof Collidable) ((Collidable) being).collide(otherBeing);
+								if (otherBeing instanceof Collidable) ((Collidable) otherBeing).collide(being);
+							}
+						}
+					}
+				}
+			}
+			// Abort move if collision happened.
+			if (hasCollision) return false;
+			
+			// Pass over Passable tiles.
+			for (Tile tile : cornerTiles) {
+				StillObject so = tile.getObject();
+				if (so instanceof Passable) ((Passable) so).pass(being);
+			}
+			
+			// Move the beings.
+			being.setX(newX);
+			being.setY(newY);
+			
+			// Move to correct containing tile.
 			if (fnX != foX || fnY != foY) {
 				tiles[foX][foY].removeBeing(being);
 				tiles[fnX][fnY].addBeing(being);
 			}
+			
+			// Return true because move was made.
 			return true;
 		}
 		else {
+			// Return false because move was not made.
 			return false;
 		}
 	}
