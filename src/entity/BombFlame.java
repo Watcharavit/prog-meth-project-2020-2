@@ -12,11 +12,12 @@ import graphics.Sprite;
 public class BombFlame extends StillObject implements Updatable, Passable, Bombable {
 	final Player placer;
 	double remainingTicks;
-	protected boolean isTempWall;
+	final boolean spawnDrop;
 
-	public BombFlame(Player placer, double lifetime) {
+	public BombFlame(Player placer, double lifetime, boolean spawnDrop) {
 		this.placer = placer;
 		this.remainingTicks = lifetime;
+		this.spawnDrop = spawnDrop;
 	}
 
 	@Override
@@ -42,9 +43,10 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		int x = tile.x;
 		int y = tile.y;
 		if (this.remainingTicks <= 0) {
-			if (isTempWall) { // we can add more condition
+			if (spawnDrop) { // we can add more condition
 				spawnItemDrop(x, y);
-			} else {
+			}
+			else {
 				this.remove(x, y);
 			}
 		}
@@ -59,18 +61,12 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		double random = Math.random();
 		if (random > 0.8) {
 			GameSingleton.setTileObject(x, y, new BombFlameUpgrade());
-		} else if (random < 0.2) {
+		}
+		else if (random < 0.2) {
 			GameSingleton.setTileObject(x, y, new BombQuantityUpgrade());
-		} else {
+		}
+		else {
 			this.remove(x, y);
 		}
-	}
-
-	public boolean isTempWall() {
-		return isTempWall;
-	}
-
-	public void setTempWall(boolean isTempWall) {
-		this.isTempWall = isTempWall;
 	}
 }

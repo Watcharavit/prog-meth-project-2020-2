@@ -22,7 +22,7 @@ public class BombCenter extends BombFlame implements Updatable {
 	boolean dStop = false;
 
 	public BombCenter(Player placer, int radius) {
-		super(placer, DEFAULT_FLAME_LIFETIME + radius * TICK_PER_RADIUS);
+		super(placer, DEFAULT_FLAME_LIFETIME + radius * TICK_PER_RADIUS, false);
 		this.radius = radius;
 	}
 
@@ -48,10 +48,7 @@ public class BombCenter extends BombFlame implements Updatable {
 			if (tileObject instanceof BombCenter) {
 				((BombCenter) tileObject).setLifetime(lifetime);
 			} else {
-				BombFlame flame = new BombFlame(placer, lifetime);
-				if(tileObject instanceof TempWall) {
-					flame.setTempWall(true);
-				}
+				BombFlame flame = new BombFlame(placer, lifetime, casted.getShouldSpawnDrop());
 				GameSingleton.setTileObject(x, y, flame);
 			}
 			casted.bombed();
