@@ -20,7 +20,7 @@ public class Player extends Being implements Collidable, Updatable {
 	private int bombsNumber;
 	private int bombsPlacedNumber;
 	private int bombRadius;
-	private int kingTime;
+	private double kingTime;
 	private final String name;
 	private final Map<PlayerControl, KeyCode> keyMap;
 
@@ -115,12 +115,12 @@ public class Player extends Being implements Collidable, Updatable {
 		this.bombRadius = bombRadius;
 	}
 
-	public int getKingTime() {
+	public double getKingTime() {
 		return kingTime;
 	}
 
-	public void setKingTime(int kingTime) {
-		this.kingTime = kingTime;
+	public void setKingTime(double d) {
+		this.kingTime = d;
 	}
 
 	public int getBombsPlacedNumber() {
