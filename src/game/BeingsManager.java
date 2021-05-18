@@ -43,6 +43,9 @@ class BeingsManager {
 		Tile[] s = {lu, ld, ru, rd};
 		return s;
 	}
+
+	// Java is dumb so we need to provide this to set.toArray() to get the correct type.
+	private static final Being[] emptyBeingsArray = {};
 	protected boolean moveBeing(Being being, double dx, double dy) {
 		double oldX = being.getX();
 		double oldY = being.getY();
@@ -69,7 +72,8 @@ class BeingsManager {
 			boolean hasCollision = false;
 			for (int i = fnX-1; i <= fnX+1; i++) {
 				for (int j = fnY-1; j <= fnY+1; j++) {
-					for (Being otherBeing : tiles[i][j].getBeings()) {
+					Being[] beingsCloned = tiles[i][j].getBeings().toArray(emptyBeingsArray);
+					for (Being otherBeing : beingsCloned) {
 						if (otherBeing != being) {
 							double colDistance = being.halfSize + otherBeing.halfSize;
 							if (Math.abs(newX - otherBeing.getX()) <= colDistance && Math.abs(newY - otherBeing.getY()) <= colDistance) {

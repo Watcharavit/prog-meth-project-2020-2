@@ -35,9 +35,11 @@ class GameController {
 			this.updatableEntities.remove((Updatable) entity);
 		}
 	}
+	
+	// Java is dumb so we need to provide this to set.toArray() to get the correct type.
+	private static final Updatable[] emptyUpdatablesArray = {};
 	private void updateUpdatables(double ticksPassed) {
-		Set<Updatable> updatableCloned = new HashSet<Updatable>();
-		updatableCloned.addAll(updatableEntities);
+		Updatable[] updatableCloned = updatableEntities.toArray(emptyUpdatablesArray);
 		for (Updatable updatable : updatableCloned) {
 			updatable.update(ticksPassed);
 		}
