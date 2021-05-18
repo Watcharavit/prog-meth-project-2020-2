@@ -13,16 +13,16 @@ import javafx.scene.canvas.GraphicsContext;
 class GameController {
 	private HashSet<Updatable> updatableEntities;
 	private HashSet<Tile> renderQueue;
-	private HashSet<Tile> renderQueueStage;
-	private GraphicsContext gc;
-	private final Tile[][] tiles;
+	private GraphicsContext objectsGc, beingsGc;
 	private GameLoopTimer timer;
+	HashSet<Being> allBeings;
 	
-	protected GameController(Canvas canvas, Tile[][] tiles) {
+	protected GameController(Canvas objectsCanvas, Canvas beingsCanvas) {
 		updatableEntities = new HashSet<Updatable>();
-		renderQueueStage = new HashSet<Tile>();
-		this.gc = canvas.getGraphicsContext2D();
-		this.tiles = tiles;
+		renderQueue = new HashSet<Tile>();
+		this.objectsGc = objectsCanvas.getGraphicsContext2D();
+		this.beingsGc = beingsCanvas.getGraphicsContext2D();
+		this.allBeings = GameSingleton.allBeings;
 	}
 	
 	protected void addEntity(Entity entity) {
@@ -42,40 +42,21 @@ class GameController {
 			updatable.update(ticksPassed);
 		}
 	}
-	private void propagateTileRender(Tile tile) {
-		if (renderQueue.add(tile)) {
-			int x = tile.x;
-			int y = tile.y;
-			boolean hasBeing = tile.getBeings().size() > 0;
-			for (int i = Math.max(0, x-1); i <= Math.min(x+1, GameSingleton.WIDTH-1); i++) {
-				for (int j = Math.max(0, y-1); j <= Math.min(y+1, GameSingleton.HEIGHT-1); j++) {
-					Tile otherTile = tiles[i][j];
-					if (hasBeing || otherTile.getBeings().size() > 0) propagateTileRender(otherTile);
-				}
-			}
-		}
-	}
 	private void render() {
-		renderQueue = new HashSet<Tile>();
-		for (Tile tile : renderQueueStage) {
-			propagateTileRender(tile);
-		}
 		for (Tile tile : renderQueue) {
 			int x = tile.x;
 			int y = tile.y;
 			StillObject object = tile.getObject();
-			object.getSprite().drawTopLeft(gc, x*GameSingleton.TILE_SIZE, y*GameSingleton.TILE_SIZE);
+			object.getSprite().drawTopLeft(objectsGc, x*GameSingleton.TILE_SIZE, y*GameSingleton.TILE_SIZE);
 		}
-		for (Tile tile : renderQueue) {
-			HashSet<Being> beings = tile.getBeings();
-			for (Being being : beings) {
-				being.getSprite().drawCenter(gc, being.getX()*GameSingleton.TILE_SIZE, being.getY()*GameSingleton.TILE_SIZE);
-			}
+		beingsGc.clearRect(0, 0, GameSingleton.WIDTH*GameSingleton.TILE_SIZE, GameSingleton.HEIGHT*GameSingleton.TILE_SIZE);
+		for (Being being : allBeings) {
+			being.getSprite().drawCenter(beingsGc, being.getX()*GameSingleton.TILE_SIZE, being.getY()*GameSingleton.TILE_SIZE);
 		}
-		renderQueueStage = new HashSet<Tile>();
+		renderQueue = new HashSet<Tile>();
 	}
 	protected void queueTileRender(Tile tile) {
-		renderQueueStage.add(tile);
+		renderQueue.add(tile);
 	}
 	private void onTick(double ticksPassed) {
 		if (ticksPassed > 1.1) System.out.println("Slow Update: " + ticksPassed);

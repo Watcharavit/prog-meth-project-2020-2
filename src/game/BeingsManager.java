@@ -9,12 +9,15 @@ import entity.base.Passable;
 import entity.base.StillObject;
 
 class BeingsManager {
-	final Tile[][] tiles;
-	protected BeingsManager(Tile[][] tiles) {
-		this.tiles = tiles;
+	Tile[][] tiles;
+	HashSet<Being> allBeings;
+	protected BeingsManager() {
+		this.tiles = GameSingleton.tiles;
+		this.allBeings = GameSingleton.allBeings;
 	}
 	
 	protected void addBeing(Being being) {
+		allBeings.add(being);
 		double x = being.getX();
 		double y = being.getY();
 		tiles[(int) x][(int) y].addBeing(being);
@@ -22,6 +25,7 @@ class BeingsManager {
 		moveBeing(being, 0, 0);
 	}
 	protected void removeBeing(Being being) {
+		allBeings.remove(being);
 		double x = being.getX();
 		double y = being.getY();
 		tiles[(int) x][(int) y].removeBeing(being);

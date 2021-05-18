@@ -11,9 +11,9 @@ class GameScreen extends StackPane {
 	StackPane pauseOverlay;
 	protected GameScreen() {
 		
-		Canvas gameCanvas = new Canvas();
-		GameSingleton.initialize(gameCanvas);
-		this.getChildren().add(gameCanvas);
+		StackPane gameStack = new StackPane();
+		GameSingleton.initialize(gameStack);
+		this.getChildren().add(gameStack);
 		
 		pauseOverlay = new PauseOverlay(() -> {
 			this.resume();

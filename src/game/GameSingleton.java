@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import logic.PlayerControl;
 
 public class GameSingleton {
@@ -27,7 +28,8 @@ public class GameSingleton {
 	protected final static int TILE_SIZE = 24;
 	
 	
-	private static Tile[][] tiles;
+	protected static Tile[][] tiles;
+	protected static HashSet<Being> allBeings;
 	private static InputManager inputManager;
 	private static PlayersManager playersManager;
 	private static BeingsManager beingsManager;
@@ -64,20 +66,26 @@ public class GameSingleton {
 		return r;
 	}
 	
-	
-	public static void initialize(Canvas canvas) {
-		canvas.setHeight(HEIGHT*TILE_SIZE);
-		canvas.setWidth(WIDTH*TILE_SIZE);
+	public static void initialize(StackPane layers) {
+		Canvas objectsCanvas = new Canvas();
+		Canvas beingsCanvas = new Canvas();
+		objectsCanvas.setHeight(HEIGHT*TILE_SIZE);
+		objectsCanvas.setWidth(WIDTH*TILE_SIZE);
+		beingsCanvas.setHeight(HEIGHT*TILE_SIZE);
+		beingsCanvas.setWidth(WIDTH*TILE_SIZE);
+		layers.getChildren().add(objectsCanvas);
+		layers.getChildren().add(beingsCanvas);
+		allBeings = new HashSet<Being>();
 		tiles = new Tile[WIDTH][HEIGHT];
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < HEIGHT; j++) {
 				tiles[i][j] = new Tile(i, j);
 			}
 		}
-		inputManager = new InputManager(canvas);
-		controller = new GameController(canvas, tiles);
-		beingsManager = new BeingsManager(tiles);
-		MapGenerator.generateMap(tiles);
+		inputManager = new InputManager(layers);
+		controller = new GameController(objectsCanvas, beingsCanvas);
+		beingsManager = new BeingsManager();
+		MapGenerator.generateMap();
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
 	}

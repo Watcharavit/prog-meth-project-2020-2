@@ -6,7 +6,8 @@ import entity.TempWall;
 import entity.base.StillObject;
 
 class MapGenerator {
-	protected static void generateMap(Tile[][] tiles) {
+	protected static void generateMap() {
+		Tile[][] tiles = GameSingleton.tiles;
 		int width = tiles.length;
 		int height = tiles[0].length;
 		for (int i=0; i<width; i++) {
