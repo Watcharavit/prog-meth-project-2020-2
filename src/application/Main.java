@@ -17,6 +17,7 @@ public class Main extends Application {
 		GameSingleton.initialize(canvas);
 		root.getChildren().add(canvas);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	

@@ -90,7 +90,7 @@ class GameController {
 			protected void tick(long frameTimeNano) {
 				double ticksPassed = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
 				onTick(ticksPassed);
-			}
+			  }
 		};
 		timer.start();
 	}
