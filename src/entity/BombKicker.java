@@ -1,7 +1,7 @@
 package entity;
 
 import entity.base.Equipment;
-import gui.Sprite;
+import graphics.Sprite;
 
 public class BombKicker extends Equipment {
 

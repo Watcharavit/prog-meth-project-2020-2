@@ -1,6 +1,7 @@
 package entity.base;
 
-import gui.Sprite;  
+import game.GameSingleton;
+import graphics.Sprite;  
 
 public abstract class Entity {
 	

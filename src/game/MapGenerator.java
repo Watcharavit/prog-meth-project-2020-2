@@ -1,4 +1,4 @@
-package application;
+package game;
 
 import entity.Floor;
 import entity.PermWall;

@@ -1,4 +1,4 @@
-package application;
+package game;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,8 +22,8 @@ import logic.PlayerControl;
 public class GameSingleton {
 	
 	
-	protected final static int WIDTH = 25;
-	protected final static int HEIGHT = 25;
+	public final static int WIDTH = 25;
+	public final static int HEIGHT = 25;
 	protected final static int TILE_SIZE = 24;
 	
 	
@@ -52,6 +52,7 @@ public class GameSingleton {
 		}
 		controller.addEntity(object);
 		tile.setObject(object);
+		beingsManager.updateBeingsAroundTile(tile);
 		controller.queueTileRender(tile);
 	}
 	public static HashSet<KeyCode> getActiveKeys() {
@@ -64,7 +65,7 @@ public class GameSingleton {
 	}
 	
 	
-	protected static void initialize(Canvas canvas) {
+	public static void initialize(Canvas canvas) {
 		canvas.setHeight(HEIGHT*TILE_SIZE);
 		canvas.setWidth(WIDTH*TILE_SIZE);
 		tiles = new Tile[WIDTH][HEIGHT];
@@ -75,11 +76,16 @@ public class GameSingleton {
 		}
 		inputManager = new InputManager(canvas);
 		controller = new GameController(canvas, tiles);
-		MapGenerator.generateMap(tiles);
 		beingsManager = new BeingsManager(tiles);
+		MapGenerator.generateMap(tiles);
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
-		
+	}
+	public static void pause() {
+		controller.pause();
+	}
+	public static void resume() {
+		controller.resume();
 	}
 	
 }

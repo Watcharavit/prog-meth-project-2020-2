@@ -1,23 +1,20 @@
 package entity;
 
-import application.GameSingleton;
-import application.Tile;
 import entity.base.Being;
 import entity.base.Bombable;
 import entity.base.Passable;
 import entity.base.StillObject;
 import entity.base.Updatable;
-import gui.Sprite;
+import game.GameSingleton;
+import game.Tile;
+import graphics.Sprite;
 
 public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
-	static final int DEFAULT_REMAINING_FRAME = 60;
 	final Player placer;
 	double remainingTicks;
-	boolean stopBlast;
-	public BombFlame(Player placer, boolean stopBlast) {
+	public BombFlame(Player placer, double lifetime) {
 		this.placer = placer;
-		this.remainingTicks = DEFAULT_REMAINING_FRAME;
-		this.stopBlast = stopBlast;
+		this.remainingTicks = lifetime;
 	}
 	@Override
 	public void pass(Being character) {
@@ -45,10 +42,4 @@ public class BombFlame extends StillObject implements Updatable,Passable,Bombabl
 		int y = tile.y;
 		GameSingleton.setTileObject(x, y, new Floor());
 	}
-	
-	@Override
-	public boolean getCanStopBlast() {
-		return this.stopBlast;
-	}
-
 }

@@ -1,7 +1,7 @@
 package entity;
 
 import entity.base.StillObject;
-import gui.Sprite;
+import graphics.Sprite;
 
 public class PermWall extends StillObject {
 	private static final Sprite sprite = new Sprite(9);
