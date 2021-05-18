@@ -64,10 +64,7 @@ public class GameSingleton {
 	}
 
 	public static boolean moveBeing(Being being, double dx, double dy) {
-		boolean r = beingsManager.moveBeing(being, dx, dy);
-		if (r)
-			controller.queueTileRender(tiles[(int) being.getX()][(int) being.getY()]);
-		return r;
+		return beingsManager.moveBeing(being, dx, dy);
 	}
 
 	public static void initialize(StackPane layers) {
