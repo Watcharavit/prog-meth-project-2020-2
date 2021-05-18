@@ -22,8 +22,8 @@ import logic.PlayerControl;
 public class GameSingleton {
 	
 	
-	protected final static int WIDTH = 25;
-	protected final static int HEIGHT = 25;
+	public final static int WIDTH = 25;
+	public final static int HEIGHT = 25;
 	protected final static int TILE_SIZE = 24;
 	
 	
