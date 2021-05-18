@@ -1,9 +1,19 @@
 package logic;
 
 public enum Direction {
-		NONE,
 		LEFT,
 		RIGHT,
 		UP,
-		DOWN,
+		DOWN;
+		
+		public int getDeltaX() {
+			if (this == LEFT) return -1;
+			if (this == RIGHT) return 1;
+			return 0;
+		}
+		public int getDeltaY() {
+			if (this == UP) return -1;
+			if (this == DOWN) return 1;
+			return 0;
+		}
 }

@@ -14,7 +14,7 @@ public class BombQuantityUpgrade extends StillObject implements Passable,Bombabl
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
-			((Player) character).setBombsNumber(((Player) character).getBombsNumber()+1);
+			((Player) character).incrementBombsNumber();
 			Tile tile = super.getTile();
 			int x = tile.x;
 			int y = tile.y;

@@ -16,7 +16,8 @@ import logic.PlayerControl;
 
 public class Player extends Being implements Collidable, Updatable {
 	public static final double SIZE = 0.6;
-	private Equipment equipment; // this is good already; hasMitt/hasBombKicker makes for worse abstraction
+	private static final double SPEED = 0.1;
+	private Equipment equipment;
 	private int bombsNumber;
 	private int bombsPlacedNumber;
 	private int bombRadius;
@@ -59,60 +60,51 @@ public class Player extends Being implements Collidable, Updatable {
 		Set<KeyCode> activeKeys = GameSingleton.getActiveKeys();
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_LEFT))) {
 			super.setFacing(Direction.LEFT);
-			GameSingleton.moveBeing(this, -0.1 * ticksPassed, 0);
+			GameSingleton.moveBeing(this, -SPEED * ticksPassed, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_RIGHT))) {
 			super.setFacing(Direction.RIGHT);
-			GameSingleton.moveBeing(this, 0.1 * ticksPassed, 0);
+			GameSingleton.moveBeing(this, SPEED * ticksPassed, 0);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_DOWN))) {
 			super.setFacing(Direction.DOWN);
-			GameSingleton.moveBeing(this, 0, 0.1 * ticksPassed);
+			GameSingleton.moveBeing(this, 0, SPEED * ticksPassed);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_UP))) {
 			super.setFacing(Direction.UP);
-			GameSingleton.moveBeing(this, 0, -0.1 * ticksPassed);
+			GameSingleton.moveBeing(this, 0, -SPEED * ticksPassed);
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.PLACE_BOMB))) {
 			this.placeBomb();
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
-			// TODO
+			if (this.equipment != null) {
+				this.equipment.useEquipment(this);
+			}
 		}
 	}
 
 	private void placeBomb() {
 		if (GameSingleton.getTileObject((int) super.x, (int) super.y) instanceof Floor) {
 			if(this.bombsPlacedNumber<this.bombsNumber) {
-				Bomb bomb = new Bomb(this);
+				Bomb bomb = new Bomb(this, this.bombRadius);
 				GameSingleton.setTileObject((int) super.x, (int) super.y, bomb);
 				this.bombsPlacedNumber++;
 			}
 		}
 	}
-
-	public Equipment getEquipment() {
-		return equipment;
+	public void returnBomb() {
+		this.bombsPlacedNumber--;
 	}
 
 	public void setEquipment(Equipment equipment) {
 		this.equipment = equipment;
 	}
-
-	public int getBombsNumber() {
-		return bombsNumber;
+	public void incrementBombsNumber() {
+		this.bombsNumber++;
 	}
-
-	public void setBombsNumber(int bombsNumber) {
-		this.bombsNumber = bombsNumber;
-	}
-
-	public int getBombRadius() {
-		return bombRadius;
-	}
-
-	public void setBombRadius(int bombRadius) {
-		this.bombRadius = bombRadius;
+	public void incrementBombRadius() {
+		this.bombRadius++;
 	}
 
 	public double getKingTime() {
@@ -121,14 +113,6 @@ public class Player extends Being implements Collidable, Updatable {
 
 	public void setKingTime(double d) {
 		this.kingTime = d;
-	}
-
-	public int getBombsPlacedNumber() {
-		return bombsPlacedNumber;
-	}
-
-	public void setBombsPlacedNumber(int bombsPlacedNumber) {
-		this.bombsPlacedNumber = bombsPlacedNumber;
 	}
 	
 
