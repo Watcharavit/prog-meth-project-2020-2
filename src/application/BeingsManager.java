@@ -18,6 +18,8 @@ class BeingsManager {
 		double x = being.getX();
 		double y = being.getY();
 		tiles[(int) x][(int) y].addBeing(being);
+		// Trigger Passable, Collidable, etc..
+		moveBeing(being, 0, 0);
 	}
 	protected void removeBeing(Being being) {
 		double x = being.getX();
@@ -67,9 +69,18 @@ class BeingsManager {
 						if (otherBeing != being) {
 							double colDistance = being.halfSize + otherBeing.halfSize;
 							if (Math.abs(newX - otherBeing.getX()) <= colDistance && Math.abs(newY - otherBeing.getY()) <= colDistance) {
-								hasCollision = true;
-								if (being instanceof Collidable) ((Collidable) being).collide(otherBeing);
-								if (otherBeing instanceof Collidable) ((Collidable) otherBeing).collide(being);
+								boolean allowPass = false;
+								if (being instanceof Collidable) {
+									Collidable casted = ((Collidable) being);
+									casted.collide(otherBeing);
+									allowPass |= casted.getCanPassThrough(); 
+								}
+								if (otherBeing instanceof Collidable) {
+									Collidable casted = ((Collidable) otherBeing);
+									casted.collide(being);
+									allowPass |= casted.getCanPassThrough();
+								}
+								hasCollision |= !allowPass;
 							}
 						}
 					}
@@ -108,6 +119,7 @@ class BeingsManager {
 		for (int i = Math.max(0, x-1); i <= Math.min(x+1, GameSingleton.WIDTH-1); i++) {
 			for (int j = Math.max(0, y-1); j <= Math.min(y+1, GameSingleton.HEIGHT-1); j++) {
 				for (Being being : tiles[i][j].getBeings()) {
+					// Trigger passable.
 					moveBeing(being, 0, 0);
 				}
 			}
