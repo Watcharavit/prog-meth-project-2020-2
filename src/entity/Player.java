@@ -27,7 +27,7 @@ public class Player extends Being implements Collidable, Updatable {
 
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
 		super(posX, posY, SIZE);
-		this.equipment = null;
+		this.equipment = new Puncher();
 		this.bombsNumber = 1;
 		this.bombRadius = 1;
 		this.name = name;
@@ -79,8 +79,12 @@ public class Player extends Being implements Collidable, Updatable {
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
 			if (this.equipment != null) {
-				this.equipment.useEquipment(this);
+				this.equipment.tryUseEquipment(this);
 			}
+		}
+		
+		if (this.equipment != null) {
+			this.equipment.update(ticksPassed);
 		}
 	}
 

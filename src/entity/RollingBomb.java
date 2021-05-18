@@ -37,13 +37,17 @@ public class RollingBomb extends Being implements Updatable,Collidable {
 	@Override
 	public void update(double ticksPassed) {
 		// Try to move. Move fail = stuck -> explode.
-		if (!GameSingleton.moveBeing(this, moveDeltaX, moveDeltaY)) {
+		if (!GameSingleton.moveBeing(this, moveDeltaX * ticksPassed, moveDeltaY * ticksPassed)) {
 			this.explode();
 		}
 	}
 	@Override
 	public void collide(Being otherBeing) {
 		this.explode();
+	}
+	@Override
+	public boolean getCanPassThrough() {
+		return true;
 	}
 	
 	private final static Sprite sprite = new Sprite(0);

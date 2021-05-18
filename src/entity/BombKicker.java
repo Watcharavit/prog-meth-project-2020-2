@@ -10,11 +10,6 @@ import logic.Direction;
 public class BombKicker extends Equipment {
 
 	@Override
-	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public void useEquipment(Player user) {
 		Direction facing = user.getFacing();
 		int sourceTileX = (int) user.getX();
@@ -23,6 +18,7 @@ public class BombKicker extends Equipment {
 		int targetTileY = sourceTileY + facing.getDeltaY();
 		StillObject actedObject = GameSingleton.getTileObject(targetTileX, targetTileY);
 		if (actedObject instanceof Bomb) {
+			super.setCooldown(30.0);
 			Bomb bomb = (Bomb) actedObject;
 			GameSingleton.setTileObject(targetTileX, targetTileY, new Floor());
 			bomb.placer.returnBomb();
