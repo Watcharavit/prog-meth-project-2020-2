@@ -1,16 +1,24 @@
 package entity;
 
 import entity.base.Being;
-import entity.base.ItemDrop;
+import entity.base.Bombable;
+import entity.base.Passable;
+import entity.base.StillObject;
+import game.GameSingleton;
+import game.Tile;
 import graphics.Sprite;
 
-public class BombQuantityUpgrade extends ItemDrop {
-	private static final Sprite sprite = new Sprite(3);
+public class BombQuantityUpgrade extends StillObject implements Passable,Bombable{
+	private static final Sprite sprite = new Sprite(0);
 	
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
 			((Player) character).setBombsNumber(((Player) character).getBombsNumber()+1);
+			Tile tile = super.getTile();
+			int x = tile.x;
+			int y = tile.y;
+			GameSingleton.setTileObject(x, y, new Floor());
 		}
 	}
 

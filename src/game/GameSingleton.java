@@ -21,31 +21,32 @@ import javafx.scene.layout.StackPane;
 import logic.PlayerControl;
 
 public class GameSingleton {
-	
-	
+
 	public final static int WIDTH = 25;
 	public final static int HEIGHT = 25;
 	protected final static int TILE_SIZE = 24;
-	
-	
+
 	protected static Tile[][] tiles;
 	protected static HashSet<Being> allBeings;
 	private static InputManager inputManager;
 	private static PlayersManager playersManager;
 	private static BeingsManager beingsManager;
 	private static GameController controller;
-	
+
 	public static void addBeing(Being being) {
 		controller.addEntity(being);
 		beingsManager.addBeing(being);
 	}
+
 	public static void removeBeing(Being being) {
 		controller.removeEntity(being);
 		beingsManager.removeBeing(being);
 	}
+
 	public static StillObject getTileObject(int x, int y) {
 		return tiles[x][y].getObject();
 	}
+
 	public static void setTileObject(int x, int y, StillObject object) {
 		Tile tile = tiles[x][y];
 		StillObject existing = tile.getObject();
@@ -57,22 +58,25 @@ public class GameSingleton {
 		beingsManager.updateBeingsAroundTile(tile);
 		controller.queueTileRender(tile);
 	}
+
 	public static HashSet<KeyCode> getActiveKeys() {
 		return inputManager.getActiveKeys();
 	}
+
 	public static boolean moveBeing(Being being, double dx, double dy) {
 		boolean r = beingsManager.moveBeing(being, dx, dy);
-		if (r) controller.queueTileRender(tiles[(int) being.getX()][(int) being.getY()]);
+		if (r)
+			controller.queueTileRender(tiles[(int) being.getX()][(int) being.getY()]);
 		return r;
 	}
-	
+
 	public static void initialize(StackPane layers) {
 		Canvas objectsCanvas = new Canvas();
 		Canvas beingsCanvas = new Canvas();
-		objectsCanvas.setHeight(HEIGHT*TILE_SIZE);
-		objectsCanvas.setWidth(WIDTH*TILE_SIZE);
-		beingsCanvas.setHeight(HEIGHT*TILE_SIZE);
-		beingsCanvas.setWidth(WIDTH*TILE_SIZE);
+		objectsCanvas.setHeight(HEIGHT * TILE_SIZE);
+		objectsCanvas.setWidth(WIDTH * TILE_SIZE);
+		beingsCanvas.setHeight(HEIGHT * TILE_SIZE);
+		beingsCanvas.setWidth(WIDTH * TILE_SIZE);
 		layers.getChildren().add(objectsCanvas);
 		layers.getChildren().add(beingsCanvas);
 		allBeings = new HashSet<Being>();
@@ -89,11 +93,13 @@ public class GameSingleton {
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
 	}
+
 	public static void pause() {
 		controller.pause();
 	}
+
 	public static void resume() {
 		controller.resume();
 	}
-	
+
 }
