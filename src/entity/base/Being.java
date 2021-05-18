@@ -18,11 +18,11 @@ public abstract class Being extends Entity {
 	public double getY() {
 		return this.y;
 	}
-	public void changeX(double dx) {
-		this.x += dx;
+	public void setX(double x) {
+		this.x = x;
 	}
-	public void changeY(double dy) {
-		this.y += dy;
+	public void setY(double y) {
+		this.y = y;
 	}
 	
 	public void setFacing(Direction facing) {

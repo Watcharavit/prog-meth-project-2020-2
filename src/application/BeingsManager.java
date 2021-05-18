@@ -56,8 +56,8 @@ class BeingsManager {
 				StillObject so = tile.getObject();
 				if (so instanceof Passable) ((Passable) so).pass(being);
 			}
-			being.changeX(dx);
-			being.changeY(dy);
+			being.setX(newX);
+			being.setY(newY);
 			int foX = (int) oldX;
 			int foY = (int) oldY;
 			int fnX = (int) newX;
@@ -71,6 +71,16 @@ class BeingsManager {
 		else {
 			return false;
 		}
-		
+	}
+	protected void updateBeingsAroundTile(Tile tile) {
+		int x = tile.x;
+		int y = tile.y;
+		for (int i = Math.max(0, x-1); i <= Math.min(x+1, GameSingleton.WIDTH-1); i++) {
+			for (int j = Math.max(0, y-1); j <= Math.min(y+1, GameSingleton.HEIGHT-1); j++) {
+				for (Being being : tiles[i][j].getBeings()) {
+					moveBeing(being, 0, 0);
+				}
+			}
+		}
 	}
 }

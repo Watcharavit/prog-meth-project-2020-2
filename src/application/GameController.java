@@ -16,15 +16,12 @@ class GameController {
 	private HashSet<Tile> renderQueueStage;
 	private GraphicsContext gc;
 	private final Tile[][] tiles;
-	private final int width, height;
 	
 	protected GameController(Canvas canvas, Tile[][] tiles) {
 		updatableEntities = new HashSet<Updatable>();
 		renderQueueStage = new HashSet<Tile>();
 		this.gc = canvas.getGraphicsContext2D();
 		this.tiles = tiles;
-		this.width = tiles.length;
-		this.height = tiles[0].length;
 	}
 	
 	protected void addEntity(Entity entity) {
@@ -49,10 +46,10 @@ class GameController {
 			int x = tile.x;
 			int y = tile.y;
 			boolean hasBeing = tile.getBeings().size() > 0;
-			for (int i = Math.max(0, x-1); i <= Math.min(x+1, width-1); i++) {
-				for (int j = Math.max(0, y-1); j <= Math.min(y+1, height-1); j++) {
+			for (int i = Math.max(0, x-1); i <= Math.min(x+1, GameSingleton.WIDTH-1); i++) {
+				for (int j = Math.max(0, y-1); j <= Math.min(y+1, GameSingleton.HEIGHT-1); j++) {
 					Tile otherTile = tiles[i][j];
-					if (hasBeing || otherTile.getBeings().size() > 0) propagateTileRender(tiles[i][j]);
+					if (hasBeing || otherTile.getBeings().size() > 0) propagateTileRender(otherTile);
 				}
 			}
 		}

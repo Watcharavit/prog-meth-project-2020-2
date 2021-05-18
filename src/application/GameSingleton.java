@@ -52,6 +52,7 @@ public class GameSingleton {
 		}
 		controller.addEntity(object);
 		tile.setObject(object);
+		beingsManager.updateBeingsAroundTile(tile);
 		controller.queueTileRender(tile);
 	}
 	public static HashSet<KeyCode> getActiveKeys() {
@@ -75,8 +76,8 @@ public class GameSingleton {
 		}
 		inputManager = new InputManager(canvas);
 		controller = new GameController(canvas, tiles);
-		MapGenerator.generateMap(tiles);
 		beingsManager = new BeingsManager(tiles);
+		MapGenerator.generateMap(tiles);
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
 		
