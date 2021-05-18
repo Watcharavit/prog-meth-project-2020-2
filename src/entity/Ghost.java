@@ -38,4 +38,5 @@ public class Ghost extends Being implements Collidable,Updatable{
 		return null;
 	}
 
+
 }

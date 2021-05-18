@@ -2,11 +2,11 @@ package entity;
 
 import entity.base.Being;
 import entity.base.ItemDrop;
-import game.Tile;
 import graphics.Sprite;
 
 public class BombQuantityUpgrade extends ItemDrop {
-
+	private static final Sprite sprite = new Sprite(3);
+	
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
@@ -17,7 +17,7 @@ public class BombQuantityUpgrade extends ItemDrop {
 	@Override
 	public Sprite getSprite() {
 		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 
 }
