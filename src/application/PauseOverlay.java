@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
@@ -13,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 class PauseOverlay extends StackPane {
 	StackPane pauseOverlay;
@@ -23,6 +25,9 @@ class PauseOverlay extends StackPane {
 		
 		VBox pauseMenu = new VBox();
 		pauseMenu.setAlignment(Pos.CENTER);
+		Label pausedLabel = new Label("Game Paused");
+		pausedLabel.setFont(new Font(64));
+		pausedLabel.setTextFill(Color.WHITE);
 		Button resumeButton = new Button("Resume");
 		this.setOnKeyPressed((KeyEvent e) -> {
 			KeyCode code = e.getCode();
@@ -33,7 +38,7 @@ class PauseOverlay extends StackPane {
 		resumeButton.setOnAction((ActionEvent e) -> {
 			resume.run();
 		});
-		pauseMenu.getChildren().addAll(resumeButton);
+		pauseMenu.getChildren().addAll(pausedLabel, resumeButton);
 		
 		this.getChildren().addAll(pauseOverlayBackground, pauseMenu);
 	}
