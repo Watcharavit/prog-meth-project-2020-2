@@ -10,7 +10,7 @@ public class BombQuantityUpgrade extends ItemDrop {
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
-			((Player) character).setBombNumber(((Player) character).getBombNumber()+1);
+			((Player) character).setBombsNumber(((Player) character).getBombsNumber()+1);
 		}
 	}
 

@@ -38,7 +38,7 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 		int x = tile.x;
 		int y = tile.y;
 		GameSingleton.setTileObject(x, y, new BombCenter(placer, radius));
-		this.placer.setBombPlacedNumber(this.placer.getBombPlacedNumber()-1);
+		this.placer.setBombsPlacedNumber(this.placer.getBombsPlacedNumber()-1);
 	}
 
 	private static final Sprite firstSprite = new Sprite(4);

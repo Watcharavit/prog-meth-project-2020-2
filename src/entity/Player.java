@@ -17,8 +17,8 @@ import logic.PlayerControl;
 public class Player extends Being implements Collidable, Updatable {
 	public static final double SIZE = 0.6;
 	private Equipment equipment; // this is good already; hasMitt/hasBombKicker makes for worse abstraction
-	private int bombNumber;
-	private int bombPlacedNumber;
+	private int bombsNumber;
+	private int bombsPlacedNumber;
 	private int bombRadius;
 	private int kingTime;
 	private final String name;
@@ -27,12 +27,12 @@ public class Player extends Being implements Collidable, Updatable {
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
 		super(posX, posY, SIZE);
 		this.equipment = null;
-		this.bombNumber = 1;
+		this.bombsNumber = 1;
 		this.bombRadius = 1;
 		this.name = name;
 		this.keyMap = keyMap;
 		this.kingTime = 0;
-		this.bombPlacedNumber = 0;
+		this.bombsPlacedNumber = 0;
 	}
 
 	@Override
@@ -83,10 +83,10 @@ public class Player extends Being implements Collidable, Updatable {
 
 	private void placeBomb() {
 		if (GameSingleton.getTileObject((int) super.x, (int) super.y) instanceof Floor) {
-			if(this.bombPlacedNumber<this.bombNumber) {
+			if(this.bombsPlacedNumber<this.bombsNumber) {
 				Bomb bomb = new Bomb(this);
 				GameSingleton.setTileObject((int) super.x, (int) super.y, bomb);
-				this.bombPlacedNumber++;
+				this.bombsPlacedNumber++;
 			}
 		}
 	}
@@ -99,12 +99,12 @@ public class Player extends Being implements Collidable, Updatable {
 		this.equipment = equipment;
 	}
 
-	public int getBombNumber() {
-		return bombNumber;
+	public int getBombsNumber() {
+		return bombsNumber;
 	}
 
-	public void setBombNumber(int bombNumber) {
-		this.bombNumber = bombNumber;
+	public void setBombsNumber(int bombsNumber) {
+		this.bombsNumber = bombsNumber;
 	}
 
 	public int getBombRadius() {
@@ -123,12 +123,12 @@ public class Player extends Being implements Collidable, Updatable {
 		this.kingTime = kingTime;
 	}
 
-	public int getBombPlacedNumber() {
-		return bombPlacedNumber;
+	public int getBombsPlacedNumber() {
+		return bombsPlacedNumber;
 	}
 
-	public void setBombPlacedNumber(int bombPlacedNumber) {
-		this.bombPlacedNumber = bombPlacedNumber;
+	public void setBombsPlacedNumber(int bombsPlacedNumber) {
+		this.bombsPlacedNumber = bombsPlacedNumber;
 	}
 	
 
