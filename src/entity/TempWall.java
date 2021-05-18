@@ -1,10 +1,10 @@
 package entity;
 
-import application.Tile;
 import entity.base.Bombable;
 import entity.base.Passable;
 import entity.base.StillObject;
-import gui.Sprite;
+import game.Tile;
+import graphics.Sprite;
 
 public class TempWall extends StillObject implements Bombable {
 	private static final Sprite sprite = new Sprite(9);

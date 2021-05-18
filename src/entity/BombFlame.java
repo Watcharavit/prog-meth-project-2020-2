@@ -1,13 +1,13 @@
 package entity;
 
-import application.GameSingleton;
-import application.Tile;
 import entity.base.Being;
 import entity.base.Bombable;
 import entity.base.Passable;
 import entity.base.StillObject;
 import entity.base.Updatable;
-import gui.Sprite;
+import game.GameSingleton;
+import game.Tile;
+import graphics.Sprite;
 
 public class BombFlame extends StillObject implements Updatable,Passable,Bombable {
 	final Player placer;

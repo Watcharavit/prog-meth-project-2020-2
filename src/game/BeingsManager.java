@@ -1,4 +1,4 @@
-package application;
+package game;
 
 import java.util.Arrays;
 import java.util.HashSet;

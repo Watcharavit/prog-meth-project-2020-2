@@ -1,12 +1,12 @@
 package entity;
 
-import application.GameSingleton;
-import application.Tile;
 import entity.base.Bombable;
 import entity.base.Entity;
 import entity.base.StillObject;
 import entity.base.Updatable;
-import gui.Sprite;
+import game.GameSingleton;
+import game.Tile;
+import graphics.Sprite;
 
 public class BombCenter extends BombFlame implements Updatable {
 	static final int DEFAULT_FLAME_LIFETIME = 60;

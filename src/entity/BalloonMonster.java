@@ -3,7 +3,7 @@ package entity;
 import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Updatable;
-import gui.Sprite;
+import graphics.Sprite;
 
 public class BalloonMonster extends Being implements Collidable, Updatable {
 

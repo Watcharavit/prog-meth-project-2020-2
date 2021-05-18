@@ -1,6 +1,6 @@
 package entity.base;
 
-import application.Tile;
+import game.Tile;
 
 public abstract class StillObject extends Entity {
 	private Tile tile;

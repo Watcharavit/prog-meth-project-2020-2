@@ -1,4 +1,4 @@
-package application;
+package game;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -65,7 +65,7 @@ public class GameSingleton {
 	}
 	
 	
-	protected static void initialize(Canvas canvas) {
+	public static void initialize(Canvas canvas) {
 		canvas.setHeight(HEIGHT*TILE_SIZE);
 		canvas.setWidth(WIDTH*TILE_SIZE);
 		tiles = new Tile[WIDTH][HEIGHT];
@@ -80,7 +80,12 @@ public class GameSingleton {
 		MapGenerator.generateMap(tiles);
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
-		
+	}
+	public static void pause() {
+		controller.pause();
+	}
+	public static void resume() {
+		controller.resume();
 	}
 	
 }

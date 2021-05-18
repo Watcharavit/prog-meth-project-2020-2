@@ -3,13 +3,13 @@ package entity;
 import java.util.Map;
 import java.util.Set;
 
-import application.GameSingleton;
 import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Equipment;
 import entity.base.Updatable;
-import gui.Sprite;
+import game.GameSingleton;
+import graphics.Sprite;
 import javafx.scene.input.KeyCode;
 import logic.Direction;
 import logic.PlayerControl;

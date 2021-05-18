@@ -1,4 +1,4 @@
-package application;
+package game;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +16,7 @@ class GameController {
 	private HashSet<Tile> renderQueueStage;
 	private GraphicsContext gc;
 	private final Tile[][] tiles;
+	private GameLoopTimer timer;
 	
 	protected GameController(Canvas canvas, Tile[][] tiles) {
 		updatableEntities = new HashSet<Updatable>();
@@ -82,7 +83,7 @@ class GameController {
 		render();
 	}
 	protected void initializeLoop() {
-		GameLoopTimer timer = new GameLoopTimer() {
+		timer = new GameLoopTimer() {
 			@Override
 			protected void tick(long frameTimeNano) {
 				double ticksPassed = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
@@ -90,5 +91,11 @@ class GameController {
 			}
 		};
 		timer.start();
+	}
+	protected void pause() {
+		timer.pause();
+	}
+	protected void resume() {
+		timer.resume();
 	}
 }

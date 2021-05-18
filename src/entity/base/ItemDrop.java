@@ -1,6 +1,6 @@
 package entity.base;
 
-import application.Tile;
+import game.Tile;
 
 public abstract class ItemDrop extends StillObject implements Passable,Bombable {
 	

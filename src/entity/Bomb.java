@@ -1,13 +1,13 @@
 package entity;
 
-import application.GameSingleton;
-import application.Tile;
 import entity.base.Bombable;
 import entity.base.Entity;
 import entity.base.Pushable;
 import entity.base.StillObject;
 import entity.base.Updatable;
-import gui.Sprite;
+import game.GameSingleton;
+import game.Tile;
+import graphics.Sprite;
 
 public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 	final Player placer;

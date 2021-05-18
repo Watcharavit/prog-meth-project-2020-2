@@ -4,7 +4,7 @@ import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Updatable;
-import gui.Sprite;
+import graphics.Sprite;
 import logic.Direction;
 
 public class WallThornMonster extends Being implements Updatable, Collidable {
