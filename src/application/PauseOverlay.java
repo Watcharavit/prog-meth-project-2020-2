@@ -1,5 +1,6 @@
 package application;
 
+import gui.UnfocusableButton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 class PauseOverlay extends StackPane {
-	StackPane pauseOverlay;
-	protected PauseOverlay(Runnable resume) {
+	protected PauseOverlay(GameScreen screenInstance) {
 		Pane pauseOverlayBackground = new Pane();
 		pauseOverlayBackground.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		pauseOverlayBackground.setOpacity(0.5);
@@ -28,17 +28,26 @@ class PauseOverlay extends StackPane {
 		Label pausedLabel = new Label("Game Paused");
 		pausedLabel.setFont(new Font(64));
 		pausedLabel.setTextFill(Color.WHITE);
-		Button resumeButton = new Button("Resume");
+		pauseMenu.setSpacing(24);
+		
 		this.setOnKeyPressed((KeyEvent e) -> {
 			KeyCode code = e.getCode();
 			if (code == KeyCode.ESCAPE) {
-				resume.run();
+				screenInstance.resume();
 			}
 		});
+		
+		Button resumeButton = new UnfocusableButton("Resume (ESC)");
 		resumeButton.setOnAction((ActionEvent e) -> {
-			resume.run();
+			screenInstance.resume();
 		});
-		pauseMenu.getChildren().addAll(pausedLabel, resumeButton);
+		
+		Button restartButton = new UnfocusableButton("Restart");
+		restartButton.setOnAction((ActionEvent e) -> {
+			screenInstance.restart();
+			screenInstance.resume();
+		});
+		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton);
 		
 		this.getChildren().addAll(pauseOverlayBackground, pauseMenu);
 	}

@@ -24,6 +24,13 @@ class GameController {
 		this.objectsGc = objectsCanvas.getGraphicsContext2D();
 		this.beingsGc = beingsCanvas.getGraphicsContext2D();
 		this.allBeings = GameSingleton.allBeings;
+		timer = new GameLoopTimer() {
+			@Override
+			protected void tick(long frameTimeNano) {
+				double ticksPassed = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
+				onTick(ticksPassed);
+			  }
+		};
 	}
 	
 	protected void addEntity(Entity entity) {
@@ -68,15 +75,11 @@ class GameController {
 		updateUpdatables(ticksPassed);
 		render();
 	}
-	protected void initializeLoop() {
-		timer = new GameLoopTimer() {
-			@Override
-			protected void tick(long frameTimeNano) {
-				double ticksPassed = frameTimeNano * 0.6e-7; // 60fps = 16.67ms = 1.00
-				onTick(ticksPassed);
-			  }
-		};
+	protected void start() {
 		timer.start();
+	}
+	protected void stop() {
+		timer.stop();
 	}
 	protected void pause() {
 		timer.pause();

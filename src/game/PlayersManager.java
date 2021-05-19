@@ -8,6 +8,7 @@ import entity.Player;
 import entity.TempWall;
 import graphics.Sprite;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import logic.PlayerControl;
 
 class PlayersManager {
@@ -33,7 +34,7 @@ class PlayersManager {
 	private final static Sprite player2NormalSprite = new Sprite(6);
 	private final static Sprite player2DyingSprite = new Sprite(1);
 
-	protected PlayersManager() {
+	protected PlayersManager(Pane pane) {
 		addPlayers();
 	}
 
