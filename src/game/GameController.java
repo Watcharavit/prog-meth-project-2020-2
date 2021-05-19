@@ -39,7 +39,7 @@ class GameController {
 
 	protected void removeEntity(Entity entity) {
 		if (entity instanceof Updatable) {
-			this.updatableEntities.remove((Updatable) entity);
+			this.updatableEntities.remove(entity);
 		}
 	}
 
