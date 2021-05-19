@@ -7,8 +7,12 @@ import logic.Direction;
 
 public class Puncher extends Equipment {
 
+	public Puncher(Player user) {
+		super(user);
+	}
+
 	@Override
-	public void useEquipment(Player user) {
+	public void useEquipment() {
 		super.setCooldown(30.0);
 		Direction facing = user.getFacing();
 		double x = user.getX() + (double) facing.getDeltaX() / 2;

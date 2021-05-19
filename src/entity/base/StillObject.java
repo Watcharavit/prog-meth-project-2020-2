@@ -2,7 +2,7 @@ package entity.base;
 
 import game.Tile;
 
-public abstract class StillObject extends Entity {
+public abstract class StillObject extends PhysicalEntity {
 	private Tile tile;
 	
 	public void setTile(Tile tile) {

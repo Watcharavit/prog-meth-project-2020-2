@@ -29,10 +29,8 @@ public class RollingBomb extends Being implements Updatable,Collidable {
 		int tileY = (int) super.getY();
 		GameSingleton.removeBeing(this);
 		StillObject oldObject = GameSingleton.getTileObject(tileX, tileY);
-		GameSingleton.setTileObject(tileX, tileY, new BombCenter(kicker, radius));
-		if (oldObject instanceof Bombable) {
-			((Bombable) oldObject).bombed();
-		}
+		BombPhantom phantom = new BombPhantom(kicker, radius, tileX, tileY);
+		phantom.startExplosion();
 	}
 	@Override
 	public void update(double ticksPassed) {

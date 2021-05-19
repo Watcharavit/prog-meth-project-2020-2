@@ -2,7 +2,7 @@ package entity.base;
 
 import logic.Direction;
 
-public abstract class Being extends Entity {
+public abstract class Being extends PhysicalEntity {
 	protected Direction facing = Direction.DOWN;
 	protected double x, y;
 	public final double halfSize;

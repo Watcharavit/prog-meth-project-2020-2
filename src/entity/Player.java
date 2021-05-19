@@ -5,7 +5,7 @@ import java.util.Set;
 
 import entity.base.Being;
 import entity.base.Collidable;
-import entity.base.Entity;
+import entity.base.PhysicalEntity;
 import entity.base.Equipment;
 import entity.base.LivingBeing;
 import entity.base.Updatable;
@@ -31,7 +31,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite, Sprite dyingSprite) {
 		super(spawnTile, SIZE);
-		this.equipment = new Puncher();
+		this.equipment = null;
 		this.bombsNumber = 1;
 		this.bombRadius = 1;
 		this.name = name;
@@ -40,6 +40,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 		this.bombsPlacedNumber = 0;
 		this.normalSprite = normalSprite;
 		this.dyingSprite = dyingSprite;
+		this.setEquipment(new Puncher(this));
 	}
 
 	@Override
@@ -80,12 +81,8 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
 			if (this.equipment != null) {
-				this.equipment.tryUseEquipment(this);
+				this.equipment.tryUseEquipment();
 			}
-		}
-
-		if (this.equipment != null) {
-			this.equipment.update(ticksPassed);
 		}
 	}
 
@@ -111,6 +108,8 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	}
 
 	public void setEquipment(Equipment equipment) {
+		if (this.equipment != null) GameSingleton.removePhantomEntity(this.equipment);
+		GameSingleton.addPhantomEntity(equipment);
 		this.equipment = equipment;
 	}
 

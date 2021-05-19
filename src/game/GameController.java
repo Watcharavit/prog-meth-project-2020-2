@@ -5,6 +5,7 @@ import java.util.Set;
 
 import entity.base.Being;
 import entity.base.Entity;
+import entity.base.PhysicalEntity;
 import entity.base.StillObject;
 import entity.base.Updatable;
 import javafx.scene.canvas.Canvas;
