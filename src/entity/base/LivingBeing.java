@@ -24,8 +24,10 @@ public abstract class LivingBeing extends Being implements Updatable {
 	}
 	
 	public void die() {
-		dead = true;
-		timeUntilSpawn = getSpawnCooldown();
+		if (!dead) {
+			dead = true;
+			timeUntilSpawn = getSpawnCooldown();
+		}
 	}
 	private void respawn() {
 		GameSingleton.removeBeing(this);
