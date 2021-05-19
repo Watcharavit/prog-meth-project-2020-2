@@ -128,7 +128,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 
 	@Override
 	public double getSpawnCooldown() {
-		return 60.0;
+		return 50.0;
 	}
 
 }
