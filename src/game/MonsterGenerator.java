@@ -15,12 +15,11 @@ public class MonsterGenerator {
 		addMonster();
 	}
 	protected void addMonster() {
-		addWallThornMonster("WallThornFirst", (GameSingleton.WIDTH /2) , (GameSingleton.HEIGHT/2) );
-		addWallThornMonster("WallThornFirst", GameSingleton.WIDTH /2 , (GameSingleton.HEIGHT/2)  );
+		addWallThornMonster("WallThornFirst", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2]);
 	}
 	
-	private void addWallThornMonster(String name, double posX, double posY) {
-		WallThornMonster wallThorn= new WallThornMonster(posX, posY);
+	private void addWallThornMonster(String name, Tile spawnTile) {
+		WallThornMonster wallThorn = new WallThornMonster(spawnTile);
 		GameSingleton.addBeing(wallThorn);
 
 	}

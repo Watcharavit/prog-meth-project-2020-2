@@ -2,6 +2,7 @@ package entity;
 
 import entity.base.Being;
 import entity.base.Bombable;
+import entity.base.LivingBeing;
 import entity.base.Passable;
 import entity.base.StillObject;
 import entity.base.Updatable;
@@ -22,13 +23,9 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 
 	@Override
 	public void pass(Being character) {
-		if (character instanceof Player) {
+		if (character instanceof LivingBeing) {
 			// player respawn
-			((Player) character).respawn();
-
-			((Player) character).recievePenalty();
-		} else if (character instanceof Ghost) {
-			// remove ghost and create a new one after 5second
+			((LivingBeing) character).die();
 		}
 
 	}

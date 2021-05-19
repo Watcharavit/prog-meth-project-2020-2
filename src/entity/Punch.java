@@ -2,6 +2,7 @@ package entity;
 
 import entity.base.Being;
 import entity.base.Collidable;
+import entity.base.LivingBeing;
 import entity.base.Updatable;
 import game.GameSingleton;
 import graphics.Sprite;
@@ -26,8 +27,8 @@ public class Punch extends Being implements Updatable,Collidable {
 	}
 	@Override
 	public void collide(Being otherBeing) {
-		if (otherBeing != placer) {
-			
+		if (otherBeing instanceof LivingBeing && otherBeing != placer) {
+			((LivingBeing) otherBeing).die();
 		}
 	}
 	@Override

@@ -7,7 +7,7 @@ import entity.base.Updatable;
 import graphics.Sprite;
 
 
-public class KingFloor extends StillObject implements Updatable,Passable{
+public class KingFloor extends StillObject implements Updatable {
 	private static final Sprite sprite = new Sprite(1);
 	private Player player;
 
@@ -20,21 +20,7 @@ public class KingFloor extends StillObject implements Updatable,Passable{
 
 	@Override
 	public void update(double ticksPassed) {
-		// TODO Auto-generated method stub
-		if(this.player != null) {
-			//System.out.println(this.player.getKingTime());
-			this.player.setKingTime(this.player.getKingTime()+ticksPassed); // fps = 16ms.
-			this.player = null;
-			
-		}
-	}
-
-	@Override
-	public void pass(Being character) {
-		// TODO Auto-generated method stub
-		if (character instanceof Player) {
-			this.player = (Player) character;
-		}
+		
 	}
 	
 }

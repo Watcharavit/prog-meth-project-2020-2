@@ -3,16 +3,18 @@ package entity;
 import entity.base.Being;
 import entity.base.Collidable;
 import entity.base.Entity;
+import entity.base.LivingBeing;
 import entity.base.Updatable;
+import game.Tile;
 import graphics.Sprite;
 import logic.Direction;
 
-public class WallThornMonster extends Being implements Updatable, Collidable {
+public class WallThornMonster extends LivingBeing implements Updatable, Collidable {
 	private static final Sprite sprite = new Sprite(1);
 	public static final double SIZE = 1;
 
-	public WallThornMonster(double posX, double posY) {
-		super(posX, posY, SIZE);
+	public WallThornMonster(Tile spawnTile) {
+		super(spawnTile, SIZE);
 		
 	}
 
