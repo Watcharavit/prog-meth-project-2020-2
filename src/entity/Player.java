@@ -100,7 +100,6 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 			this.placeBomb();
 		}
 		if (activeKeys.contains(keyMap.get(PlayerControl.USE_EQUIPMENT))) {
-			System.out.println(this);
 			if (this.equipment != null) {
 				this.equipment.tryUseEquipment(this);
 			}
