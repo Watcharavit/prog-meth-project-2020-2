@@ -31,6 +31,8 @@ public class Ghost extends LivingBeing implements Collidable, Updatable {
 		// Ghost win player
 		if (otherCharacter instanceof Player) {
 			((Player) otherCharacter).die();
+		}else if(otherCharacter instanceof Ghost) {
+			((Ghost) otherCharacter).move();
 		}
 		// Ghost lose WallThorn
 		// implement in Wall thorn class
