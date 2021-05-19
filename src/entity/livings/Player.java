@@ -13,8 +13,10 @@ import game.Tile;
 import graphics.Sprite;
 import interfaces.Collidable;
 import interfaces.Updatable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import logic.Direction;
 import logic.PlayerControl;
 
@@ -29,6 +31,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	private final String name;
 	private final Map<PlayerControl, KeyCode> keyMap;
 	private final Sprite normalSprite, dyingSprite;
+	private final PlayerUi ui;
 	// private boolean isDying; // for red tone player's sprite
 
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
@@ -43,6 +46,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 		this.bombsPlacedNumber = 0;
 		this.normalSprite = normalSprite;
 		this.dyingSprite = dyingSprite;
+		this.ui = new PlayerUi(uiPane, this);
 		this.setEquipment(new EquipmentPuncher(this));
 	}
 
@@ -136,6 +140,17 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	@Override
 	protected double getSpawnCooldown() {
 		return 50.0;
+	}
+	
+	class PlayerUi extends VBox {
+		private final Player player;
+		private final Label nameLabel;
+		private PlayerUi(Pane root, Player player) {
+			this.player = player;
+			root.getChildren().add(this);
+			this.nameLabel = new Label(player.name);
+			this.getChildren().add(nameLabel);
+		}
 	}
 
 }
