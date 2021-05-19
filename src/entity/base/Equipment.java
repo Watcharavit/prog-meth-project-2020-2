@@ -1,12 +1,17 @@
 package entity.base;
 
 import entity.Player;
+import game.GameSingleton;
 
-public abstract class Equipment implements Updatable {
+public abstract class Equipment extends PhantomEntity implements Updatable {
 	private double cooldown = 0;
-	public abstract void useEquipment(Player user);
-	public void tryUseEquipment(Player user) {
-		if (cooldown <= 0) useEquipment(user);
+	public final Player user;
+	public Equipment(Player user) {
+		this.user = user;
+	}
+	public abstract void useEquipment();
+	public void tryUseEquipment() {
+		if (cooldown <= 0) useEquipment();
 	}
 	@Override
 	public void update(double ticksPassed) {

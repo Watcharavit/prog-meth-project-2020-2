@@ -9,8 +9,12 @@ import logic.Direction;
 
 public class BombKicker extends Equipment {
 
+	public BombKicker(Player user) {
+		super(user);
+	}
+
 	@Override
-	public void useEquipment(Player user) {
+	public void useEquipment() {
 		Direction facing = user.getFacing();
 		int sourceTileX = (int) user.getX();
 		int sourceTileY = (int) user.getY();

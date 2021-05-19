@@ -2,7 +2,7 @@ package entity;
 
 import entity.base.Being;
 import entity.base.Collidable;
-import entity.base.Entity;
+import entity.base.PhysicalEntity;
 import entity.base.LivingBeing;
 import entity.base.Updatable;
 import game.Tile;

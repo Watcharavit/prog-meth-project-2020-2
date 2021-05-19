@@ -11,7 +11,8 @@ import java.util.WeakHashMap;
 import entity.Player;
 import entity.WallThornMonster;
 import entity.base.Being;
-import entity.base.Entity;
+import entity.base.PhysicalEntity;
+import entity.base.PhantomEntity;
 import entity.base.StillObject;
 import entity.base.Updatable;
 import javafx.event.EventHandler;
@@ -39,7 +40,6 @@ public class GameSingleton {
 		controller.addEntity(being);
 		beingsManager.addBeing(being);
 	}
-
 	public static void removeBeing(Being being) {
 		controller.removeEntity(being);
 		beingsManager.removeBeing(being);
@@ -48,7 +48,6 @@ public class GameSingleton {
 	public static StillObject getTileObject(int x, int y) {
 		return tiles[x][y].getObject();
 	}
-
 	public static void setTileObject(int x, int y, StillObject object) {
 		Tile tile = tiles[x][y];
 		StillObject existing = tile.getObject();
@@ -59,6 +58,13 @@ public class GameSingleton {
 		tile.setObject(object);
 		beingsManager.updateBeingsAroundTile(tile);
 		controller.queueTileRender(tile);
+	}
+	
+	public static void addPhantomEntity(PhantomEntity entity) {
+		controller.addEntity(entity);
+	}
+	public static void removePhantomEntity(PhantomEntity entity) {
+		controller.removeEntity(entity);
 	}
 
 	public static HashSet<KeyCode> getActiveKeys() {

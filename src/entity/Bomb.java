@@ -1,7 +1,7 @@
 package entity;
 
 import entity.base.Bombable;
-import entity.base.Entity;
+import entity.base.PhysicalEntity;
 import entity.base.Pushable;
 import entity.base.StillObject;
 import entity.base.Updatable;
@@ -13,6 +13,7 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 	final Player placer;
 	final int radius;
 	private double remainingTicks = 60;
+	private boolean exploded = false;
 	
 	public Bomb(Player placer, int radius) {
 		this.placer = placer;
@@ -36,8 +37,11 @@ public class Bomb extends StillObject implements Pushable,Updatable,Bombable {
 	}
 	
 	private void startExplosion() {
+		if (exploded) return;
+		exploded = true;
 		Tile tile = super.getTile();
-		GameSingleton.setTileObject(tile.x, tile.y, new BombCenter(placer, radius));
+		BombPhantom phantom = new BombPhantom(placer, radius, tile.x, tile.y);
+		phantom.startExplosion();
 		placer.returnBomb();
 	}
 	
