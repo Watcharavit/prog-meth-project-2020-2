@@ -1,16 +1,10 @@
 package game;
 
-import java.util.Map;
-
 import entity.livings.LivingBeing;
 import entity.livings.MonsterGhost;
 import entity.livings.MonsterWallThorn;
-import entity.livings.Player;
 import entity.terrains.Floor;
-import entity.terrains.KingFloor;
 import entity.terrains.TempWall;
-import javafx.scene.input.KeyCode;
-import logic.PlayerControl;
 
 public class MonsterGenerator {
 
@@ -21,11 +15,15 @@ public class MonsterGenerator {
 	protected void addMonster() {
 		addWallThornMonster("WallThorn1", GameSingleton.tiles[GameSingleton.WIDTH / 2 - 1][GameSingleton.HEIGHT / 2]);
 		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 - 1]);
-		addGhost("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT / 4]);
-		addGhost("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT / 4]);
-		addGhost("Ghost3", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT*3 / 4]);
-		addGhost("Ghost4", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT*3 / 4]);
-		
+		addGhost("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+				5)][GameSingleton.HEIGHT / 4]);
+		addGhost("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+				5)][GameSingleton.HEIGHT / 4]);
+		addGhost("Ghost3", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+				5)][GameSingleton.HEIGHT * 3 / 4]);
+		addGhost("Ghost4", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+				5)][GameSingleton.HEIGHT * 3 / 4]);
+
 	}
 
 	private void addWallThornMonster(String name, Tile spawnTile) {

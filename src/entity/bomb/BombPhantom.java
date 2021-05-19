@@ -1,12 +1,9 @@
 package entity.bomb;
 
 import entity.PhantomEntity;
-import entity.PhysicalEntity;
 import entity.StillObject;
 import entity.livings.Player;
 import game.GameSingleton;
-import game.Tile;
-import graphics.Sprite;
 import interfaces.Bombable;
 import interfaces.Updatable;
 
@@ -31,9 +28,9 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		this.x = x;
 		this.y = y;
 		this.phantomLifetime = DEFAULT_FLAME_LIFETIME + radius * TICK_PER_RADIUS;
-		
+
 	}
-	
+
 	public void startExplosion() {
 		explodeAt(x, y, phantomLifetime);
 		GameSingleton.addPhantomEntity(this);
@@ -42,7 +39,8 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 
 	@Override
 	public void update(double ticksPassed) {
-		if (!setOff) return;
+		if (!setOff)
+			return;
 		this.totalTicks += ticksPassed;
 		int newExplodeRadius = Math.min(radius, (int) (this.totalTicks / TICK_PER_RADIUS));
 		if (newExplodeRadius >= 1 && newExplodeRadius > explodeRadius) {

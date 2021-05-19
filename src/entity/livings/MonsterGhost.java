@@ -14,14 +14,13 @@ public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
 		super(spawnTile, SIZE);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	private void move() {
-		//move ghost to the enable direction
+		// move ghost to the enable direction
 	}
 
 	@Override
 	public void update(double ticksPassed) {
-	
 
 	}
 
@@ -30,7 +29,7 @@ public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
 		// Ghost win player
 		if (otherCharacter instanceof Player) {
 			((Player) otherCharacter).die();
-		}else if(otherCharacter instanceof MonsterGhost) {
+		} else if (otherCharacter instanceof MonsterGhost) {
 			((MonsterGhost) otherCharacter).move();
 		}
 		// Ghost lose WallThorn

@@ -3,7 +3,6 @@ package entity.equipments;
 import entity.livings.Player;
 import entity.projectiles.ProjectilePunch;
 import game.GameSingleton;
-import graphics.Sprite;
 import logic.Direction;
 
 public class EquipmentPuncher extends Equipment {

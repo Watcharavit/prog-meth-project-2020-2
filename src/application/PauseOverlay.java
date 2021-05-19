@@ -20,35 +20,36 @@ import javafx.scene.text.Font;
 class PauseOverlay extends StackPane {
 	protected PauseOverlay(GameScreen screenInstance) {
 		Pane pauseOverlayBackground = new Pane();
-		pauseOverlayBackground.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+		pauseOverlayBackground
+				.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		pauseOverlayBackground.setOpacity(0.5);
-		
+
 		VBox pauseMenu = new VBox();
 		pauseMenu.setAlignment(Pos.CENTER);
 		Label pausedLabel = new Label("Game Paused");
 		pausedLabel.setFont(new Font(64));
 		pausedLabel.setTextFill(Color.WHITE);
 		pauseMenu.setSpacing(24);
-		
+
 		this.setOnKeyPressed((KeyEvent e) -> {
 			KeyCode code = e.getCode();
 			if (code == KeyCode.ESCAPE) {
 				screenInstance.resume();
 			}
 		});
-		
+
 		Button resumeButton = new UnfocusableButton("Resume (ESC)");
 		resumeButton.setOnAction((ActionEvent e) -> {
 			screenInstance.resume();
 		});
-		
+
 		Button restartButton = new UnfocusableButton("Restart");
 		restartButton.setOnAction((ActionEvent e) -> {
 			screenInstance.restart();
 			screenInstance.resume();
 		});
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton);
-		
+
 		this.getChildren().addAll(pauseOverlayBackground, pauseMenu);
 	}
 }

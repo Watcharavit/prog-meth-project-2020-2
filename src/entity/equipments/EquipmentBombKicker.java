@@ -6,8 +6,6 @@ import entity.livings.Player;
 import entity.projectiles.ProjectileRollingBomb;
 import entity.terrains.Floor;
 import game.GameSingleton;
-import game.Tile;
-import graphics.Sprite;
 import logic.Direction;
 
 public class EquipmentBombKicker extends Equipment {
@@ -29,7 +27,8 @@ public class EquipmentBombKicker extends Equipment {
 			BombObject bomb = (BombObject) actedObject;
 			if (bomb.prepareForExplosion()) {
 				GameSingleton.setTileObject(targetTileX, targetTileY, new Floor());
-				GameSingleton.addBeing(new ProjectileRollingBomb(targetTileX + 0.5, targetTileY + 0.5, facing, user, bomb.radius));
+				GameSingleton.addBeing(
+						new ProjectileRollingBomb(targetTileX + 0.5, targetTileY + 0.5, facing, user, bomb.radius));
 			}
 		}
 	}

@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Set;
 
 import entity.Being;
-import entity.PhysicalEntity;
 import entity.bomb.BombObject;
 import entity.equipments.Equipment;
 import entity.equipments.EquipmentPuncher;
@@ -32,7 +31,8 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	private final Sprite normalSprite, dyingSprite;
 	// private boolean isDying; // for red tone player's sprite
 
-	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite, Sprite dyingSprite, Pane uiPane) {
+	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
+			Sprite dyingSprite, Pane uiPane) {
 		super(spawnTile, SIZE);
 		this.equipment = null;
 		this.bombsNumber = 1;
@@ -54,14 +54,17 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 
 	@Override
 	public Sprite getSprite() {
-		if (super.isDead()) return dyingSprite;
-		else return normalSprite;
+		if (super.isDead())
+			return dyingSprite;
+		else
+			return normalSprite;
 	}
 
 	@Override
 	public void update(double ticksPassed) {
 		super.update(ticksPassed);
-		if (super.isDead()) return;
+		if (super.isDead())
+			return;
 		Set<KeyCode> activeKeys = GameSingleton.getActiveKeys();
 		if (activeKeys.contains(keyMap.get(PlayerControl.MOVE_LEFT))) {
 			super.setFacing(Direction.LEFT);
@@ -104,7 +107,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	public void die() {
 		super.die();
 		bombRadius = Math.max(1, bombRadius - 3);
-		bombsNumber = Math.max(1,  bombsNumber - 3);
+		bombsNumber = Math.max(1, bombsNumber - 3);
 	}
 
 	public void returnBomb() {
@@ -112,7 +115,8 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	}
 
 	public void setEquipment(Equipment equipment) {
-		if (this.equipment != null) GameSingleton.removePhantomEntity(this.equipment);
+		if (this.equipment != null)
+			GameSingleton.removePhantomEntity(this.equipment);
 		GameSingleton.addPhantomEntity(equipment);
 		this.equipment = equipment;
 	}

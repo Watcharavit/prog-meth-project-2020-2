@@ -1,6 +1,5 @@
 package game;
 
-import entity.StillObject;
 import entity.terrains.Floor;
 import entity.terrains.KingFloor;
 import entity.terrains.PermWall;
@@ -30,18 +29,18 @@ class MapGenerator {
 			}
 		}
 
-		int[] ys = {0, height - 1};
-		for (int i=0; i<width; i++) {
+		int[] ys = { 0, height - 1 };
+		for (int i = 0; i < width; i++) {
 			for (int j : ys) {
 				GameSingleton.setTileObject(i, j, new PermWall());
 			}
 		}
-		int[] xs = {0, width - 1};
-		for (int j=0; j<height; j++) {
+		int[] xs = { 0, width - 1 };
+		for (int j = 0; j < height; j++) {
 			for (int i : xs) {
 				GameSingleton.setTileObject(i, j, new PermWall());
 			}
 		}
-		GameSingleton.setTileObject(width / 2 , height / 2 , new KingFloor());
+		GameSingleton.setTileObject(width / 2, height / 2, new KingFloor());
 	}
 }

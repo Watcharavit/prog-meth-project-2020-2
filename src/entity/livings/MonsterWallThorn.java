@@ -12,7 +12,7 @@ public class MonsterWallThorn extends LivingBeing implements Updatable, Collidab
 
 	public MonsterWallThorn(Tile spawnTile) {
 		super(spawnTile, SIZE);
-		
+
 	}
 
 	@Override
@@ -23,24 +23,22 @@ public class MonsterWallThorn extends LivingBeing implements Updatable, Collidab
 	@Override
 	public void update(double ticksPassed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void collide(Being otherCharacter) {
-		if(otherCharacter instanceof Player) {
+		if (otherCharacter instanceof Player) {
 			((Player) otherCharacter).die();
-		}else if(otherCharacter instanceof MonsterGhost) {
+		} else if (otherCharacter instanceof MonsterGhost) {
 			((MonsterGhost) otherCharacter).die();
-		}else {
+		} else {
 			// move wallMon to the opposite side
 		}
 	}
-	
-	private void move() {
-		
-	}
 
-	
+	private void move() {
+
+	}
 
 }

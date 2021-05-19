@@ -34,7 +34,7 @@ class PlayersManager {
 	private final static Sprite player1DyingSprite = new Sprite(0);
 	private final static Sprite player2NormalSprite = new Sprite(6);
 	private final static Sprite player2DyingSprite = new Sprite(1);
-	
+
 	private final VBox uiContainer;
 
 	protected PlayersManager(Pane pane) {
@@ -65,7 +65,7 @@ class PlayersManager {
 		Pane playerPane = new Pane();
 		Player player = new Player(name, keyMap, spawnTile, normalSprite, dyingSprite, playerPane);
 		uiContainer.getChildren().add(playerPane);
-		
+
 		GameSingleton.addBeing(player);
 		clearTilesAroundPlayer(player);
 	}

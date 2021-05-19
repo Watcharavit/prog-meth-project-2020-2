@@ -1,29 +1,16 @@
 package game;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
 
 import entity.Being;
 import entity.PhantomEntity;
-import entity.PhysicalEntity;
 import entity.StillObject;
-import entity.livings.MonsterWallThorn;
-import entity.livings.Player;
-import interfaces.Updatable;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import logic.PlayerControl;
 
 public class GameSingleton {
 
@@ -38,11 +25,12 @@ public class GameSingleton {
 	private static BeingsManager beingsManager;
 	private static GameController controller;
 	private static MonsterGenerator monsterGenerator;
-	
+
 	public static void addBeing(Being being) {
 		controller.addEntity(being);
 		beingsManager.addBeing(being);
 	}
+
 	public static void removeBeing(Being being) {
 		controller.removeEntity(being);
 		beingsManager.removeBeing(being);
@@ -51,6 +39,7 @@ public class GameSingleton {
 	public static StillObject getTileObject(int x, int y) {
 		return tiles[x][y].getObject();
 	}
+
 	public static void setTileObject(int x, int y, StillObject object) {
 		Tile tile = tiles[x][y];
 		StillObject existing = tile.getObject();
@@ -62,10 +51,11 @@ public class GameSingleton {
 		beingsManager.updateBeingsAroundTile(tile);
 		controller.queueTileRender(tile);
 	}
-	
+
 	public static void addPhantomEntity(PhantomEntity entity) {
 		controller.addEntity(entity);
 	}
+
 	public static void removePhantomEntity(PhantomEntity entity) {
 		controller.removeEntity(entity);
 	}
@@ -80,14 +70,14 @@ public class GameSingleton {
 
 	public static void initialize(Pane root) {
 		HBox container = new HBox();
-		
+
 		VBox leftPart = new VBox();
 		Pane playersUiPane = new Pane();
 		Pane miscUiPane = new Pane();
 		leftPart.getChildren().add(playersUiPane);
 		leftPart.getChildren().add(miscUiPane);
 		container.getChildren().add(leftPart);
-		
+
 		StackPane layers = new StackPane();
 		Canvas objectsCanvas = new Canvas();
 		Canvas beingsCanvas = new Canvas();
@@ -98,9 +88,9 @@ public class GameSingleton {
 		layers.getChildren().add(objectsCanvas);
 		layers.getChildren().add(beingsCanvas);
 		container.getChildren().add(layers);
-		
+
 		root.getChildren().add(container);
-		
+
 		allBeings = new HashSet<Being>();
 		tiles = new Tile[WIDTH][HEIGHT];
 		for (int i = 0; i < WIDTH; i++) {
@@ -116,6 +106,7 @@ public class GameSingleton {
 		monsterGenerator = new MonsterGenerator();
 		controller.start();
 	}
+
 	public static void destroy() {
 		controller.stop();
 	}

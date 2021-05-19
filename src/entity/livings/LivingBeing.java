@@ -3,7 +3,6 @@ package entity.livings;
 import entity.Being;
 import game.GameSingleton;
 import game.Tile;
-import graphics.Sprite;
 import interfaces.Updatable;
 
 public abstract class LivingBeing extends Being implements Updatable {
