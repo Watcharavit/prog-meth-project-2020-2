@@ -21,15 +21,13 @@ public class Ghost extends Being implements Collidable,Updatable{
 	@Override
 	public void collide(Being otherCharacter) {
 		// TODO Auto-generated method stub
-		
+
 		// Ghost win player
 		if (otherCharacter instanceof Player) {
-
+			((Player) otherCharacter).respawn();
 		}
 		// Ghost lose WallThorn
-		else if (otherCharacter instanceof WallThornMonster) {
-
-		}
+		// implement in Wall thorn class
 	}
 
 	@Override

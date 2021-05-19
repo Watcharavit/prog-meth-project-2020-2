@@ -25,6 +25,8 @@ public class Player extends Being implements Collidable, Updatable {
 	private final String name;
 	private final Map<PlayerControl, KeyCode> keyMap;
 	private int playerNumber;
+	private int spawnX;
+	// private boolean isDying; // for red tone player's sprite
 
 	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap, int playerNumber) {
 		super(posX, posY, SIZE);
@@ -36,6 +38,7 @@ public class Player extends Being implements Collidable, Updatable {
 		this.kingTime = 0;
 		this.bombsPlacedNumber = 0;
 		this.playerNumber = playerNumber;
+		// this.isDying = false;
 	}
 
 	@Override
@@ -45,22 +48,24 @@ public class Player extends Being implements Collidable, Updatable {
 	}
 
 	private static final Sprite spriteFirstPlayer = new Sprite(5);
+	private static final Sprite spriteFirstPlayerDying = new Sprite(0);
 	private static final Sprite spriteSecondPlayer = new Sprite(6);
+	private static final Sprite spriteSecondPlayerDying = new Sprite(1);
 
 	@Override
 	public Sprite getSprite() {
-		if(this.playerNumber==1) {
+		if (this.playerNumber == 1) {
+//			if (isDying) {
+//				return spriteFirstPlayerDying; // haven't change sprite
+//			}
 			return spriteFirstPlayer;
-		}else {
+		} else {
+//			if (isDying) {
+//				return spriteSecondPlayerDying;
+//			}
 			return spriteSecondPlayer;
 		}
 	}
-
-	/*
-	 * equip(Equipment BombKicker, Player leastScorePlayer, Equipment mitt) { //
-	 * method to equip bombkicker for highest score player and mitt for least score
-	 * player setEquipment(BombKicker); leastScorePlayer.setEquipment(mitt); }
-	 */
 
 	@Override
 	public void update(double ticksPassed) {
@@ -89,7 +94,7 @@ public class Player extends Being implements Collidable, Updatable {
 				this.equipment.tryUseEquipment(this);
 			}
 		}
-		
+
 		if (this.equipment != null) {
 			this.equipment.update(ticksPassed);
 		}
@@ -97,13 +102,28 @@ public class Player extends Being implements Collidable, Updatable {
 
 	private void placeBomb() {
 		if (GameSingleton.getTileObject((int) super.x, (int) super.y) instanceof Floor) {
-			if(this.bombsPlacedNumber<this.bombsNumber) {
+			if (this.bombsPlacedNumber < this.bombsNumber) {
 				Bomb bomb = new Bomb(this, this.bombRadius);
 				GameSingleton.setTileObject((int) super.x, (int) super.y, bomb);
 				this.bombsPlacedNumber++;
 			}
 		}
 	}
+
+	public void respawn() { // move player to starting point
+
+		if (this.spawnX == 2.5) {
+			this.setX(2.5);
+			this.setY(2.5);
+		} else {
+			this.setX(GameSingleton.WIDTH - 2.5);
+			this.setY(GameSingleton.HEIGHT - 2.5);
+		}
+		GameSingleton.removeBeing(this);
+		System.out.println("444");
+		GameSingleton.addBeing(this);
+	}
+
 	public void returnBomb() {
 		this.bombsPlacedNumber--;
 	}
@@ -111,9 +131,11 @@ public class Player extends Being implements Collidable, Updatable {
 	public void setEquipment(Equipment equipment) {
 		this.equipment = equipment;
 	}
+
 	public void incrementBombsNumber() {
 		this.bombsNumber++;
 	}
+
 	public void incrementBombRadius() {
 		this.bombRadius++;
 	}
@@ -125,6 +147,26 @@ public class Player extends Being implements Collidable, Updatable {
 	public void setKingTime(double d) {
 		this.kingTime = d;
 	}
-	
+
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
+
+	public void recievePenalty() {
+		if (this.bombRadius > 3) {
+			this.bombRadius -= 3;
+		} else {
+			this.bombRadius = 1;
+		}
+		if (this.bombsNumber > 3) {
+			this.bombsNumber -= 3;
+		} else {
+			this.bombsNumber = 1;
+		}
+	}
 
 }

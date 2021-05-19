@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import entity.Player;
+import entity.WallThornMonster;
 import entity.base.Being;
 import entity.base.Entity;
 import entity.base.StillObject;
@@ -32,7 +33,8 @@ public class GameSingleton {
 	private static PlayersManager playersManager;
 	private static BeingsManager beingsManager;
 	private static GameController controller;
-
+	private static MonsterGenerator monsterGenerator;
+	
 	public static void addBeing(Being being) {
 		controller.addEntity(being);
 		beingsManager.addBeing(being);
@@ -89,6 +91,8 @@ public class GameSingleton {
 		MapGenerator.generateMap();
 		playersManager = new PlayersManager();
 		controller.initializeLoop();
+		monsterGenerator = new MonsterGenerator();
+		
 	}
 
 	public static void pause() {

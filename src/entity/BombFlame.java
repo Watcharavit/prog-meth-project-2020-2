@@ -23,10 +23,14 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
-			// remove player and create a new one
+			// player respawn
+			((Player) character).respawn();
+
+			((Player) character).recievePenalty();
 		} else if (character instanceof Ghost) {
 			// remove ghost and create a new one after 5second
 		}
+
 	}
 
 	private static final Sprite sprite = new Sprite(1);
@@ -45,8 +49,7 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		if (this.remainingTicks <= 0) {
 			if (spawnDrop) { // we can add more condition
 				spawnItemDrop(x, y);
-			}
-			else {
+			} else {
 				this.remove(x, y);
 			}
 		}
@@ -61,11 +64,9 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		double random = Math.random();
 		if (random > 0.8) {
 			GameSingleton.setTileObject(x, y, new BombFlameUpgrade());
-		}
-		else if (random < 0.2) {
+		} else if (random < 0.2) {
 			GameSingleton.setTileObject(x, y, new BombQuantityUpgrade());
-		}
-		else {
+		} else {
 			this.remove(x, y);
 		}
 	}

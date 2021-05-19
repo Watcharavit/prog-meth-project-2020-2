@@ -8,17 +8,17 @@ import graphics.Sprite;
 import logic.Direction;
 
 public class WallThornMonster extends Being implements Updatable, Collidable {
+	private static final Sprite sprite = new Sprite(1);
+	public static final double SIZE = 1;
 
-
-	public WallThornMonster(double x, double y, double size) {
-		super(x, y, size);
-		// TODO Auto-generated constructor stub
+	public WallThornMonster(double posX, double posY) {
+		super(posX, posY, SIZE);
+		
 	}
 
 	@Override
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 
 	@Override
@@ -29,7 +29,6 @@ public class WallThornMonster extends Being implements Updatable, Collidable {
 
 	@Override
 	public void collide(Being otherCharacter) {
-		// TODO Auto-generated method stub
 		
 	}
 
