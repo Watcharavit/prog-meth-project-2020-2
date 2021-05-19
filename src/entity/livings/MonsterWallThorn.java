@@ -41,4 +41,10 @@ public class MonsterWallThorn extends LivingBeing implements Updatable, Collidab
 
 	}
 
+	@Override
+	protected void onDeath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

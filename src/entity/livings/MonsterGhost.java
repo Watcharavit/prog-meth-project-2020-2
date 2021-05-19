@@ -47,4 +47,10 @@ public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
 		return 60.0;
 	}
 
+	@Override
+	protected void onDeath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
