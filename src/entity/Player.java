@@ -24,8 +24,9 @@ public class Player extends Being implements Collidable, Updatable {
 	private double kingTime;
 	private final String name;
 	private final Map<PlayerControl, KeyCode> keyMap;
+	private int playerNumber;
 
-	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap) {
+	public Player(String name, double posX, double posY, Map<PlayerControl, KeyCode> keyMap, int playerNumber) {
 		super(posX, posY, SIZE);
 		this.equipment = new Puncher();
 		this.bombsNumber = 1;
@@ -34,6 +35,7 @@ public class Player extends Being implements Collidable, Updatable {
 		this.keyMap = keyMap;
 		this.kingTime = 0;
 		this.bombsPlacedNumber = 0;
+		this.playerNumber = playerNumber;
 	}
 
 	@Override
@@ -42,11 +44,16 @@ public class Player extends Being implements Collidable, Updatable {
 
 	}
 
-	private static final Sprite sprite = new Sprite(5);
+	private static final Sprite spriteFirstPlayer = new Sprite(5);
+	private static final Sprite spriteSecondPlayer = new Sprite(6);
 
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		if(this.playerNumber==1) {
+			return spriteFirstPlayer;
+		}else {
+			return spriteSecondPlayer;
+		}
 	}
 
 	/*

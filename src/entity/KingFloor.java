@@ -4,7 +4,6 @@ import entity.base.Being;
 import entity.base.Passable;
 import entity.base.StillObject;
 import entity.base.Updatable;
-import game.Tile;
 import graphics.Sprite;
 
 
@@ -23,7 +22,7 @@ public class KingFloor extends StillObject implements Updatable,Passable{
 	public void update(double ticksPassed) {
 		// TODO Auto-generated method stub
 		if(this.player != null) {
-			System.out.println(this.player.getKingTime());
+			//System.out.println(this.player.getKingTime());
 			this.player.setKingTime(this.player.getKingTime()+ticksPassed); // fps = 16ms.
 			this.player = null;
 			

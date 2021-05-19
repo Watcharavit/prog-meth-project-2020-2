@@ -11,7 +11,7 @@ import graphics.Sprite;
 
 public class BombFlame extends StillObject implements Updatable, Passable, Bombable {
 	final Player placer;
-	double remainingTicks;
+	protected double remainingTicks;
 	final boolean spawnDrop;
 
 	public BombFlame(Player placer, double lifetime, boolean spawnDrop) {

@@ -33,8 +33,8 @@ class PlayersManager {
 	}
 	
 	private void addPlayers() {
-		addPlayer("Player 1", player1Control, 2.5, 2.5);
-		addPlayer("Player 2", player2Control, GameSingleton.WIDTH - 2.5, GameSingleton.HEIGHT- 2.5);
+		addPlayer("Player 1", player1Control, 2.5, 2.5, 1);
+		addPlayer("Player 2", player2Control, GameSingleton.WIDTH - 2.5, GameSingleton.HEIGHT- 2.5, 2);
 	}
 	private void clearTilesAroundPlayer(Player player) {
 		int x = (int) player.getX();
@@ -45,8 +45,8 @@ class PlayersManager {
 			}
 		}
 	}
-	private void addPlayer(String name, Map<PlayerControl, KeyCode> keyMap, double posX, double posY) {
-		Player player = new Player(name, posX, posY, keyMap);
+	private void addPlayer(String name, Map<PlayerControl, KeyCode> keyMap, double posX, double posY,int playerNumber) {
+		Player player = new Player(name, posX, posY, keyMap, playerNumber);
 		GameSingleton.addBeing(player);
 		clearTilesAroundPlayer(player);
 	}
