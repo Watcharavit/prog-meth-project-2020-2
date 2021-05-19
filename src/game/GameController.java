@@ -3,11 +3,11 @@ package game;
 import java.util.HashSet;
 import java.util.Set;
 
-import entity.base.Being;
-import entity.base.Entity;
-import entity.base.PhysicalEntity;
-import entity.base.StillObject;
-import entity.base.Updatable;
+import entity.Being;
+import entity.Entity;
+import entity.PhysicalEntity;
+import entity.StillObject;
+import interfaces.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 

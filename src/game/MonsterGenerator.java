@@ -2,13 +2,13 @@ package game;
 
 import java.util.Map;
 
-import entity.Floor;
-import entity.Ghost;
-import entity.KingFloor;
-import entity.Player;
-import entity.TempWall;
-import entity.WallThornMonster;
-import entity.base.LivingBeing;
+import entity.livings.LivingBeing;
+import entity.livings.MonsterGhost;
+import entity.livings.MonsterWallThorn;
+import entity.livings.Player;
+import entity.terrains.Floor;
+import entity.terrains.KingFloor;
+import entity.terrains.TempWall;
 import javafx.scene.input.KeyCode;
 import logic.PlayerControl;
 
@@ -29,7 +29,7 @@ public class MonsterGenerator {
 	}
 
 	private void addWallThornMonster(String name, Tile spawnTile) {
-		WallThornMonster wallThorn = new WallThornMonster(spawnTile);
+		MonsterWallThorn wallThorn = new MonsterWallThorn(spawnTile);
 		GameSingleton.addBeing(wallThorn);
 		clearTileAtMonster(wallThorn);
 
@@ -39,7 +39,7 @@ public class MonsterGenerator {
 //		while(GameSingleton.getTileObject(spawnTile.x, spawnTile.y) instanceof Ghost) {
 //			spawnTile = GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT / 4]);
 //		}
-		Ghost ghost = new Ghost(spawnTile);
+		MonsterGhost ghost = new MonsterGhost(spawnTile);
 		GameSingleton.addBeing(ghost);
 		clearTileAtMonster(ghost);
 	}

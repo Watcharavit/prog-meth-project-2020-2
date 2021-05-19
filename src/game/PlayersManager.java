@@ -3,12 +3,13 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
-import entity.Floor;
-import entity.Player;
-import entity.TempWall;
+import entity.livings.Player;
+import entity.terrains.Floor;
+import entity.terrains.TempWall;
 import graphics.Sprite;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import logic.PlayerControl;
 
 class PlayersManager {
@@ -33,9 +34,13 @@ class PlayersManager {
 	private final static Sprite player1DyingSprite = new Sprite(0);
 	private final static Sprite player2NormalSprite = new Sprite(6);
 	private final static Sprite player2DyingSprite = new Sprite(1);
+	
+	private final VBox uiContainer;
 
 	protected PlayersManager(Pane pane) {
 		addPlayers();
+		this.uiContainer = new VBox();
+		pane.getChildren().add(uiContainer);
 	}
 
 	private void addPlayers() {
@@ -57,7 +62,10 @@ class PlayersManager {
 
 	private void addPlayer(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
 			Sprite dyingSprite) {
-		Player player = new Player(name, keyMap, spawnTile, normalSprite, dyingSprite);
+		Pane playerPane = new Pane();
+		Player player = new Player(name, keyMap, spawnTile, normalSprite, dyingSprite, playerPane);
+		uiContainer.getChildren().add(playerPane);
+		
 		GameSingleton.addBeing(player);
 		clearTilesAroundPlayer(player);
 	}

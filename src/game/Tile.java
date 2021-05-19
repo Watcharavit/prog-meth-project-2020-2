@@ -2,8 +2,8 @@ package game;
 
 import java.util.HashSet;
 
-import entity.base.Being;
-import entity.base.StillObject;
+import entity.Being;
+import entity.StillObject;
 
 public class Tile {
 	private StillObject object;

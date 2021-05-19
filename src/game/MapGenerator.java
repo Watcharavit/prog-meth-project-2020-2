@@ -1,10 +1,10 @@
 package game;
 
-import entity.Floor;
-import entity.KingFloor;
-import entity.PermWall;
-import entity.TempWall;
-import entity.base.StillObject;
+import entity.StillObject;
+import entity.terrains.Floor;
+import entity.terrains.KingFloor;
+import entity.terrains.PermWall;
+import entity.terrains.TempWall;
 
 class MapGenerator {
 	protected static void generateMap() {

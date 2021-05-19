@@ -3,10 +3,10 @@ package game;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import entity.base.Being;
-import entity.base.Collidable;
-import entity.base.Passable;
-import entity.base.StillObject;
+import entity.Being;
+import entity.StillObject;
+import interfaces.Collidable;
+import interfaces.Passable;
 
 class BeingsManager {
 	Tile[][] tiles;

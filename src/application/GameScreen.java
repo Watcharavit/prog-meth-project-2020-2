@@ -1,7 +1,11 @@
 package application;
 
 import game.GameSingleton;
+import gui.UnfocusableButton;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -13,14 +17,20 @@ class GameScreen extends StackPane {
 	StackPane pauseOverlay;
 	Pane gamePane;
 	protected GameScreen() {
-		VBox container = new VBox();
-		
-		ControlsBox controlsPane = new ControlsBox(this);
-		container.getChildren().add(controlsPane);
+		StackPane container = new StackPane();
+		container.setAlignment(Pos.BOTTOM_LEFT);
 		
 		gamePane = new Pane();
 		GameSingleton.initialize(gamePane);
 		container.getChildren().add(gamePane);
+		
+		Button pauseButton = new UnfocusableButton("Pause (ESC)");
+		pauseButton.setOnAction((ActionEvent e) -> {
+			this.pause();
+		});
+		container.getChildren().add(pauseButton);
+		
+		
 		this.getChildren().add(container);
 		
 		pauseOverlay = new PauseOverlay(this);

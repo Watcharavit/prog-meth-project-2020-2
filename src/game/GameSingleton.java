@@ -8,13 +8,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import entity.Player;
-import entity.WallThornMonster;
-import entity.base.Being;
-import entity.base.PhysicalEntity;
-import entity.base.PhantomEntity;
-import entity.base.StillObject;
-import entity.base.Updatable;
+import entity.Being;
+import entity.PhantomEntity;
+import entity.PhysicalEntity;
+import entity.StillObject;
+import entity.livings.MonsterWallThorn;
+import entity.livings.Player;
+import interfaces.Updatable;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -80,7 +80,14 @@ public class GameSingleton {
 
 	public static void initialize(Pane root) {
 		HBox container = new HBox();
+		
+		VBox leftPart = new VBox();
 		Pane playersUiPane = new Pane();
+		Pane miscUiPane = new Pane();
+		leftPart.getChildren().add(playersUiPane);
+		leftPart.getChildren().add(miscUiPane);
+		container.getChildren().add(leftPart);
+		
 		StackPane layers = new StackPane();
 		Canvas objectsCanvas = new Canvas();
 		Canvas beingsCanvas = new Canvas();
@@ -90,9 +97,10 @@ public class GameSingleton {
 		beingsCanvas.setWidth(WIDTH * TILE_SIZE);
 		layers.getChildren().add(objectsCanvas);
 		layers.getChildren().add(beingsCanvas);
-		container.getChildren().add(playersUiPane);
 		container.getChildren().add(layers);
+		
 		root.getChildren().add(container);
+		
 		allBeings = new HashSet<Being>();
 		tiles = new Tile[WIDTH][HEIGHT];
 		for (int i = 0; i < WIDTH; i++) {
