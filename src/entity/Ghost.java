@@ -2,13 +2,15 @@ package entity;
 
 import entity.base.Being;
 import entity.base.Collidable;
+import entity.base.LivingBeing;
 import entity.base.Updatable;
+import game.Tile;
 import graphics.Sprite;
 
-public class Ghost extends Being implements Collidable,Updatable{
+public class Ghost extends LivingBeing implements Collidable,Updatable{
 
-	public Ghost(double x, double y, double size) {
-		super(x, y, size);
+	public Ghost(Tile spawnTile, double size) {
+		super(spawnTile, size);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,7 +26,7 @@ public class Ghost extends Being implements Collidable,Updatable{
 
 		// Ghost win player
 		if (otherCharacter instanceof Player) {
-			((Player) otherCharacter).respawn();
+			((Player) otherCharacter).die();
 		}
 		// Ghost lose WallThorn
 		// implement in Wall thorn class
