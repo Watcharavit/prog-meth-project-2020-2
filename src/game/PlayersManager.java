@@ -38,8 +38,8 @@ class PlayersManager {
 	private final VBox uiContainer;
 
 	protected PlayersManager(Pane pane) {
-		addPlayers();
 		this.uiContainer = new VBox();
+		addPlayers();
 		pane.getChildren().add(uiContainer);
 	}
 
