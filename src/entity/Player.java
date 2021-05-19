@@ -111,7 +111,7 @@ public class Player extends Being implements Collidable, Updatable {
 	}
 
 	public void respawn() { // move player to starting point
-
+		GameSingleton.removeBeing(this);
 		if (this.spawnX == 2.5) {
 			this.setX(2.5);
 			this.setY(2.5);
@@ -119,7 +119,7 @@ public class Player extends Being implements Collidable, Updatable {
 			this.setX(GameSingleton.WIDTH - 2.5);
 			this.setY(GameSingleton.HEIGHT - 2.5);
 		}
-		GameSingleton.removeBeing(this);
+		
 		System.out.println("444");
 		GameSingleton.addBeing(this);
 	}
