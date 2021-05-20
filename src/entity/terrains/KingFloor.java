@@ -3,14 +3,13 @@ package entity.terrains;
 import java.util.HashSet;
 
 import entity.Being;
-import entity.StillObject;
 import entity.livings.Player;
 import game.Tile;
 import graphics.Sprite;
 import interfaces.Passable;
 import interfaces.Updatable;
 
-public class KingFloor extends StillObject implements Updatable, Passable {
+public class KingFloor extends Floor implements Updatable, Passable {
 	private static final Sprite sprite = new Sprite(1);
 	private HashSet<Player> standingPlayers;
 

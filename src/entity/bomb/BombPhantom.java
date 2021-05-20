@@ -28,7 +28,6 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		this.x = x;
 		this.y = y;
 		this.phantomLifetime = DEFAULT_FLAME_LIFETIME + radius * TICK_PER_RADIUS;
-
 	}
 
 	public void startExplosion() {
@@ -60,7 +59,7 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
 			boolean stopBlast = casted.getCanStopBlast();
-			BombFlame flame = new BombFlame(placer, lifetime, casted.getShouldSpawnDrop());
+			BombFlame flame = new BombFlame(placer, lifetime, casted);
 			GameSingleton.setTileObject(x, y, flame);
 			casted.bombed();
 

@@ -4,6 +4,7 @@ import java.util.Formatter;
 import java.util.Map;
 import java.util.Set;
 
+import entity.StillObject;
 import entity.bomb.BombObject;
 import entity.equipments.Equipment;
 import entity.equipments.EquipmentPuncher;
@@ -91,9 +92,10 @@ public class Player extends LivingBeing implements Updatable {
 	private void placeBomb() {
 		int x = (int) super.getX();
 		int y = (int) super.getY();
-		if (GameSingleton.getTileObject(x, y) instanceof Floor) {
+		StillObject currentObject = GameSingleton.getTileObject(x, y);
+		if (currentObject instanceof Floor) {
 			if (bombsPlacedNumber.get() < bombsNumber.get()) {
-				BombObject bomb = new BombObject(this, bombRadius.get());
+				BombObject bomb = new BombObject(this, bombRadius.get(), (Floor) currentObject);
 				GameSingleton.setTileObject(x, y, bomb);
 				bombsPlacedNumber.set(bombsPlacedNumber.get() + 1);
 			}

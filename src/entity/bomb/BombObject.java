@@ -2,6 +2,7 @@ package entity.bomb;
 
 import entity.StillObject;
 import entity.livings.Player;
+import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
 import interfaces.Bombable;
@@ -12,10 +13,12 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	public final int radius;
 	private double remainingTicks = 60;
 	private boolean explosionLock = false;
+	private final Bombable originalObject;
 
-	public BombObject(Player placer, int radius) {
+	public BombObject(Player placer, int radius, Bombable originalObject) {
 		this.placer = placer;
 		this.radius = radius;
+		this.originalObject = originalObject;
 	}
 
 	@Override
@@ -37,6 +40,8 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 		if (!explosionLock) {
 			explosionLock = true;
 			placer.returnBomb();
+			Tile tile = super.getTile();
+			GameSingleton.setTileObject(tile.x, tile.y, originalObject.getAfterBombed());
 			return true;
 		} else
 			return false;
@@ -55,6 +60,11 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	public void bombed() {
 		if (prepareForExplosion())
 			startExplosion();
+	}
+
+	@Override
+	public StillObject getAfterBombed() {
+		return originalObject.getAfterBombed();
 	}
 
 }

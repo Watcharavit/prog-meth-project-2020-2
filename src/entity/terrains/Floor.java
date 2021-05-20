@@ -20,4 +20,9 @@ public class Floor extends StillObject implements Passable, Bombable {
 
 	}
 
+	@Override
+	public StillObject getAfterBombed() {
+		return this;
+	}
+
 }

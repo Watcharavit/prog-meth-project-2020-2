@@ -23,4 +23,8 @@ abstract class Drop extends StillObject implements Passable, Bombable {
 
 	protected abstract void onPicked(Player player);
 
+	@Override
+	public StillObject getAfterBombed() {
+		return new Floor();
+	}
 }

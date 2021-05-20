@@ -2,11 +2,8 @@ package entity.bomb;
 
 import entity.Being;
 import entity.StillObject;
-import entity.drops.DropBombFlameUpgrade;
-import entity.drops.DropBombQuantityUpgrade;
 import entity.livings.LivingBeing;
 import entity.livings.Player;
-import entity.terrains.Floor;
 import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
@@ -15,14 +12,14 @@ import interfaces.Passable;
 import interfaces.Updatable;
 
 public class BombFlame extends StillObject implements Updatable, Passable, Bombable {
-	final Player placer;
-	protected double remainingTicks;
-	final boolean spawnDrop;
+	private final Player placer;
+	private double remainingTicks;
+	private final Bombable bombedObject;
 
-	public BombFlame(Player placer, double lifetime, boolean spawnDrop) {
+	public BombFlame(Player placer, double lifetime, Bombable bombedObject) {
 		this.placer = placer;
 		this.remainingTicks = lifetime;
-		this.spawnDrop = spawnDrop;
+		this.bombedObject = bombedObject;
 	}
 
 	@Override
@@ -48,27 +45,14 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		int x = tile.x;
 		int y = tile.y;
 		if (this.remainingTicks <= 0) {
-			if (spawnDrop) { // we can add more condition
-				spawnItemDrop(x, y);
-			} else {
-				this.remove(x, y);
-			}
+			GameSingleton.setTileObject(x, y, bombedObject.getAfterBombed());
 		}
 
 	}
 
-	private void remove(int x, int y) {
-		GameSingleton.setTileObject(x, y, new Floor());
+	@Override
+	public StillObject getAfterBombed() {
+		return bombedObject.getAfterBombed();
 	}
 
-	private void spawnItemDrop(int x, int y) {
-		double random = Math.random();
-		if (random > 0.8) {
-			GameSingleton.setTileObject(x, y, new DropBombFlameUpgrade());
-		} else if (random < 0.2) {
-			GameSingleton.setTileObject(x, y, new DropBombQuantityUpgrade());
-		} else {
-			this.remove(x, y);
-		}
-	}
 }

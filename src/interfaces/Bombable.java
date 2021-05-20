@@ -1,5 +1,7 @@
 package interfaces;
 
+import entity.StillObject;
+
 public interface Bombable {
 	public default void bombed() {
 
@@ -8,8 +10,6 @@ public interface Bombable {
 	public default boolean getCanStopBlast() {
 		return false;
 	}
-
-	public default boolean getShouldSpawnDrop() {
-		return false;
-	}
+	
+	public StillObject getAfterBombed();
 }
