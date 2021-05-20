@@ -4,14 +4,14 @@ import entity.StillObject;
 import entity.drops.DropBombFlameUpgrade;
 import entity.drops.DropBombQuantityUpgrade;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Bombable;
 
 public class TempWall extends StillObject implements Bombable {
-	private static final Sprite sprite = new Sprite(10);
 
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		return SpritesLibrary.TEMP_WALL;
 	}
 
 	@Override

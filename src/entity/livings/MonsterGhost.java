@@ -3,6 +3,7 @@ package entity.livings;
 import entity.Being;
 import game.Tile;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
@@ -56,16 +57,14 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 		
 	}
 
-	
-	private static final Sprite sprite = new Sprite(8);
 	@Override
 	protected Sprite getAliveSprite() {
-		return sprite;
+		return SpritesLibrary.GHOST;
 	}
 
 	@Override
 	protected Sprite getDyingSprite() {
-		return sprite;
+		return SpritesLibrary.GHOST_DYING;
 	}
 
 }

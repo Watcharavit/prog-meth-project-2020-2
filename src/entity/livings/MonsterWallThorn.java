@@ -3,6 +3,7 @@ package entity.livings;
 import entity.Being;
 import game.Tile;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
@@ -56,14 +57,14 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 		
 	}
 
-	private static final Sprite sprite = new Sprite(2);
+
 	@Override
 	protected Sprite getAliveSprite() {
-		return sprite;
+		return SpritesLibrary.THORN;
 	}
 	@Override
 	protected Sprite getDyingSprite() {
-		return sprite;
+		return SpritesLibrary.THORN_DYING;
 	}
 
 }

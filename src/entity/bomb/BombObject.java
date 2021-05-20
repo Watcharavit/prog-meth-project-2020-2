@@ -5,6 +5,7 @@ import entity.livings.Player;
 import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Updatable;
 
@@ -47,13 +48,9 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 			return false;
 	}
 
-	private static final Sprite firstSprite = new Sprite(4);
-	private static final Sprite secondSprite = new Sprite(3);
-	private static final Sprite thirdSprite = new Sprite(0);
-
 	@Override
 	public Sprite getSprite() {
-		return firstSprite;
+		return SpritesLibrary.BOMB;
 	}
 
 	@Override

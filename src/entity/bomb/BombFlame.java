@@ -7,6 +7,7 @@ import entity.livings.Player;
 import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Passable;
 import interfaces.Updatable;
@@ -33,38 +34,30 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		}
 
 	}
-
-	protected static final Sprite centerSprite = new Sprite(13);
-	protected static final Sprite topSprite = new Sprite(18);
-	protected static final Sprite bottomSprite = new Sprite(12);
-	protected static final Sprite leftSprite = new Sprite(14);
-	protected static final Sprite rightSprite = new Sprite(15);
-	protected static final Sprite horizontalSprite = new Sprite(16);
-	protected static final Sprite verticalSprite = new Sprite(17);
 	
 	protected static Sprite getSpriteFor(Direction direction, boolean end) {
 		if (end) {
 			switch (direction) {
 			case UP:
-				return topSprite;
+				return SpritesLibrary.BLAST_TOP;
 			case DOWN:
-				return bottomSprite;
+				return SpritesLibrary.BLAST_BOTTOM;
 			case LEFT:
-				return leftSprite;
+				return SpritesLibrary.BLAST_LEFT;
 			case RIGHT:
-				return rightSprite;
+				return SpritesLibrary.BLAST_RIGHT;
 			}
 		}
 		else {
 			switch (direction) {
 			case UP:
-				return verticalSprite;
+				return SpritesLibrary.BLAST_VERTICAL;
 			case DOWN:
-				return verticalSprite;
+				return SpritesLibrary.BLAST_VERTICAL;
 			case LEFT:
-				return horizontalSprite;
+				return SpritesLibrary.BLAST_HORIZONTAL;
 			case RIGHT:
-				return horizontalSprite;
+				return SpritesLibrary.BLAST_HORIZONTAL;
 			}
 		}
 		

@@ -6,6 +6,7 @@ import entity.bomb.BombPhantom;
 import entity.livings.Player;
 import game.GameSingleton;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
@@ -49,10 +50,8 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 		return true;
 	}
 
-	private final static Sprite sprite = new Sprite(0);
-
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		return SpritesLibrary.ROLLING_BOMB;
 	}
 }

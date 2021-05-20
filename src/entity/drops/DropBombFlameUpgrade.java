@@ -2,13 +2,13 @@ package entity.drops;
 
 import entity.livings.Player;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 
 public class DropBombFlameUpgrade extends Drop {
-	private static final Sprite sprite = new Sprite(1);
 
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		return SpritesLibrary.BOMB_FLAME;
 	}
 
 	@Override

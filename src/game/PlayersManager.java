@@ -7,6 +7,7 @@ import entity.livings.Player;
 import entity.terrains.Floor;
 import entity.terrains.TempWall;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -30,10 +31,6 @@ class PlayersManager {
 		player2Control.put(PlayerControl.PLACE_BOMB, KeyCode.ENTER);
 		player2Control.put(PlayerControl.USE_EQUIPMENT, KeyCode.SLASH);
 	}
-	private final static Sprite player1NormalSprite = new Sprite(5);
-	private final static Sprite player1DyingSprite = new Sprite(0);
-	private final static Sprite player2NormalSprite = new Sprite(6);
-	private final static Sprite player2DyingSprite = new Sprite(1);
 
 	private final VBox uiContainer;
 
@@ -44,9 +41,9 @@ class PlayersManager {
 	}
 
 	private void addPlayers() {
-		addPlayer("Player 1", player1Control, GameSingleton.tiles[2][2], player1NormalSprite, player1DyingSprite);
+		addPlayer("Player 1", player1Control, GameSingleton.tiles[2][2], SpritesLibrary.PLAYER_ONE, SpritesLibrary.PLAYER_ONE_DYING);
 		addPlayer("Player 2", player2Control, GameSingleton.tiles[GameSingleton.WIDTH - 3][GameSingleton.HEIGHT - 3],
-				player2NormalSprite, player2DyingSprite);
+				SpritesLibrary.PLAYER_TWO, SpritesLibrary.PLAYER_TWO_DYING);
 	}
 
 	private void clearTilesAroundPlayer(Player player) {

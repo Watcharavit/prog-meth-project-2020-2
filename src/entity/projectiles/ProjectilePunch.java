@@ -5,6 +5,7 @@ import entity.livings.LivingBeing;
 import entity.livings.Player;
 import game.GameSingleton;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
@@ -13,7 +14,7 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 	public static final double SIZE = 0.6;
 	private final static double SPEED = 0.2;
 	private double remainingMoveTicks;
-	final Player placer;
+	private final Player placer;
 
 	public ProjectilePunch(double x, double y, Direction direction, Player placer) {
 		super(x, y, SIZE, SPEED, direction);
@@ -47,11 +48,21 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 		}
 	}
 
-	private static final Sprite sprite = new Sprite(0);
-
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		switch (super.getFacing()) {
+		case DOWN:
+			return SpritesLibrary.PUNCH_DOWN;
+		case UP:
+			return SpritesLibrary.PUNCH_UP;
+		case LEFT:
+			return SpritesLibrary.PUNCH_LEFT;
+		case RIGHT:
+			return SpritesLibrary.PUNCH_RIGHT;
+		}
+		
+		// Unreachable
+		return null;
 	}
 
 }

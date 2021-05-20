@@ -6,11 +6,11 @@ import entity.Being;
 import entity.livings.Player;
 import game.Tile;
 import graphics.Sprite;
+import graphics.SpritesLibrary;
 import interfaces.Passable;
 import interfaces.Updatable;
 
 public class KingFloor extends Floor implements Updatable, Passable {
-	private static final Sprite sprite = new Sprite(1);
 	private HashSet<Player> standingPlayers;
 
 	public KingFloor() {
@@ -19,7 +19,7 @@ public class KingFloor extends Floor implements Updatable, Passable {
 
 	@Override
 	public Sprite getSprite() {
-		return sprite;
+		return SpritesLibrary.KING_FLOOR;
 	}
 
 	// Java is dumb so we need to provide this to set.toArray() to get the correct
