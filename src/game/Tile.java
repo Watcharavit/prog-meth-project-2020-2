@@ -34,7 +34,7 @@ public class Tile {
 		this.beings.add(being);
 	}
 
-	protected void removeBeing(Being being) {
-		this.beings.remove(being);
+	protected boolean removeBeing(Being being) {
+		return this.beings.remove(being);
 	}
 }

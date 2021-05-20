@@ -58,7 +58,7 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		StillObject tileObject = GameSingleton.getTileObject(x, y);
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
-			BombFlame flame = new BombFlame(x, y, placer, phantomLifetime, casted, SpritesLibrary.BLAST_CENTER);
+			BombFlame flame = new BombFlame(x, y, placer, phantomLifetime, casted.getAfterBombed(), SpritesLibrary.BLAST_CENTER);
 			GameSingleton.addBeing(flame);
 			casted.bombed();
 		}
@@ -73,13 +73,13 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
 			boolean stopBlast = casted.getCanStopBlast();
-			BombFlame flame = new BombFlame(x, y, placer, lifetime, casted,
+			StillObject afterBomb = casted.getAfterBombed();
+			GameSingleton.setTileObject(x, y, afterBomb);
+			BombFlame flame = new BombFlame(x, y, placer, lifetime, afterBomb,
 					BombFlame.getSpriteFor(direction, stopBlast || radius == this.radius));
 			GameSingleton.addBeing(flame);
 			casted.bombed();
-
-			if (!stopBlast)
-				return false;
+			return stopBlast;
 		}
 		return true;
 	}

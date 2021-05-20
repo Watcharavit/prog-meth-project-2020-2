@@ -7,6 +7,7 @@ import java.util.Set;
 import entity.StillObject;
 import entity.bomb.BombObject;
 import entity.equipments.Equipment;
+import entity.equipments.EquipmentBombKicker;
 import entity.equipments.EquipmentPuncher;
 import entity.terrains.Floor;
 import game.GameSingleton;
@@ -53,7 +54,6 @@ public class Player extends LivingBeing implements Updatable {
 		this.normalSprite = normalSprite;
 		this.dyingSprite = dyingSprite;
 		this.ui = new PlayerUi(uiPane, this);
-		this.setEquipment(new EquipmentPuncher(this));
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class Player extends LivingBeing implements Updatable {
 		}
 	}
 
-	private void setEquipment(Equipment equipment) {
+	public void setEquipment(Equipment equipment) {
 		if (this.equipment != null)
 			GameSingleton.removePhantomEntity(this.equipment);
 		if (equipment != null)
@@ -117,7 +117,6 @@ public class Player extends LivingBeing implements Updatable {
 
 	@Override
 	public void onDeath() {
-		setEquipment(null);
 		bombRadius = (Math.max(1, bombRadius - 3));
 		bombsNumber = (Math.max(1, bombsNumber - 3));
 		ui.refreshBombsNumber();
@@ -160,8 +159,12 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	public void incrementKingTime(double ticks) {
-		kingTime += ticks / 60;
+		kingTime += ticks;
 		ui.refreshKingTime();
+	}
+	
+	public double getKingTime() {
+		return kingTime;
 	}
 
 	class PlayerUi extends VBox {
@@ -170,6 +173,7 @@ public class Player extends LivingBeing implements Updatable {
 		private final Label bombsNumberLabel;
 		private final Label bombRadiusLabel;
 		private final Label kingTimeLabel;
+		private double kingTimeDebounced = -1;
 
 		private PlayerUi(Pane root, Player player) {
 			this.player = player;
@@ -180,11 +184,12 @@ public class Player extends LivingBeing implements Updatable {
 			this.bombsNumberLabel = new Label();
 			this.bombRadiusLabel = new Label();
 			this.kingTimeLabel = new Label();
+			
+			this.setPadding(new Insets(24));
 
 			this.getChildren().addAll(nameLabel, bombsNumberLabel, bombRadiusLabel, kingTimeLabel);
-			this.setPadding(new Insets(24));
 			this.setAlignment(Pos.BASELINE_LEFT);
-			this.setMinWidth(180);
+			
 			
 			refreshBombsNumber();
 			refreshBombRadius();
@@ -210,10 +215,14 @@ public class Player extends LivingBeing implements Updatable {
 		
 		protected void refreshKingTime() {
 			double kingTime = player.kingTime;
-			Formatter f = new Formatter();
-			String r = f.format("Score: %3.2f", kingTime).toString();
-			f.close();
-			this.kingTimeLabel.setText(r);
+			double v = Math.floor(kingTime / 6.0);
+			if (v != kingTimeDebounced) {
+				kingTimeDebounced = v;
+				Formatter f = new Formatter();
+				String r = f.format("Score: %3.1f", kingTimeDebounced / 10).toString();
+				f.close();
+				this.kingTimeLabel.setText(r);
+			}
 		}
 	}
 

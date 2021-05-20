@@ -18,14 +18,14 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	private static final double SIZE = 1.0;
 	private final Player placer;
 	private double remainingTicks;
-	private final Bombable bombedObject;
+	private final StillObject afterBomb;
 	private final Sprite sprite;
 
-	public BombFlame(int x, int y, Player placer, double lifetime, Bombable bombedObject, Sprite sprite) {
+	public BombFlame(int x, int y, Player placer, double lifetime, StillObject afterBomb, Sprite sprite) {
 		super(x + 0.5, y + 0.5, SIZE);
 		this.placer = placer;
 		this.remainingTicks = lifetime;
-		this.bombedObject = bombedObject;
+		this.afterBomb = afterBomb;
 		this.sprite = sprite;
 	}
 
@@ -34,6 +34,10 @@ public class BombFlame extends Being implements Updatable, Collidable {
 		if (character instanceof LivingBeing) {
 			((LivingBeing) character).die();
 		}
+	}
+	@Override
+	public boolean getCanPassThrough() {
+		return true;
 	}
 
 	protected static Sprite getSpriteFor(Direction direction, boolean end) {
@@ -77,7 +81,7 @@ public class BombFlame extends Being implements Updatable, Collidable {
 		int y = (int) super.getY();
 		if (this.remainingTicks <= 0) {
 			GameSingleton.removeBeing(this);
-			GameSingleton.setTileObject(x, y, bombedObject.getAfterBombed());
+			GameSingleton.setTileObject(x, y, afterBomb);
 		}
 	}
 }

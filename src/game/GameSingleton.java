@@ -21,10 +21,9 @@ public class GameSingleton {
 	protected static Tile[][] tiles;
 	protected static HashSet<Being> allBeings;
 	private static InputManager inputManager;
-	private static PlayersManager playersManager;
+	private static GameplayManager gameplayManager;
 	private static BeingsManager beingsManager;
 	private static GameController controller;
-	private static MonsterGenerator monsterGenerator;
 
 	public static void addBeing(Being being) {
 		controller.addEntity(being);
@@ -74,10 +73,8 @@ public class GameSingleton {
 		HBox container = new HBox();
 
 		VBox leftPart = new VBox();
-		Pane playersUiPane = new Pane();
-		Pane miscUiPane = new Pane();
-		leftPart.getChildren().add(playersUiPane);
-		leftPart.getChildren().add(miscUiPane);
+		Pane gameUiPane = new Pane();
+		leftPart.getChildren().add(gameUiPane);
 		container.getChildren().add(leftPart);
 
 		StackPane layers = new StackPane();
@@ -104,8 +101,8 @@ public class GameSingleton {
 		controller = new GameController(objectsCanvas, beingsCanvas);
 		beingsManager = new BeingsManager();
 		MapGenerator.generateMap();
-		playersManager = new PlayersManager(playersUiPane);
-		monsterGenerator = new MonsterGenerator();
+		MonsterGenerator.generateMonsters();
+		GameplayManager.setupGameplay(gameUiPane);
 		controller.start();
 	}
 

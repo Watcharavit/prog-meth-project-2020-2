@@ -42,7 +42,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	
 	@Override
 	public boolean getCanPassThrough() {
-		return true;
+		return false;
 	}
 
 	@Override

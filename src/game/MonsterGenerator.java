@@ -9,40 +9,40 @@ import logic.Direction;
 
 public class MonsterGenerator {
 
-	protected MonsterGenerator() {
+	protected static void generateMonsters() {
 		addMonster();
 	}
 
-	protected void addMonster() {
+	private static void addMonster() {
 		addWallThornMonster("WallThorn1", GameSingleton.tiles[GameSingleton.WIDTH / 2 - 1][GameSingleton.HEIGHT / 2],
 				Direction.LEFT);
 		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 - 1],
 				Direction.UP);
-		addGhost("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+		addGhostMonster("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
 				5)][GameSingleton.HEIGHT / 4]);
-		addGhost("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+		addGhostMonster("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
 				5)][GameSingleton.HEIGHT / 4]);
-		addGhost("Ghost3", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+		addGhostMonster("Ghost3", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
 				5)][GameSingleton.HEIGHT * 3 / 4]);
-		addGhost("Ghost4", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
+		addGhostMonster("Ghost4", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
 				5)][GameSingleton.HEIGHT * 3 / 4]);
 
 	}
 
-	private void addWallThornMonster(String name, Tile spawnTile, Direction direction) {
+	private static void addWallThornMonster(String name, Tile spawnTile, Direction direction) {
 		MonsterWallThorn wallThorn = new MonsterWallThorn(spawnTile, direction);
 		GameSingleton.addBeing(wallThorn);
 		clearTileAtMonster(wallThorn);
 
 	}
 
-	private void addGhost(String name, Tile spawnTile) {
+	private static void addGhostMonster(String name, Tile spawnTile) {
 		MonsterGhost ghost = new MonsterGhost(spawnTile);
 		GameSingleton.addBeing(ghost);
 		clearTileAtMonster(ghost);
 	}
 
-	private void clearTileAtMonster(LivingBeing being) {
+	private static void clearTileAtMonster(LivingBeing being) {
 		int x = (int) being.getX();
 		int y = (int) being.getY();
 		if (GameSingleton.getTileObject(x, y) instanceof TempWall)
