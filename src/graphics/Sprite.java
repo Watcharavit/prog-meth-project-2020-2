@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
 public class Sprite {
-	private static Image mainSprites = new Image(ClassLoader.getSystemResource("sprite_sheet.png").toString());
+	private static Image mainSprites = new Image(ClassLoader.getSystemResource("spritesheet.png").toString());
 	private static final int spriteSize = 24;
 
 	private final WritableImage img;
