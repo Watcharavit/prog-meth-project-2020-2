@@ -4,8 +4,10 @@ import entity.PhantomEntity;
 import entity.StillObject;
 import entity.livings.Player;
 import game.GameSingleton;
+import graphics.Sprite;
 import interfaces.Bombable;
 import interfaces.Updatable;
+import logic.Direction;
 
 public class BombPhantom extends PhantomEntity implements Updatable {
 	static final int DEFAULT_FLAME_LIFETIME = 60;
@@ -31,8 +33,8 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 	}
 
 	public void startExplosion() {
-		explodeAt(x, y, phantomLifetime);
 		GameSingleton.addPhantomEntity(this);
+		explodeHere();
 		this.setOff = true;
 	}
 
@@ -51,15 +53,27 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 			GameSingleton.removePhantomEntity(this);
 		}
 	}
+	
+	private void explodeHere() {
+		StillObject tileObject = GameSingleton.getTileObject(x, y);
+		if (tileObject instanceof Bombable) {
+			Bombable casted = ((Bombable) tileObject);
+			BombFlame flame = new BombFlame(placer, phantomLifetime, casted, BombFlame.centerSprite);
+			GameSingleton.setTileObject(x, y, flame);
+			casted.bombed();
+		}
+	}
 
-	private boolean explodeAt(int x, int y, double lifetime) {
+	private boolean explodeAt(Direction direction, int radius, double lifetime) {
+		int x = this.x + direction.getDeltaX() * radius;
+		int y = this.y + direction.getDeltaY() * radius;
 		if (x < 0 || x >= GameSingleton.WIDTH || y < 0 || y >= GameSingleton.HEIGHT)
 			return true;
 		StillObject tileObject = GameSingleton.getTileObject(x, y);
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
 			boolean stopBlast = casted.getCanStopBlast();
-			BombFlame flame = new BombFlame(placer, lifetime, casted);
+			BombFlame flame = new BombFlame(placer, lifetime, casted, BombFlame.getSpriteFor(direction, radius == this.radius));
 			GameSingleton.setTileObject(x, y, flame);
 			casted.bombed();
 
@@ -72,12 +86,12 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 	private void explodeForRadius(int radius) {
 		double lifetime = DEFAULT_FLAME_LIFETIME + (this.radius - radius) * TICK_PER_RADIUS;
 		if (!lStop)
-			lStop = this.explodeAt(x - radius, y, lifetime);
+			lStop = this.explodeAt(Direction.LEFT, radius, lifetime);
 		if (!rStop)
-			rStop = this.explodeAt(x + radius, y, lifetime);
+			rStop = this.explodeAt(Direction.RIGHT, radius, lifetime);
 		if (!uStop)
-			uStop = this.explodeAt(x, y - radius, lifetime);
+			uStop = this.explodeAt(Direction.UP, radius, lifetime);
 		if (!dStop)
-			dStop = this.explodeAt(x, y + radius, lifetime);
+			dStop = this.explodeAt(Direction.DOWN, radius, lifetime);
 	}
 }

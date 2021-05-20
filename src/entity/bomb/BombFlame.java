@@ -10,16 +10,19 @@ import graphics.Sprite;
 import interfaces.Bombable;
 import interfaces.Passable;
 import interfaces.Updatable;
+import logic.Direction;
 
 public class BombFlame extends StillObject implements Updatable, Passable, Bombable {
 	private final Player placer;
 	private double remainingTicks;
 	private final Bombable bombedObject;
+	private final Sprite sprite;
 
-	public BombFlame(Player placer, double lifetime, Bombable bombedObject) {
+	public BombFlame(Player placer, double lifetime, Bombable bombedObject, Sprite sprite) {
 		this.placer = placer;
 		this.remainingTicks = lifetime;
 		this.bombedObject = bombedObject;
+		this.sprite = sprite;
 	}
 
 	@Override
@@ -31,7 +34,44 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 
 	}
 
-	private static final Sprite sprite = new Sprite(1);
+	protected static final Sprite centerSprite = new Sprite(13);
+	protected static final Sprite topSprite = new Sprite(18);
+	protected static final Sprite bottomSprite = new Sprite(12);
+	protected static final Sprite leftSprite = new Sprite(14);
+	protected static final Sprite rightSprite = new Sprite(15);
+	protected static final Sprite horizontalSprite = new Sprite(16);
+	protected static final Sprite verticalSprite = new Sprite(17);
+	
+	protected static Sprite getSpriteFor(Direction direction, boolean end) {
+		if (end) {
+			switch (direction) {
+			case UP:
+				return topSprite;
+			case DOWN:
+				return bottomSprite;
+			case LEFT:
+				return leftSprite;
+			case RIGHT:
+				return rightSprite;
+			}
+		}
+		else {
+			switch (direction) {
+			case UP:
+				return verticalSprite;
+			case DOWN:
+				return verticalSprite;
+			case LEFT:
+				return horizontalSprite;
+			case RIGHT:
+				return horizontalSprite;
+			}
+		}
+		
+		// Unreachable
+		return null;
+	}
+	
 
 	@Override
 	public Sprite getSprite() {
