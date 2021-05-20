@@ -9,17 +9,20 @@ import game.Tile;
 import graphics.Sprite;
 import graphics.SpritesLibrary;
 import interfaces.Bombable;
+import interfaces.Collidable;
 import interfaces.Passable;
 import interfaces.Updatable;
 import logic.Direction;
 
-public class BombFlame extends StillObject implements Updatable, Passable, Bombable {
+public class BombFlame extends Being implements Updatable, Collidable {
+	private static final double SIZE = 1.0;
 	private final Player placer;
 	private double remainingTicks;
 	private final Bombable bombedObject;
 	private final Sprite sprite;
 
-	public BombFlame(Player placer, double lifetime, Bombable bombedObject, Sprite sprite) {
+	public BombFlame(int x, int y, Player placer, double lifetime, Bombable bombedObject, Sprite sprite) {
+		super(x + 0.5, y + 0.5, SIZE, Direction.random());
 		this.placer = placer;
 		this.remainingTicks = lifetime;
 		this.bombedObject = bombedObject;
@@ -27,12 +30,10 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 	}
 
 	@Override
-	public void pass(Being character) {
+	public void collide(Being character) {
 		if (character instanceof LivingBeing) {
-			// player respawn
 			((LivingBeing) character).die();
 		}
-
 	}
 
 	protected static Sprite getSpriteFor(Direction direction, boolean end) {
@@ -72,18 +73,11 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 	@Override
 	public void update(double ticksPassed) {
 		this.remainingTicks -= ticksPassed;
-		Tile tile = super.getTile();
-		int x = tile.x;
-		int y = tile.y;
+		int x = (int) super.getX();
+		int y = (int) super.getY();
 		if (this.remainingTicks <= 0) {
+			GameSingleton.removeBeing(this);
 			GameSingleton.setTileObject(x, y, bombedObject.getAfterBombed());
 		}
-
 	}
-
-	@Override
-	public StillObject getAfterBombed() {
-		return bombedObject.getAfterBombed();
-	}
-
 }
