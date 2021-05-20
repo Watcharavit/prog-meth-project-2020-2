@@ -11,11 +11,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 class GameScreen extends StackPane {
-	boolean isPaused = false;
-	StackPane pauseOverlay;
-	Pane gamePane;
+	private boolean isPaused = false;
+	private final StackPane pauseOverlay;
+	private final Pane gamePane;
+	private final Main mainInstance;
 
-	protected GameScreen() {
+	protected GameScreen(Main mainInstance) {
+		this.mainInstance = mainInstance;
+		
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
 
@@ -42,6 +45,14 @@ class GameScreen extends StackPane {
 					this.pause();
 			}
 		});
+	}
+	
+	protected void switchToHome() {
+		mainInstance.switchToHome();
+	}
+	
+	protected void switchToHelp() {
+		mainInstance.switchToHelp();
 	}
 
 	protected void pause() {

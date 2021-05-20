@@ -25,7 +25,7 @@ public class GameSingleton {
 	private static BeingsManager beingsManager;
 	private static GameController controller;
 	private static MonsterGenerator monsterGenerator;
-
+	
 	public static void addBeing(Being being) {
 		controller.addEntity(being);
 		beingsManager.addBeing(being);
@@ -69,6 +69,8 @@ public class GameSingleton {
 	}
 
 	public static void initialize(Pane root) {
+		root.getChildren().clear();
+		
 		HBox container = new HBox();
 
 		VBox leftPart = new VBox();
