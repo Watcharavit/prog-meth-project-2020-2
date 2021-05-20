@@ -22,7 +22,7 @@ class PlayersManager {
 		player1Control.put(PlayerControl.MOVE_RIGHT, KeyCode.D);
 		player1Control.put(PlayerControl.PLACE_BOMB, KeyCode.SPACE);
 		player1Control.put(PlayerControl.USE_EQUIPMENT, KeyCode.C);
-
+		
 		player2Control.put(PlayerControl.MOVE_UP, KeyCode.UP);
 		player2Control.put(PlayerControl.MOVE_LEFT, KeyCode.LEFT);
 		player2Control.put(PlayerControl.MOVE_DOWN, KeyCode.DOWN);
