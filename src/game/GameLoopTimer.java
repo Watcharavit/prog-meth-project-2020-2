@@ -16,7 +16,7 @@ class GameLoopTimer extends AnimationTimer {
 		// long finishNano = System.nanoTime();
 		// System.out.println(finishNano - startNano);
 	}
-	
+
 	@Override
 	public void start() {
 		this.lastFrameNano = System.nanoTime();

@@ -10,12 +10,12 @@ class HelpScreen extends VBox {
 	public HelpScreen(Main mainInstance) {
 		this.setAlignment(Pos.TOP_CENTER);
 		Label title = new Label("Help");
-		
+
 		Button backButton = new Button("Back");
 		backButton.setOnAction((ActionEvent e) -> {
 			mainInstance.switchToHome();
 		});
-		
+
 		this.getChildren().addAll(title, backButton);
 	}
 }

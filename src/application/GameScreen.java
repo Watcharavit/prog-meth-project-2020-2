@@ -18,7 +18,7 @@ class GameScreen extends StackPane {
 
 	protected GameScreen(Main mainInstance) {
 		this.mainInstance = mainInstance;
-		
+
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
 
@@ -46,11 +46,11 @@ class GameScreen extends StackPane {
 			}
 		});
 	}
-	
+
 	protected void switchToHome() {
 		mainInstance.switchToHome();
 	}
-	
+
 	protected void switchToHelp() {
 		mainInstance.switchToHelp();
 	}

@@ -34,7 +34,7 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 		}
 
 	}
-	
+
 	protected static Sprite getSpriteFor(Direction direction, boolean end) {
 		if (end) {
 			switch (direction) {
@@ -47,8 +47,7 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 			case RIGHT:
 				return SpritesLibrary.BLAST_RIGHT;
 			}
-		}
-		else {
+		} else {
 			switch (direction) {
 			case UP:
 				return SpritesLibrary.BLAST_VERTICAL;
@@ -60,11 +59,10 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 				return SpritesLibrary.BLAST_HORIZONTAL;
 			}
 		}
-		
+
 		// Unreachable
 		return null;
 	}
-	
 
 	@Override
 	public Sprite getSprite() {

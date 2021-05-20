@@ -26,8 +26,7 @@ public abstract class LivingBeing extends Being implements Updatable {
 			if (dyingTime <= 0) {
 				respawn();
 			}
-		}
-		else if (isSpawning) {
+		} else if (isSpawning) {
 			spawningTime -= ticksPassed;
 			if (spawningTime <= 0) {
 				live();
@@ -42,34 +41,40 @@ public abstract class LivingBeing extends Being implements Updatable {
 			this.onDeath();
 		}
 	}
-	
+
 	private void respawn() {
 		isDying = false;
 		isSpawning = true;
 		spawningTime = getSpawnCooldown();
-		
+
 		GameSingleton.removeBeing(this);
 		this.setX(spawnTile.x + 0.5);
 		this.setY(spawnTile.y + 0.5);
 		GameSingleton.addBeing(this);
 		this.onSpawn();
 	}
+
 	private void live() {
 		isSpawning = false;
 		this.onAlive();
 	}
-	
+
 	protected abstract void onDeath();
+
 	protected abstract void onSpawn();
+
 	protected abstract void onAlive();
-	
+
 	@Override
 	public Sprite getSprite() {
-		if (isDying) return getDyingSprite();
-		else return getAliveSprite();
+		if (isDying)
+			return getDyingSprite();
+		else
+			return getAliveSprite();
 	}
-	
+
 	protected abstract Sprite getAliveSprite();
+
 	protected abstract Sprite getDyingSprite();
 
 	protected double getSpawnCooldown() {

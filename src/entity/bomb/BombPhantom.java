@@ -4,7 +4,6 @@ import entity.PhantomEntity;
 import entity.StillObject;
 import entity.livings.Player;
 import game.GameSingleton;
-import graphics.Sprite;
 import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Updatable;
@@ -54,7 +53,7 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 			GameSingleton.removePhantomEntity(this);
 		}
 	}
-	
+
 	private void explodeHere() {
 		StillObject tileObject = GameSingleton.getTileObject(x, y);
 		if (tileObject instanceof Bombable) {
@@ -74,7 +73,8 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
 			boolean stopBlast = casted.getCanStopBlast();
-			BombFlame flame = new BombFlame(placer, lifetime, casted, BombFlame.getSpriteFor(direction, stopBlast || radius == this.radius));
+			BombFlame flame = new BombFlame(placer, lifetime, casted,
+					BombFlame.getSpriteFor(direction, stopBlast || radius == this.radius));
 			GameSingleton.setTileObject(x, y, flame);
 			casted.bombed();
 

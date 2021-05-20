@@ -60,7 +60,7 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 		case RIGHT:
 			return SpritesLibrary.PUNCH_RIGHT;
 		}
-		
+
 		// Unreachable
 		return null;
 	}

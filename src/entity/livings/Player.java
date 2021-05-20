@@ -46,7 +46,8 @@ public class Player extends LivingBeing implements Updatable {
 		this.equipment = null;
 		this.bombsNumber = new SimpleIntegerProperty(1);
 		this.bombsPlacedNumber = new SimpleIntegerProperty(0);
-		this.bombRadius = new SimpleIntegerProperty(1);;
+		this.bombRadius = new SimpleIntegerProperty(1);
+		;
 		this.name = name;
 		this.keyMap = keyMap;
 		this.kingTime = new SimpleDoubleProperty(0);
@@ -100,10 +101,12 @@ public class Player extends LivingBeing implements Updatable {
 			}
 		}
 	}
-	
+
 	private void setEquipment(Equipment equipment) {
-		if (this.equipment != null) GameSingleton.removePhantomEntity(this.equipment);
-		if (equipment != null) GameSingleton.addPhantomEntity(equipment);
+		if (this.equipment != null)
+			GameSingleton.removePhantomEntity(this.equipment);
+		if (equipment != null)
+			GameSingleton.addPhantomEntity(equipment);
 		this.equipment = equipment;
 	}
 
@@ -111,19 +114,22 @@ public class Player extends LivingBeing implements Updatable {
 	protected double getSpawnCooldown() {
 		return 60.0;
 	}
+
 	@Override
 	public void onDeath() {
 		setEquipment(null);
 		bombRadius.set(Math.max(1, bombRadius.get() - 3));
 		bombsNumber.set(Math.max(1, bombsNumber.get() - 3));
 	}
+
 	@Override
 	protected void onSpawn() {
-		
+
 	}
+
 	@Override
 	protected void onAlive() {
-		
+
 	}
 
 	@Override
@@ -152,20 +158,19 @@ public class Player extends LivingBeing implements Updatable {
 		kingTime.set(kingTime.get() + ticks / 60);
 	}
 
-	
-	
 	class PlayerUi extends VBox {
 		private final Player player;
 		private final Label nameLabel;
 		private final Label bombsNumberLabel;
 		private final Label bombRadiusLabel;
-		private final Label kingTimeLabel; 
+		private final Label kingTimeLabel;
+
 		private PlayerUi(Pane root, Player player) {
 			this.player = player;
-			
+
 			root.getChildren().add(this);
 			this.nameLabel = new Label(player.name);
-			
+
 			this.bombsNumberLabel = new Label();
 			StringBinding bombsNumberBinding = Bindings.createStringBinding(() -> {
 				int total = player.bombsNumber.get();
@@ -176,13 +181,13 @@ public class Player extends LivingBeing implements Updatable {
 				return r;
 			}, player.bombsPlacedNumber, player.bombsNumber);
 			bombsNumberLabel.textProperty().bind(bombsNumberBinding);
-			
+
 			this.bombRadiusLabel = new Label();
 			bombRadiusLabel.textProperty().bind(player.bombRadius.asString("Bomb Radius: %2d"));
-			
+
 			this.kingTimeLabel = new Label();
 			kingTimeLabel.textProperty().bind(player.kingTime.asString("King Time: %2.2f"));
-			
+
 			this.getChildren().addAll(nameLabel, bombsNumberLabel, bombRadiusLabel, kingTimeLabel);
 			this.setPadding(new Insets(24));
 			this.setAlignment(Pos.BASELINE_LEFT);

@@ -41,7 +41,8 @@ class PlayersManager {
 	}
 
 	private void addPlayers() {
-		addPlayer("Player 1", player1Control, GameSingleton.tiles[2][2], SpritesLibrary.PLAYER_ONE, SpritesLibrary.PLAYER_ONE_DYING);
+		addPlayer("Player 1", player1Control, GameSingleton.tiles[2][2], SpritesLibrary.PLAYER_ONE,
+				SpritesLibrary.PLAYER_ONE_DYING);
 		addPlayer("Player 2", player2Control, GameSingleton.tiles[GameSingleton.WIDTH - 3][GameSingleton.HEIGHT - 3],
 				SpritesLibrary.PLAYER_TWO, SpritesLibrary.PLAYER_TWO_DYING);
 	}
