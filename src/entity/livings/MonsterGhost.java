@@ -11,6 +11,9 @@ import logic.Direction;
 public class MonsterGhost extends Monster implements Collidable, Updatable {
 	public static final double SIZE = 0.8, SPEED = 0.1;
 
+	
+	private double hiddenTime = 0;
+
 	public MonsterGhost(Tile spawnTile) {
 		super(spawnTile, SIZE, SPEED, Direction.random());
 	}
@@ -18,8 +21,11 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	@Override
 	public void update(double ticksPassed) {
 		super.update(ticksPassed);
-		if (super.isDead())
+		if (super.isDead()) {
+			this.hiddenTime -= ticksPassed;
 			return;
+		}
+			
 		boolean didMove = super.move(ticksPassed);
 		if (!didMove) {
 			super.setFacing(Direction.random());
@@ -42,7 +48,7 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 
 	@Override
 	protected double getSpawnCooldown() {
-		return 60.0;
+		return 240.0;
 	}
 
 	@Override
@@ -53,19 +59,19 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 
 	@Override
 	protected void onSpawn() {
-		// TODO Auto-generated method stub
-
+		this.hiddenTime = 180.0;
 	}
 
 	@Override
 	protected void onAlive() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	protected Sprite getAliveSprite() {
-		return SpritesLibrary.GHOST;
+		if (super.isDead() && this.hiddenTime > 0) return SpritesLibrary.TRANSPARENT;
+		else return SpritesLibrary.GHOST;
 	}
 
 	@Override

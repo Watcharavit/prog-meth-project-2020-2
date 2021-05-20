@@ -36,6 +36,11 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	@Override
+	public void die() {
+		// This thing can't die.
+	}
+	
+	@Override
 	public boolean getCanPassThrough() {
 		return true;
 	}
@@ -70,7 +75,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 
 	@Override
 	protected Sprite getDyingSprite() {
-		return SpritesLibrary.THORN_DYING;
+		return SpritesLibrary.TRANSPARENT;
 	}
 
 }

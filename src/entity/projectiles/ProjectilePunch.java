@@ -15,11 +15,29 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 	private final static double SPEED = 0.2;
 	private double remainingMoveTicks;
 	private final Player placer;
+	private final Sprite sprite;
 
 	public ProjectilePunch(double x, double y, Direction direction, Player placer) {
 		super(x, y, SIZE, SPEED, direction);
 		this.remainingMoveTicks = 3.0;
 		this.placer = placer;
+		switch (direction) {
+		case DOWN:
+			this.sprite = SpritesLibrary.PUNCH_DOWN;
+			break;
+		case UP:
+			this.sprite = SpritesLibrary.PUNCH_UP;
+			break;
+		case LEFT:
+			this.sprite = SpritesLibrary.PUNCH_LEFT;
+			break;
+		case RIGHT:
+			this.sprite = SpritesLibrary.PUNCH_RIGHT;
+			break;
+		default:
+			// Unreachable
+			this.sprite = null; 
+		}
 	}
 
 	private void remove() {
@@ -47,22 +65,10 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 			remove();
 		}
 	}
-
+	
 	@Override
 	public Sprite getSprite() {
-		switch (super.getFacing()) {
-		case DOWN:
-			return SpritesLibrary.PUNCH_DOWN;
-		case UP:
-			return SpritesLibrary.PUNCH_UP;
-		case LEFT:
-			return SpritesLibrary.PUNCH_LEFT;
-		case RIGHT:
-			return SpritesLibrary.PUNCH_RIGHT;
-		}
-
-		// Unreachable
-		return null;
+		return sprite;
 	}
 
 }

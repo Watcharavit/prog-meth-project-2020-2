@@ -13,10 +13,20 @@ public abstract class LivingBeing extends Being implements Updatable {
 	private boolean isDying = false;
 	private boolean isSpawning = false;
 	private final Tile spawnTile;
+	private Direction facing;
 
 	protected LivingBeing(Tile spawnTile, double size, Direction direction) {
-		super(spawnTile.x + 0.5, spawnTile.y + 0.5, size, direction);
+		super(spawnTile.x + 0.5, spawnTile.y + 0.5, size);
 		this.spawnTile = spawnTile;
+		this.facing = direction;
+	}
+	
+	public Direction getFacing() {
+		return this.facing;
+	}
+
+	public void setFacing(Direction facing) {
+		this.facing = facing;
 	}
 
 	@Override

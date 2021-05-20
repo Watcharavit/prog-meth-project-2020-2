@@ -3,15 +3,13 @@ package entity;
 import logic.Direction;
 
 public abstract class Being extends PhysicalEntity {
-	private Direction facing;
 	private double x, y;
 	public final double halfSize;
 
-	public Being(double x, double y, double size, Direction facing) {
+	public Being(double x, double y, double size) {
 		this.x = x;
 		this.y = y;
 		this.halfSize = size / 2;
-		this.facing = facing;
 	}
 
 	public double getX() {
@@ -28,14 +26,6 @@ public abstract class Being extends PhysicalEntity {
 
 	public void setY(double y) {
 		this.y = y;
-	}
-
-	public Direction getFacing() {
-		return this.facing;
-	}
-
-	public void setFacing(Direction facing) {
-		this.facing = facing;
 	}
 
 }

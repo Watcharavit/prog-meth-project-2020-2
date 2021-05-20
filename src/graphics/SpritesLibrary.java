@@ -16,7 +16,7 @@ public final class SpritesLibrary {
 	public static final Sprite GHOST = new Sprite(12);
 	public static final Sprite GHOST_DYING = new Sprite(13);
 	public static final Sprite THORN = new Sprite(14);
-	public static final Sprite THORN_DYING = new Sprite(15);
+	public static final Sprite TRANSPARENT = new Sprite(15);
 	public static final Sprite BLAST_CENTER = new Sprite(16);
 	public static final Sprite BLAST_HORIZONTAL = new Sprite(17);
 	public static final Sprite BLAST_VERTICAL = new Sprite(18);

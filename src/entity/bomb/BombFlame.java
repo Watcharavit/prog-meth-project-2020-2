@@ -22,7 +22,7 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	private final Sprite sprite;
 
 	public BombFlame(int x, int y, Player placer, double lifetime, Bombable bombedObject, Sprite sprite) {
-		super(x + 0.5, y + 0.5, SIZE, Direction.random());
+		super(x + 0.5, y + 0.5, SIZE);
 		this.placer = placer;
 		this.remainingTicks = lifetime;
 		this.bombedObject = bombedObject;
