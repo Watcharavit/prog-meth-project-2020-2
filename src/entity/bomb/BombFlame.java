@@ -5,7 +5,6 @@ import entity.StillObject;
 import entity.drops.DropBombFlameUpgrade;
 import entity.drops.DropBombQuantityUpgrade;
 import entity.livings.LivingBeing;
-import entity.livings.MonsterGhost;
 import entity.livings.Player;
 import entity.terrains.Floor;
 import game.GameSingleton;
@@ -28,11 +27,9 @@ public class BombFlame extends StillObject implements Updatable, Passable, Bomba
 
 	@Override
 	public void pass(Being character) {
-		if (character instanceof Player) {
+		if (character instanceof LivingBeing) {
 			// player respawn
-			((Player) character).die();
-		}else if(character instanceof MonsterGhost) {
-			((MonsterGhost) character).die();
+			((LivingBeing) character).die();
 		}
 
 	}

@@ -7,9 +7,7 @@ import interfaces.Collidable;
 import interfaces.Updatable;
 
 public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
-	private static final Sprite Normalsprite = new Sprite(8);
-	private final static Sprite DyingSprite = new Sprite(5);
-	private final static Sprite EMPTYSPRITE = new Sprite(7);
+	private static final Sprite sprite = new Sprite(8);
 	public static final double SIZE = 1;
 
 	public MonsterGhost(Tile spawnTile) {
@@ -19,7 +17,6 @@ public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
 
 	private void move() {
 		// move ghost to the enable direction
-		
 	}
 
 	@Override
@@ -41,15 +38,13 @@ public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
 
 	@Override
 	public Sprite getSprite() {
-		if (super.isDead())
-			return EMPTYSPRITE;
-		else
-			return Normalsprite;
+		// TODO Auto-generated method stub
+		return sprite;
 	}
 
 	@Override
 	protected double getSpawnCooldown() {
-		return 70.0;
+		return 60.0;
 	}
 
 	@Override

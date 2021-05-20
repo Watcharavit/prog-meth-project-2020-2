@@ -130,7 +130,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	
 	@Override
 	protected double getSpawnCooldown() {
-		return 60.0;
+		return 50.0;
 	}
 
 	public void returnBomb() {
@@ -186,4 +186,5 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 			this.setMinWidth(180);
 		}
 	}
+
 }
