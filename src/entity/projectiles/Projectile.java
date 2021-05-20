@@ -8,10 +8,9 @@ abstract class Projectile extends Being {
 	private final double moveDeltaX, moveDeltaY;
 
 	public Projectile(double x, double y, double size, double speed, Direction direction) {
-		super(x, y, size);
+		super(x, y, size, direction);
 		this.moveDeltaX = direction.getDeltaX() * speed;
 		this.moveDeltaY = direction.getDeltaY() * speed;
-		super.facing = direction;
 	}
 
 	public boolean move(double ticksPassed) {

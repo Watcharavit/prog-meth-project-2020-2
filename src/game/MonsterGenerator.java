@@ -5,6 +5,7 @@ import entity.livings.MonsterGhost;
 import entity.livings.MonsterWallThorn;
 import entity.terrains.Floor;
 import entity.terrains.TempWall;
+import logic.Direction;
 
 public class MonsterGenerator {
 
@@ -13,8 +14,8 @@ public class MonsterGenerator {
 	}
 
 	protected void addMonster() {
-		addWallThornMonster("WallThorn1", GameSingleton.tiles[GameSingleton.WIDTH / 2 - 1][GameSingleton.HEIGHT / 2]);
-		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 - 1]);
+		addWallThornMonster("WallThorn1", GameSingleton.tiles[GameSingleton.WIDTH / 2 - 1][GameSingleton.HEIGHT / 2], Direction.LEFT);
+		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 - 1], Direction.UP);
 		addGhost("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
 				5)][GameSingleton.HEIGHT / 4]);
 		addGhost("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
@@ -26,17 +27,14 @@ public class MonsterGenerator {
 
 	}
 
-	private void addWallThornMonster(String name, Tile spawnTile) {
-		MonsterWallThorn wallThorn = new MonsterWallThorn(spawnTile);
+	private void addWallThornMonster(String name, Tile spawnTile, Direction direction) {
+		MonsterWallThorn wallThorn = new MonsterWallThorn(spawnTile, direction);
 		GameSingleton.addBeing(wallThorn);
 		clearTileAtMonster(wallThorn);
 
 	}
 
 	private void addGhost(String name, Tile spawnTile) {
-//		while(GameSingleton.getTileObject(spawnTile.x, spawnTile.y) instanceof Ghost) {
-//			spawnTile = GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 5)][GameSingleton.HEIGHT / 4]);
-//		}
 		MonsterGhost ghost = new MonsterGhost(spawnTile);
 		GameSingleton.addBeing(ghost);
 		clearTileAtMonster(ghost);

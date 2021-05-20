@@ -1,11 +1,9 @@
 package entity.livings;
 
-import java.text.MessageFormat;
 import java.util.Formatter;
 import java.util.Map;
 import java.util.Set;
 
-import entity.Being;
 import entity.bomb.BombObject;
 import entity.equipments.Equipment;
 import entity.equipments.EquipmentPuncher;
@@ -13,7 +11,6 @@ import entity.terrains.Floor;
 import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
-import interfaces.Collidable;
 import interfaces.Updatable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
@@ -30,7 +27,7 @@ import javafx.scene.layout.VBox;
 import logic.Direction;
 import logic.PlayerControl;
 
-public class Player extends LivingBeing implements Collidable, Updatable {
+public class Player extends LivingBeing implements Updatable {
 	public static final double SIZE = 0.6;
 	private static final double SPEED = 0.1;
 	private Equipment equipment;
@@ -44,7 +41,7 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
 			Sprite dyingSprite, Pane uiPane) {
-		super(spawnTile, SIZE);
+		super(spawnTile, SIZE, Direction.random());
 		this.equipment = null;
 		this.bombsNumber = new SimpleIntegerProperty(1);
 		this.bombsPlacedNumber = new SimpleIntegerProperty(0);
@@ -56,20 +53,6 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 		this.dyingSprite = dyingSprite;
 		this.ui = new PlayerUi(uiPane, this);
 		this.setEquipment(new EquipmentPuncher(this));
-	}
-
-	@Override
-	public void collide(Being otherCharacter) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Sprite getSprite() {
-		if (super.isDead())
-			return dyingSprite;
-		else
-			return normalSprite;
 	}
 
 	@Override
@@ -106,31 +89,50 @@ public class Player extends LivingBeing implements Collidable, Updatable {
 	}
 
 	private void placeBomb() {
-		if (GameSingleton.getTileObject((int) super.x, (int) super.y) instanceof Floor) {
+		int x = (int) super.getX();
+		int y = (int) super.getY();
+		if (GameSingleton.getTileObject(x, y) instanceof Floor) {
 			if (bombsPlacedNumber.get() < bombsNumber.get()) {
 				BombObject bomb = new BombObject(this, bombRadius.get());
-				GameSingleton.setTileObject((int) super.x, (int) super.y, bomb);
+				GameSingleton.setTileObject(x, y, bomb);
 				bombsPlacedNumber.set(bombsPlacedNumber.get() + 1);
 			}
 		}
 	}
 	
 	private void setEquipment(Equipment equipment) {
-		if (this.equipment != null)
-			GameSingleton.removePhantomEntity(this.equipment);
-		GameSingleton.addPhantomEntity(equipment);
+		if (this.equipment != null) GameSingleton.removePhantomEntity(this.equipment);
+		if (equipment != null) GameSingleton.addPhantomEntity(equipment);
 		this.equipment = equipment;
 	}
 
 	@Override
+	protected double getSpawnCooldown() {
+		return 60.0;
+	}
+	@Override
 	public void onDeath() {
+		setEquipment(null);
 		bombRadius.set(Math.max(1, bombRadius.get() - 3));
 		bombsNumber.set(Math.max(1, bombsNumber.get() - 3));
 	}
-	
 	@Override
-	protected double getSpawnCooldown() {
-		return 50.0;
+	protected void onSpawn() {
+		
+	}
+	@Override
+	protected void onAlive() {
+		
+	}
+
+	@Override
+	protected Sprite getAliveSprite() {
+		return normalSprite;
+	}
+
+	@Override
+	protected Sprite getDyingSprite() {
+		return dyingSprite;
 	}
 
 	public void returnBomb() {

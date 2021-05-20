@@ -5,52 +5,67 @@ import game.Tile;
 import graphics.Sprite;
 import interfaces.Collidable;
 import interfaces.Updatable;
+import logic.Direction;
 
-public class MonsterGhost extends LivingBeing implements Collidable, Updatable {
-	private static final Sprite sprite = new Sprite(8);
-	public static final double SIZE = 1;
+public class MonsterGhost extends Monster implements Collidable, Updatable {
+	public static final double SIZE = 0.8, SPEED = 0.1;
 
 	public MonsterGhost(Tile spawnTile) {
-		super(spawnTile, SIZE);
-		// TODO Auto-generated constructor stub
-	}
-
-	private void move() {
-		// move ghost to the enable direction
+		super(spawnTile, SIZE, SPEED, Direction.random());
 	}
 
 	@Override
 	public void update(double ticksPassed) {
-
+		super.update(ticksPassed);
+		if (super.isDead()) return;
+		boolean didMove = super.move(ticksPassed);
+		if (!didMove) {
+			super.setFacing(Direction.random());
+		}
 	}
 
 	@Override
 	public void collide(Being otherCharacter) {
-		// Ghost win player
+		if (super.isDead()) return;
 		if (otherCharacter instanceof Player) {
 			((Player) otherCharacter).die();
-		} else if (otherCharacter instanceof MonsterGhost) {
-			((MonsterGhost) otherCharacter).move();
 		}
-		// Ghost lose WallThorn
-		// implement in Wall thorn class
 	}
-
 	@Override
-	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return sprite;
+	public boolean getCanPassThrough() {
+		return true;
 	}
 
 	@Override
 	protected double getSpawnCooldown() {
 		return 60.0;
 	}
-
 	@Override
 	protected void onDeath() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	protected void onSpawn() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void onAlive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	private static final Sprite sprite = new Sprite(8);
+	@Override
+	protected Sprite getAliveSprite() {
+		return sprite;
+	}
+
+	@Override
+	protected Sprite getDyingSprite() {
+		return sprite;
 	}
 
 }
