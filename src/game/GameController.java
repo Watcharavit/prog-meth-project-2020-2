@@ -76,8 +76,6 @@ class GameController {
 	}
 
 	private void onTick(double ticksPassed) {
-		if (ticksPassed > 1.1)
-			System.out.println("Slow Update: " + ticksPassed);
 		updateUpdatables(ticksPassed);
 		render();
 	}
