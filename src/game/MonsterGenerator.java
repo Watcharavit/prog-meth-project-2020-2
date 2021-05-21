@@ -16,37 +16,40 @@ public class MonsterGenerator {
 	private static void addMonster() {
 		addWallThornMonster("WallThorn1", GameSingleton.tiles[GameSingleton.WIDTH / 2 - 1][GameSingleton.HEIGHT / 2],
 				Direction.LEFT);
-		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 - 1],
+		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 + 1],
 				Direction.UP);
 		addGhostMonster("Ghost1", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
-				5)][GameSingleton.HEIGHT / 4]);
+				3)][GameSingleton.HEIGHT / 4]);
 		addGhostMonster("Ghost2", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
-				5)][GameSingleton.HEIGHT / 4]);
+				3)][GameSingleton.HEIGHT / 4]);
 		addGhostMonster("Ghost3", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
-				5)][GameSingleton.HEIGHT * 3 / 4]);
+				3)][GameSingleton.HEIGHT * 3 / 4]);
 		addGhostMonster("Ghost4", GameSingleton.tiles[(int) Math.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)),
-				5)][GameSingleton.HEIGHT * 3 / 4]);
+				3)][GameSingleton.HEIGHT * 3 / 4]);
 
 	}
 
 	private static void addWallThornMonster(String name, Tile spawnTile, Direction direction) {
 		MonsterWallThorn wallThorn = new MonsterWallThorn(spawnTile, direction);
 		GameSingleton.addBeing(wallThorn);
-		clearTileAtMonster(wallThorn);
+		clearTileAroundMonster(wallThorn);
 
 	}
 
 	private static void addGhostMonster(String name, Tile spawnTile) {
 		MonsterGhost ghost = new MonsterGhost(spawnTile);
 		GameSingleton.addBeing(ghost);
-		clearTileAtMonster(ghost);
+		clearTileAroundMonster(ghost);
 	}
 
-	private static void clearTileAtMonster(LivingBeing being) {
+	private static void clearTileAroundMonster(LivingBeing being) {
 		int x = (int) being.getX();
 		int y = (int) being.getY();
-		if (GameSingleton.getTileObject(x, y) instanceof TempWall)
-			GameSingleton.setTileObject(x, y, new Floor());
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (GameSingleton.getTileObject(i, j) instanceof TempWall)
+					GameSingleton.setTileObject(i, j, new Floor());
+			}
+		}
 	}
-
 }
