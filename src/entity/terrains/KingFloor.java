@@ -5,10 +5,10 @@ import java.util.HashSet;
 import entity.Being;
 import entity.livings.Player;
 import game.Tile;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Passable;
 import interfaces.Updatable;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class KingFloor extends Floor implements Updatable, Passable {
 	private HashSet<Player> standingPlayers;

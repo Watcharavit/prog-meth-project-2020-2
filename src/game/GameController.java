@@ -95,4 +95,8 @@ class GameController {
 	protected void resume() {
 		timer.resume();
 	}
+
+	protected boolean isActive() {
+		return timer.isActive();
+	}
 }

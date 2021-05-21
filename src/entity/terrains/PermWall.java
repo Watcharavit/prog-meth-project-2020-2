@@ -1,8 +1,8 @@
 package entity.terrains;
 
 import entity.StillObject;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class PermWall extends StillObject {
 

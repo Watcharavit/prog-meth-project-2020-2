@@ -4,11 +4,11 @@ import entity.Being;
 import entity.livings.LivingBeing;
 import entity.livings.Player;
 import game.GameSingleton;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class ProjectilePunch extends Projectile implements Updatable, Collidable {
 	public static final double SIZE = 0.6;
@@ -36,7 +36,7 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 			break;
 		default:
 			// Unreachable
-			this.sprite = null; 
+			this.sprite = null;
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 			remove();
 		}
 	}
-	
+
 	@Override
 	public Sprite getSprite() {
 		return sprite;

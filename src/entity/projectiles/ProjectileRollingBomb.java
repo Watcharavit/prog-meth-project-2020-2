@@ -4,11 +4,11 @@ import entity.Being;
 import entity.bomb.BombPhantom;
 import entity.livings.Player;
 import game.GameSingleton;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class ProjectileRollingBomb extends Projectile implements Updatable, Collidable {
 	public final static double SIZE = 0.6;
@@ -25,7 +25,8 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 	}
 
 	private void explode() {
-		if (this.exploded) return;
+		if (this.exploded)
+			return;
 		this.exploded = true;
 		int tileX = (int) super.getX();
 		int tileY = (int) super.getY();
@@ -41,17 +42,17 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 			this.explode();
 		}
 	}
-	
+
 	@Override
 	public void collide(Being otherBeing) {
-		
+
 	}
 
 	@Override
 	public boolean getCanPassThrough() {
 		return false;
 	}
-	
+
 	@Override
 	public Sprite getSprite() {
 		return SpritesLibrary.ROLLING_BOMB;

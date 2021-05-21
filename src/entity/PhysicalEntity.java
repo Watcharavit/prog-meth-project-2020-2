@@ -1,6 +1,6 @@
 package entity;
 
-import graphics.Sprite;
+import resources.Sprite;
 
 public abstract class PhysicalEntity extends Entity {
 

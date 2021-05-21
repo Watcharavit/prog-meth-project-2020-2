@@ -2,16 +2,15 @@ package entity.livings;
 
 import entity.Being;
 import game.Tile;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class MonsterGhost extends Monster implements Collidable, Updatable {
 	public static final double SIZE = 0.8, SPEED = 0.1;
 
-	
 	private double hiddenTime = 0;
 
 	public MonsterGhost(Tile spawnTile) {
@@ -25,7 +24,7 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 			this.hiddenTime -= ticksPassed;
 			return;
 		}
-			
+
 		boolean didMove = super.move(ticksPassed);
 		if (!didMove) {
 			super.setFacing(Direction.random());
@@ -65,13 +64,15 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	@Override
 	protected void onAlive() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected Sprite getAliveSprite() {
-		if (super.isDead() && this.hiddenTime > 0) return SpritesLibrary.TRANSPARENT;
-		else return SpritesLibrary.GHOST;
+		if (super.isDead() && this.hiddenTime > 0)
+			return SpritesLibrary.TRANSPARENT;
+		else
+			return SpritesLibrary.GHOST;
 	}
 
 	@Override

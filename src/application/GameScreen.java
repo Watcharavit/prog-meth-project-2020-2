@@ -14,10 +14,8 @@ class GameScreen extends StackPane {
 	private boolean isPaused = false;
 	private final StackPane pauseOverlay;
 	private final Pane gamePane;
-	private final Main mainInstance;
 
-	protected GameScreen(Main mainInstance) {
-		this.mainInstance = mainInstance;
+	protected GameScreen() {
 
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
@@ -47,14 +45,6 @@ class GameScreen extends StackPane {
 		});
 	}
 
-	protected void switchToHome() {
-		mainInstance.switchToHome();
-	}
-
-	protected void switchToHelp() {
-		mainInstance.switchToHelp();
-	}
-
 	protected void pause() {
 		isPaused = true;
 		this.getChildren().add(pauseOverlay);
@@ -68,7 +58,10 @@ class GameScreen extends StackPane {
 	}
 
 	protected void restart() {
-		GameSingleton.destroy();
-		GameSingleton.initialize(gamePane);
+		GameSingleton.start();
+	}
+
+	protected void onFocus() {
+		restart();
 	}
 }

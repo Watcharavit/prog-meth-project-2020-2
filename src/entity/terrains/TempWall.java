@@ -3,9 +3,9 @@ package entity.terrains;
 import entity.StillObject;
 import entity.drops.DropBombFlameUpgrade;
 import entity.drops.DropBombQuantityUpgrade;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Bombable;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class TempWall extends StillObject implements Bombable {
 

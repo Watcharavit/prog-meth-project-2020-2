@@ -3,9 +3,9 @@ package entity.livings;
 import entity.Being;
 import game.GameSingleton;
 import game.Tile;
-import graphics.Sprite;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
 
 public abstract class LivingBeing extends Being implements Updatable {
 	private double dyingTime = 0;
@@ -20,7 +20,7 @@ public abstract class LivingBeing extends Being implements Updatable {
 		this.spawnTile = spawnTile;
 		this.facing = direction;
 	}
-	
+
 	public Direction getFacing() {
 		return this.facing;
 	}

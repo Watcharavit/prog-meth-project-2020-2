@@ -121,7 +121,8 @@ class BeingsManager {
 
 			// Move to correct containing tile.
 			if (fnX != foX || fnY != foY) {
-				if (tiles[foX][foY].removeBeing(being)) tiles[fnX][fnY].addBeing(being);
+				if (tiles[foX][foY].removeBeing(being))
+					tiles[fnX][fnY].addBeing(being);
 			}
 
 			// Return true because move was made.
