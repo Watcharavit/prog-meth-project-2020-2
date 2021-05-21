@@ -9,26 +9,31 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-class HomeScreen extends StackPane {
+class HomeScreen extends HBox {
 
 	private final Button gameButton, helpButton;
 
 	protected HomeScreen() {
-		this.setPadding(new Insets(0, 480, 0, 0));
-		this.setPrefWidth(300);
-		VBox home = new VBox();
-		home.setAlignment(Pos.TOP_CENTER);
-		home.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		VBox right = new VBox();
+		right.setPrefWidth(600);
+		VBox left = new VBox();
+		left.setPrefWidth(180);
+		right.setAlignment(Pos.CENTER);
+		left.setAlignment(Pos.CENTER);
+		left.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		Label title = new Label("King of Bomb");
 		title.setFont(Font.font("Courier New", FontWeight.BOLD, 36));
+		title.setTextFill(Color.GREEN);
 		title.setPadding(new Insets(80, 0, 80, 0));
+
+		right.getChildren().add(title);
 
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
@@ -47,9 +52,9 @@ class HomeScreen extends StackPane {
 		helpButton.setPrefHeight(40);
 		helpButton.setPrefWidth(150);
 
-		home.getChildren().addAll(title, gameButton, helpButton);
+		left.getChildren().addAll(gameButton, helpButton);
 
-		this.getChildren().add(home);
+		this.getChildren().addAll(left, right);
 	}
 
 }
