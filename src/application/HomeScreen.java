@@ -32,7 +32,8 @@ class HomeScreen extends StackPane {
 
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
-			this.switchToGame();
+			GameSingleton.start();
+			AppSingleton.switchToGame();
 		});
 		gameButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
 		gameButton.setPrefHeight(40);
@@ -40,7 +41,7 @@ class HomeScreen extends StackPane {
 
 		helpButton = new Button("How to Play");
 		helpButton.setOnAction((ActionEvent e) -> {
-			this.switchToHelp();
+			AppSingleton.showHelp();
 		});
 		helpButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
 		helpButton.setPrefHeight(40);
@@ -49,19 +50,6 @@ class HomeScreen extends StackPane {
 		home.getChildren().addAll(title, gameButton, helpButton);
 
 		this.getChildren().add(home);
-
-	}
-
-	private void switchToGame() {
-		AppSingleton.switchToGame();
-	}
-
-	private void switchToHelp() {
-		AppSingleton.switchToHelp();
-	}
-
-	protected void onFocus() {
-		GameSingleton.start();
 	}
 
 }

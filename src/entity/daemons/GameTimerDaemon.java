@@ -97,6 +97,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 
 			Button homeButton = new UnfocusableButton("Back to Main Menu");
 			homeButton.setOnAction((ActionEvent e) -> {
+				GameSingleton.start();
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, restartButton, homeButton);

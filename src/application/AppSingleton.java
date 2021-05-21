@@ -9,23 +9,20 @@ public class AppSingleton {
 	private static GameScreen gameScreen;
 	private static HomeScreen homeScreen;
 	private static HelpScreen helpScreen;
-	private static Stage primaryStage;
-	private static StackPane homeGameStack;
-	private static Scene homeGameScene, helpScene;
+	private static StackPane rootStack;
+	private static Scene rootScene;
 
 	public static void start(Stage primaryStage) {
-		AppSingleton.primaryStage = primaryStage;
 
-		homeGameStack = new StackPane();
+		rootStack = new StackPane();
 		gameScreen = new GameScreen();
-		homeGameStack.getChildren().add(gameScreen);
 		homeScreen = new HomeScreen();
-		homeGameScene = new Scene(homeGameStack);
+		rootScene = new Scene(rootStack);
 
 		helpScreen = new HelpScreen();
-		helpScene = new Scene(helpScreen);
 
 		resetToHome();
+		primaryStage.setScene(rootScene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
@@ -35,23 +32,24 @@ public class AppSingleton {
 	}
 
 	protected static void switchToGame() {
-		gameScreen.onFocus();
-		primaryStage.setScene(homeGameScene);
-		homeGameStack.getChildren().remove(homeScreen);
+		rootStack.getChildren().clear();
+		rootStack.getChildren().add(gameScreen);
 		MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
 	}
 
 	protected static void switchToHome() {
-		homeScreen.onFocus();
-		primaryStage.setScene(homeGameScene);
-		homeGameStack.getChildren().add(homeScreen);
+		rootStack.getChildren().clear();
+		rootStack.getChildren().add(gameScreen);
+		rootStack.getChildren().add(homeScreen);
 		MusicsLibrary.playMusic(MusicsLibrary.MAIN_MENU);
 	}
 
-	protected static void switchToHelp() {
-		helpScreen.onFocus();
-		primaryStage.setScene(helpScene);
-		MusicsLibrary.playMusic(null);
+	protected static void showHelp() {
+		rootStack.getChildren().add(helpScreen);
+	}
+
+	protected static void hideHelp() {
+		rootStack.getChildren().remove(helpScreen);
 	}
 
 }

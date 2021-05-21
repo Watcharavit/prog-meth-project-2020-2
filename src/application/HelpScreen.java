@@ -5,15 +5,21 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 class HelpScreen extends StackPane {
 
 	public HelpScreen() {
+
+		this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		VBox howToPlay = new VBox();
 		howToPlay.setAlignment(Pos.TOP_CENTER);
@@ -37,26 +43,14 @@ class HelpScreen extends StackPane {
 		backButton.setPrefHeight(40);
 		backButton.setPrefWidth(70);
 		backButton.setOnAction((ActionEvent e) -> {
-			AppSingleton.switchToHome();
+			AppSingleton.hideHelp();
 		});
 
-		Button playButton = new Button("Play");
-		playButton.setOnAction((ActionEvent e) -> {
-			AppSingleton.switchToGame();
-		});
-		playButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
-		playButton.setPrefHeight(40);
-		playButton.setPrefWidth(70);
-
-		buttonPane.getChildren().addAll(backButton, playButton);
+		buttonPane.getChildren().addAll(backButton);
 		buttonPane.setAlignment(Pos.BOTTOM_CENTER);
 
 		howToPlay.getChildren().addAll(title, manual, buttonPane);
 
 		this.getChildren().addAll(howToPlay);
-	}
-
-	protected void onFocus() {
-
 	}
 }

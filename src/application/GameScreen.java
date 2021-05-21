@@ -43,6 +43,7 @@ class GameScreen extends StackPane {
 					this.pause();
 			}
 		});
+		GameSingleton.start();
 	}
 
 	protected void pause() {
@@ -59,9 +60,5 @@ class GameScreen extends StackPane {
 
 	protected void restart() {
 		GameSingleton.start();
-	}
-
-	protected void onFocus() {
-		restart();
 	}
 }
