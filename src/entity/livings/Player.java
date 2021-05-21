@@ -1,5 +1,7 @@
 package entity.livings;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Formatter;
 import java.util.Map;
 import java.util.Set;
@@ -7,25 +9,20 @@ import java.util.Set;
 import entity.StillObject;
 import entity.bomb.BombObject;
 import entity.equipments.Equipment;
-import entity.equipments.EquipmentBombKicker;
-import entity.equipments.EquipmentPuncher;
 import entity.terrains.Floor;
 import game.GameSingleton;
 import game.Tile;
 import graphics.Sprite;
 import interfaces.Updatable;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import logic.Direction;
 import logic.PlayerControl;
 
@@ -39,6 +36,7 @@ public class Player extends LivingBeing implements Updatable {
 	private final Map<PlayerControl, KeyCode> keyMap;
 	private final Sprite normalSprite, dyingSprite;
 	private final PlayerUi ui;
+	//private final Media sound = new Media(new File("/ProgMeth Project/res/bombplaced.wav").toURI().toString());
 
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
 			Sprite dyingSprite, Pane uiPane) {
@@ -98,6 +96,7 @@ public class Player extends LivingBeing implements Updatable {
 				GameSingleton.setTileObject(x, y, bomb);
 				bombsPlacedNumber += 1;
 				ui.refreshBombsNumber();
+				this.playSound();
 			}
 		}
 	}
@@ -121,6 +120,15 @@ public class Player extends LivingBeing implements Updatable {
 		bombsNumber = (Math.max(1, bombsNumber - 3));
 		ui.refreshBombsNumber();
 		ui.refreshBombRadius();
+	}
+	
+	private void playSound() {
+//        MediaPlayer mediaPlayer = new MediaPlayer(this.sound);
+//        mediaPlayer.play();
+		URL sound = getClass().getResource("bombplaced.wav");
+		System.out.println(sound);
+		AudioClip clip = new AudioClip(sound.toString());
+		clip.play();
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import entity.terrains.Floor;
 import entity.terrains.TempWall;
 import graphics.Sprite;
 import graphics.SpritesLibrary;
-import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;

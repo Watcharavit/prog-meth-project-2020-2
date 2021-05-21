@@ -5,12 +5,9 @@ import entity.StillObject;
 import entity.livings.LivingBeing;
 import entity.livings.Player;
 import game.GameSingleton;
-import game.Tile;
 import graphics.Sprite;
 import graphics.SpritesLibrary;
-import interfaces.Bombable;
 import interfaces.Collidable;
-import interfaces.Passable;
 import interfaces.Updatable;
 import logic.Direction;
 

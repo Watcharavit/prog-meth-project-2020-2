@@ -1,7 +1,6 @@
 package entity.projectiles;
 
 import entity.Being;
-import entity.StillObject;
 import entity.bomb.BombPhantom;
 import entity.livings.Player;
 import game.GameSingleton;

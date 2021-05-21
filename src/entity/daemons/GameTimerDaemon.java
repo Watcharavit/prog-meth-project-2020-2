@@ -7,10 +7,8 @@ import entity.livings.Player;
 import game.GameSingleton;
 import interfaces.Updatable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	private double remainingTime;

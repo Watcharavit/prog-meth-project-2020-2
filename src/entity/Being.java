@@ -1,7 +1,5 @@
 package entity;
 
-import logic.Direction;
-
 public abstract class Being extends PhysicalEntity {
 	private double x, y;
 	public final double halfSize;
