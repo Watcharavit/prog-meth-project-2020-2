@@ -45,7 +45,7 @@ class GameplayManager {
 			player2Control.put(PlayerControl.MOVE_DOWN, KeyCode.DOWN);
 			player2Control.put(PlayerControl.MOVE_RIGHT, KeyCode.RIGHT);
 			player2Control.put(PlayerControl.PLACE_BOMB, KeyCode.ENTER);
-			player2Control.put(PlayerControl.USE_EQUIPMENT, KeyCode.SLASH);
+			player2Control.put(PlayerControl.USE_EQUIPMENT, KeyCode.L);
 		}
 
 		protected static Player[] createPlayers(Pane uiPane) {

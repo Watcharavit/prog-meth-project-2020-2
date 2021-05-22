@@ -32,7 +32,7 @@ class HomeScreen extends HBox {
 		title.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 60));
 		title.setTextFill(Color.BLACK);
 		title.setPadding(new Insets(18, 3, 18, 3));
-		title.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		title.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		title.setOpacity(0.85);
 
 		right.getChildren().add(title);

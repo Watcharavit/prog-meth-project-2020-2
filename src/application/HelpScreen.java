@@ -32,8 +32,8 @@ class HelpScreen extends StackPane {
 		title.setPadding(new Insets(35, 20, 25, 20));
 		title.setBackground(new Background(new BackgroundFill(Color.DARKORANGE, CornerRadii.EMPTY, new Insets(7, 10, 5, 10))));
 
-		String manualInformation = "Player 1 control: a, s, d, w, spacebar = bomb , c = using equipment\r\n"
-				+ "Player2 control: left, right, up, down, enter = bomb,  / = using equipment\r\n"
+		String manualInformation = "Player 1 control: A, S, D, W, Spacebar = placing bomb , C = using equipment\r\n"
+				+ "Player2 control: Left, Right, Up, Down, Enter = placing bomb,  L = using equipment\r\n"
 				+ "\r\n"
 				+ "Equipment: get it according to the score \r\n"
 				+ "	Bombkicker = can kick a bomb\r\n"
