@@ -12,7 +12,7 @@ import resources.SpritesLibrary;
 public class BombObject extends StillObject implements Updatable, Bombable {
 	private final Player placer;
 	public final int radius;
-	private double remainingTicks = 60;
+	private double remainingTicks = 105;
 	private boolean explosionLock = false;
 	private final Bombable originalObject;
 

@@ -58,7 +58,7 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 
 	@Override
 	protected void onSpawn() {
-		this.hiddenTime = 180.0;
+		this.hiddenTime = 300.0;
 	}
 
 	@Override

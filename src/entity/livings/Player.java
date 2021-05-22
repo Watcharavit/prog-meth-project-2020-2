@@ -162,6 +162,10 @@ public class Player extends LivingBeing implements Updatable {
 		return kingTime;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 	class PlayerUi extends VBox {
 		private final Player player;
 		private final Label nameLabel;

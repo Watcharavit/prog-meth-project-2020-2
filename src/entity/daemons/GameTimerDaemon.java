@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -33,7 +34,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 60 * 5;
+		remainingTime = 60 * 60 * 0.5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
@@ -71,25 +72,41 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 
 			VBox endGameMenu = new VBox();
 			endGameMenu.setAlignment(Pos.CENTER);
-			Label endLabel = new Label("Game Ended");
-			endLabel.setFont(new Font(64));
-			endLabel.setTextFill(Color.AZURE);
 			endGameMenu.setSpacing(24);
 
-			VBox scoreBoard = new VBox();
-			Label player1Score = new Label("Player 1 's score = ");
-			Label player2Score = new Label("Player 2 's score = ");
-			player1Score.setFont(new Font(35));
-			player1Score.setTextFill(Color.WHITE);
-			player2Score.setFont(new Font(35));
-			player2Score.setTextFill(Color.WHITE);
-			Label winnerName = new Label();
-			winnerName.setFont(Font.font("Courier New", FontWeight.BOLD, 40));
-			winnerName.setTextFill(Color.WHITE);
-			scoreBoard.setAlignment(Pos.CENTER);
-			scoreBoard.setSpacing(20);
-			scoreBoard.getChildren().addAll(player1Score, player2Score, winnerName);
+			Label endLabel = new Label("Game Ended");
+			endLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 60));
+			endLabel.setTextFill(Color.BLACK);
+			endLabel.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+			endLabel.setOpacity(0.85);
 
+			VBox scoreBoard = new VBox();
+			Player winnerPlayer = player[0];
+			String winnerName = "player 1";
+			for(int i=0; i<player.length;i++) {
+				Label playerScore = new Label(player[i].getName()+ "'s score = "+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
+				playerScore.setFont(new Font(25));
+				playerScore.setTextFill(Color.BLACK);
+				scoreBoard.getChildren().add(playerScore);
+				if(winnerPlayer.getKingTime() < player[i].getKingTime()) {
+					winnerPlayer = player[i];
+					winnerName = player[i].getName()+ " wins!!";
+				}else if(winnerPlayer.getKingTime()==0) {
+					winnerName = "Draws !!";
+				}
+			}
+			
+			scoreBoard.setAlignment(Pos.CENTER);
+			scoreBoard.setSpacing(7);
+			scoreBoard.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+			scoreBoard.setOpacity(0.85);
+			
+			Label winner = new Label(winnerName);
+			winner.setFont(Font.font("Courier New", FontWeight.BOLD, 40));
+			winner.setTextFill(Color.BLACK);
+			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+			winner.setOpacity(0.85);
+			
 			Button restartButton = new UnfocusableButton("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
 				GameSingleton.start();
@@ -100,8 +117,8 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 				GameSingleton.start();
 				AppSingleton.resetToHome();
 			});
-			endGameMenu.getChildren().addAll(endLabel, scoreBoard, restartButton, homeButton);
-
+			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);
+			endGameMenu.setPadding(new Insets(72, 0, 0, 300));
 			this.getChildren().addAll(endGameMenu);
 		}
 	}

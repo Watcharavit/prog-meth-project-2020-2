@@ -19,13 +19,13 @@ public class MonsterGenerator {
 		addWallThornMonster("WallThorn2", GameSingleton.tiles[GameSingleton.WIDTH / 2][GameSingleton.HEIGHT / 2 + 1],
 				Direction.UP);
 		addGhostMonster("Ghost1", GameSingleton.tiles[(int) Math
-				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 3)][GameSingleton.HEIGHT / 4]);
+				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 6)), 5)][GameSingleton.HEIGHT / 4]);
 		addGhostMonster("Ghost2", GameSingleton.tiles[(int) Math
-				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 3)][GameSingleton.HEIGHT / 4]);
+				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 6)), 5)][GameSingleton.HEIGHT / 4]);
 		addGhostMonster("Ghost3", GameSingleton.tiles[(int) Math
-				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 3)][GameSingleton.HEIGHT * 3 / 4]);
+				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 6)), 5)][GameSingleton.HEIGHT * 3 / 4]);
 		addGhostMonster("Ghost4", GameSingleton.tiles[(int) Math
-				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 4)), 3)][GameSingleton.HEIGHT * 3 / 4]);
+				.max(Math.floor(Math.random() * (GameSingleton.WIDTH - 6)), 5)][GameSingleton.HEIGHT * 3 / 4]);
 
 	}
 
