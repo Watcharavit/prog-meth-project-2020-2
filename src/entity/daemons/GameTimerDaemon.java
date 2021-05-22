@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,7 +33,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 60 * 0.5;
+		remainingTime = 60 * 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
