@@ -6,6 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * This is a singleton class that handles navigation between screens in the application.
+ * It works as a stack navigator: screens are pushed on top and popped of.
+ * @author Wisha
+ *
+ */
 public class AppSingleton {
 	private static GameScreen gameScreen;
 	private static HomeScreen homeScreen;
@@ -14,6 +20,10 @@ public class AppSingleton {
 	private static StackPane screensStack;
 	private static Scene rootScene;
 
+	/**
+	 * Initialize the StackPane and the screens. Put everything on the given stage.
+	 * @param primaryStage the stage on which we build the navigator.
+	 */
 	public static void start(Stage primaryStage) {
 		screensStack = new StackPane();
 		gameScreen = new GameScreen();
@@ -30,6 +40,9 @@ public class AppSingleton {
 		primaryStage.show();
 	}
 
+	/**
+	 * Reset the navigator to default state.
+	 */
 	public static void resetToHome() {
 		screensStack.getChildren().clear();
 		screensStack.getChildren().add(gameScreen);
@@ -63,6 +76,9 @@ public class AppSingleton {
 		}
 	}
 
+	/**
+	 * @see HomeScreen
+	 */
 	protected static void showHome() {
 		showScreen(homeScreen);
 	}
@@ -71,6 +87,9 @@ public class AppSingleton {
 		hideScreen(homeScreen);
 	}
 
+	/**
+	 * @see PauseScreen
+	 */
 	protected static void showPause() {
 		showScreen(pauseScreen);
 	}
@@ -79,6 +98,9 @@ public class AppSingleton {
 		hideScreen(pauseScreen);
 	}
 
+	/**
+	 * @see HelpScreen
+	 */
 	protected static void showHelp() {
 		showScreen(helpScreen);
 	}
