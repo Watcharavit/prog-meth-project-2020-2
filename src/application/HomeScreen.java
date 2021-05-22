@@ -26,14 +26,18 @@ class HomeScreen extends HBox {
 		left.setPrefWidth(180);
 		right.setAlignment(Pos.CENTER);
 		left.setAlignment(Pos.CENTER);
-		left.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		left.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		Label title = new Label("King of Bomb");
-		title.setFont(Font.font("Courier New", FontWeight.BOLD, 36));
-		title.setTextFill(Color.GREEN);
-		title.setPadding(new Insets(80, 0, 80, 0));
+		title.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 60));
+		title.setTextFill(Color.BLACK);
+		title.setPadding(new Insets(18, 3, 18, 3));
+		title.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		title.setOpacity(0.85);
 
 		right.getChildren().add(title);
+		right.setAlignment(Pos.CENTER);
+
 
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
