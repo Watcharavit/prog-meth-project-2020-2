@@ -10,17 +10,21 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * The 'Engine' of the game.
- * Controls the clock, updates {@link interfaces.Updatable}, and renders {@link entity.PhysicalEntity}s.
+ * The 'Engine' of the game. Controls the clock, updates
+ * {@link interfaces.Updatable}, and renders {@link entity.PhysicalEntity}s.
  *
- * For rendering, we have two canvas layers: one for {@link entity.Being}s and one for {@link entity.StillObject}.
- * We re-render every {@link entity.Being} on every frame.
- * But we only re-render a {@link Tile}'s {@link entity.StillObject} when requested. 
+ * For rendering, we have two canvas layers: one for {@link entity.Being}s and
+ * one for {@link entity.StillObject}. We re-render every {@link entity.Being}
+ * on every frame. But we only re-render a {@link Tile}'s
+ * {@link entity.StillObject} when requested.
  */
 class GameController {
 	/** A set of all {@link interfaces.Updatable} in the game. */
 	private HashSet<Updatable> updatableEntities;
-	/** A set of {@link Tile} whose {@link entity.StillObject} needs to be re-rendered in the next frame. */
+	/**
+	 * A set of {@link Tile} whose {@link entity.StillObject} needs to be
+	 * re-rendered in the next frame.
+	 */
 	private HashSet<Tile> renderQueue;
 	/** The GraphicsContext of one of a layer. */
 	private GraphicsContext objectsGc, beingsGc;
@@ -31,8 +35,9 @@ class GameController {
 
 	/**
 	 * Prepare the controller.
+	 * 
 	 * @param objectsCanvas The canvas for the objects layer. Below.
-	 * @param beingsCanvas The canvas for the beings layer. Above.
+	 * @param beingsCanvas  The canvas for the beings layer. Above.
 	 */
 	protected GameController(Canvas objectsCanvas, Canvas beingsCanvas) {
 		updatableEntities = new HashSet<Updatable>();
@@ -50,7 +55,9 @@ class GameController {
 	}
 
 	/**
-	 * If the given entity is {@link interfaces.Updatable}, add it to {@link #updatableEntities};
+	 * If the given entity is {@link interfaces.Updatable}, add it to
+	 * {@link #updatableEntities};
+	 * 
 	 * @param entity The entity to be added.
 	 */
 	protected void addEntity(Entity entity) {
@@ -60,7 +67,9 @@ class GameController {
 	}
 
 	/**
-	 * If the given entity is {@link interfaces.Updatable}, remove it from {@link #updatableEntities};
+	 * If the given entity is {@link interfaces.Updatable}, remove it from
+	 * {@link #updatableEntities};
+	 * 
 	 * @param entity The entity to be removed.
 	 */
 	protected void removeEntity(Entity entity) {
@@ -73,8 +82,11 @@ class GameController {
 	private static final Updatable[] emptyUpdatablesArray = {};
 
 	/**
-	 * Run {@link interfaces.Updatable#update(double)} on each entity in {@link #updatableEntities}.
-	 * @param ticksPassed The amount of ticks that passed since last frame. 1 tick always equal 16.67ms (even in non-60fps scenarios).
+	 * Run {@link interfaces.Updatable#update(double)} on each entity in
+	 * {@link #updatableEntities}.
+	 * 
+	 * @param ticksPassed The amount of ticks that passed since last frame. 1 tick
+	 *                    always equal 16.67ms (even in non-60fps scenarios).
 	 */
 	private void updateUpdatables(double ticksPassed) {
 		Updatable[] updatableCloned = updatableEntities.toArray(emptyUpdatablesArray);
@@ -107,9 +119,10 @@ class GameController {
 		}
 		renderQueue = new HashSet<Tile>();
 	}
-	
+
 	/**
 	 * Add tile to the {@link #renderQueue}.
+	 * 
 	 * @param tile The tile whose object should be re-rendered.
 	 */
 	protected void queueTileRender(Tile tile) {
@@ -118,7 +131,9 @@ class GameController {
 
 	/**
 	 * Run {@link #updateUpdatables(double)} and {@link #render()} for a frame.
-	 * @param ticksPassed The amount of ticks that passed since last frame. 1 tick always equal 16.67ms (even in non-60fps scenarios).
+	 * 
+	 * @param ticksPassed The amount of ticks that passed since last frame. 1 tick
+	 *                    always equal 16.67ms (even in non-60fps scenarios).
 	 */
 	private void onTick(double ticksPassed) {
 		updateUpdatables(ticksPassed);
@@ -154,8 +169,9 @@ class GameController {
 	}
 
 	/**
-	 * Check if the timer is still alive.
-	 * Returns false if {@link #stop()} has been called. 
+	 * Check if the timer is still alive. Returns false if {@link #stop()} has been
+	 * called.
+	 * 
 	 * @return Whether or not the timer has been destroyed.
 	 */
 	protected boolean isActive() {

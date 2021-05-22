@@ -39,7 +39,7 @@ public abstract class LivingBeing extends Being implements Updatable {
 		this.spawnTile = spawnTile;
 		this.facing = direction;
 	}
-	
+
 	/**
 	 * 
 	 * @return Direction that this living being is going.
@@ -47,9 +47,10 @@ public abstract class LivingBeing extends Being implements Updatable {
 	public Direction getFacing() {
 		return this.facing;
 	}
-	
+
 	/**
 	 * Set direction that this living being is going.
+	 * 
 	 * @param facing Direction that this living being is going.
 	 */
 	public void setFacing(Direction facing) {
@@ -57,9 +58,8 @@ public abstract class LivingBeing extends Being implements Updatable {
 	}
 
 	/**
-	 * Update every 1/60 second
-	 * If this living being is dying soon, then re-spawn it.
-	 * Otherwise, do nothing.
+	 * Update every 1/60 second If this living being is dying soon, then re-spawn
+	 * it. Otherwise, do nothing.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -75,7 +75,7 @@ public abstract class LivingBeing extends Being implements Updatable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Make this living being die. Set isDying true.
 	 */
@@ -87,8 +87,9 @@ public abstract class LivingBeing extends Being implements Updatable {
 		}
 	}
 
-	/** 
-	 * Respawn this living being at the spawn tile and set isDying false, isSpawning true.
+	/**
+	 * Respawn this living being at the spawn tile and set isDying false, isSpawning
+	 * true.
 	 */
 	private void respawn() {
 		isDying = false;
@@ -103,14 +104,13 @@ public abstract class LivingBeing extends Being implements Updatable {
 	}
 
 	/**
-	 * When alive, do something. Override in sub class.
-	 * Set isSpawning false. 
+	 * When alive, do something. Override in sub class. Set isSpawning false.
 	 */
 	private void live() {
 		isSpawning = false;
 		this.onAlive();
 	}
-	
+
 	/**
 	 * Override in sub class.
 	 */
@@ -127,7 +127,8 @@ public abstract class LivingBeing extends Being implements Updatable {
 	protected abstract void onAlive();
 
 	/**
-	 * If this living being is alive, then return normal image. Otherwise, return Dying Image.
+	 * If this living being is alive, then return normal image. Otherwise, return
+	 * Dying Image.
 	 */
 	@Override
 	public Sprite getSprite() {
@@ -154,8 +155,9 @@ public abstract class LivingBeing extends Being implements Updatable {
 		return 0.0;
 	}
 
-	/** 
+	/**
 	 * Check if it is dead or not.
+	 * 
 	 * @return true if it is dead. Otherwise, false.
 	 */
 	protected boolean isDead() {

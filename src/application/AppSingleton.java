@@ -1,34 +1,35 @@
 package application;
 
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- * This is a singleton class that handles navigation between screens in the application.
- * It works as a stack navigator: screens are pushed on top and popped of.
+ * This is a singleton class that handles navigation between screens in the
+ * application. It works as a stack navigator: screens are pushed on top and
+ * popped of.
  * 
- * A trick we use here is to make the {@link HomeScreen} transparent,
- * so we can have the {@link GameScreen} below as moving background.
+ * A trick we use here is to make the {@link HomeScreen} transparent, so we can
+ * have the {@link GameScreen} below as moving background.
  *
  */
 public class AppSingleton {
 	/** One screen in the navigator */
 	private static Screen homeScreen, gameScreen, pauseScreen, helpScreen;
-	
+
 	/** The StackPane containing the screens */
 	private static StackPane screensStack;
 
 	/**
 	 * Initialize the StackPane and the screens. Put everything on the given stage.
+	 * 
 	 * @param primaryStage The stage on which we build this navigator.
 	 */
 	public static void start(Stage primaryStage) {
 		screensStack = new StackPane();
-		
+
 		gameScreen = new GameScreen();
 		homeScreen = new HomeScreen();
 		pauseScreen = new PauseScreen();
@@ -53,8 +54,9 @@ public class AppSingleton {
 	}
 
 	/**
-	 * Push a screen onto the stack, disable the the screen below, and call {@link Screen#onFocus()}.
-	 *  
+	 * Push a screen onto the stack, disable the the screen below, and call
+	 * {@link Screen#onFocus()}.
+	 * 
 	 * @param node The screen to show.
 	 */
 	private static void showScreen(Screen node) {
@@ -71,6 +73,7 @@ public class AppSingleton {
 
 	/**
 	 * Remove a screen from the stack and enable and focus the new visible screen.
+	 * 
 	 * @param node The screen to remove.
 	 */
 	private static void hideScreen(Screen node) {
@@ -86,6 +89,7 @@ public class AppSingleton {
 
 	/**
 	 * Show home screen.
+	 * 
 	 * @see HomeScreen
 	 */
 	protected static void showHome() {
@@ -101,6 +105,7 @@ public class AppSingleton {
 
 	/**
 	 * Show pause screen.
+	 * 
 	 * @see PauseScreen
 	 */
 	protected static void showPause() {
@@ -116,6 +121,7 @@ public class AppSingleton {
 
 	/**
 	 * Show help screen.
+	 * 
 	 * @see HelpScreen
 	 */
 	protected static void showHelp() {

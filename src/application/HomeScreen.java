@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -19,8 +18,8 @@ import javafx.scene.text.FontWeight;
 import resources.MusicsLibrary;
 
 /**
- * The Home Screen displays a large logo, a Start Game button, and a How to Play button.
- * This screen uses {@link GameScreen} as animated background.
+ * The Home Screen displays a large logo, a Start Game button, and a How to Play
+ * button. This screen uses {@link GameScreen} as animated background.
  *
  */
 class HomeScreen extends Screen {
@@ -63,7 +62,7 @@ class HomeScreen extends Screen {
 		left.getChildren().addAll(gameButton, helpButton);
 
 		container.getChildren().addAll(left, right);
-		
+
 		this.getChildren().add(container);
 	}
 

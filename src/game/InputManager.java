@@ -15,9 +15,9 @@ public class InputManager {
 	/** Set of currently pressed keys. */
 	HashSet<KeyCode> activeKeys;
 
-	
 	/**
 	 * Create the listener.
+	 * 
 	 * @param node The node to listen on.
 	 */
 	protected InputManager(Node node) {

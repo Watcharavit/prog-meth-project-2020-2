@@ -11,6 +11,6 @@ abstract class Screen extends StackPane {
 	 * To be called when the screen is focused.
 	 */
 	protected void onFocus() {
-		
+
 	}
 }

@@ -13,8 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
- * A singleton class to manage the game.
- * This class is the only way to access the member class of {@link game} from outside.
+ * A singleton class to manage the game. This class is the only way to access
+ * the member class of {@link game} from outside.
  *
  */
 public class GameSingleton {
@@ -41,8 +41,10 @@ public class GameSingleton {
 	private static GameController controller;
 
 	/**
-	 * Add a being to the game.
-	 * Calls {@link GameController#addEntity(entity.Entity)} and {@link BeingsManager#addBeing(Being)}.
+	 * Add a being to the game. Calls
+	 * {@link GameController#addEntity(entity.Entity)} and
+	 * {@link BeingsManager#addBeing(Being)}.
+	 * 
 	 * @param being The being to add.
 	 */
 	public static void addBeing(Being being) {
@@ -51,8 +53,10 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Remove a being from the game.
-	 * Calls {@link GameController#removeEntity(entity.Entity)} and {@link BeingsManager#removeBeing(Being)}.
+	 * Remove a being from the game. Calls
+	 * {@link GameController#removeEntity(entity.Entity)} and
+	 * {@link BeingsManager#removeBeing(Being)}.
+	 * 
 	 * @param being The being to remove.
 	 */
 	public static void removeBeing(Being being) {
@@ -62,6 +66,7 @@ public class GameSingleton {
 
 	/**
 	 * Get the object at the specified tile position.
+	 * 
 	 * @param x The x position of the tile.
 	 * @param y THe y position of the tile.
 	 * @return The object at the tile.
@@ -71,10 +76,12 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Set the object at the specified tile position.
-	 * This also calls {@link GameController#queueTileRender(Tile)} and {@link BeingsManager#updateBeingsAroundTile(Tile)}. 
-	 * @param x The x position of the tile.
-	 * @param y THe y position of the tile.
+	 * Set the object at the specified tile position. This also calls
+	 * {@link GameController#queueTileRender(Tile)} and
+	 * {@link BeingsManager#updateBeingsAroundTile(Tile)}.
+	 * 
+	 * @param x      The x position of the tile.
+	 * @param y      THe y position of the tile.
 	 * @param object The object to put on the tile.
 	 */
 	public static void setTileObject(int x, int y, StillObject object) {
@@ -90,8 +97,9 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Add a phantom entity (an unrendered background entity).
-	 * Uses {@link GameController#addEntity(entity.Entity)}.
+	 * Add a phantom entity (an unrendered background entity). Uses
+	 * {@link GameController#addEntity(entity.Entity)}.
+	 * 
 	 * @param entity The entity to add.
 	 */
 	public static void addPhantomEntity(PhantomEntity entity) {
@@ -99,8 +107,9 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Remove a phantom entity.
-	 * Uses {@link GameController#removeEntity(entity.Entity)}.
+	 * Remove a phantom entity. Uses
+	 * {@link GameController#removeEntity(entity.Entity)}.
+	 * 
 	 * @param entity The entity to remove.
 	 */
 	public static void removePhantomEntity(PhantomEntity entity) {
@@ -108,8 +117,8 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Get the set of currently pressed keyboard keys.
-	 * Used for key polling.
+	 * Get the set of currently pressed keyboard keys. Used for key polling.
+	 * 
 	 * @see entity.livings.Player#update(double)
 	 * @return The set of currently pressed keyboard keys
 	 */
@@ -118,11 +127,11 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Move a being.
-	 * Uses {@link BeingsManager#moveBeing(Being, double, double)}.
+	 * Move a being. Uses {@link BeingsManager#moveBeing(Being, double, double)}.
+	 * 
 	 * @param being The being to move.
-	 * @param dx The x axis position difference.
-	 * @param dy The y axis position difference.
+	 * @param dx    The x axis position difference.
+	 * @param dy    The y axis position difference.
 	 * @return Whether or not the move was successful.
 	 */
 	public static boolean moveBeing(Being being, double dx, double dy) {
@@ -131,6 +140,7 @@ public class GameSingleton {
 
 	/**
 	 * Prepare the GameSingleton.
+	 * 
 	 * @param pane The Pane to use for game UIs and canvases.
 	 */
 	public static void initialize(Pane pane) {
@@ -138,10 +148,13 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Start or restart the game.
-	 * Build UIs and canvas layers.
-	 * Initialize all fields except {@link #rootPane}.
-	 * @param createGameplayManager Whether or not to set up with {@link GameplayManager}. True for actual games. False if you just want a map with monsters moving (see {@link application.HomeScreen}).
+	 * Start or restart the game. Build UIs and canvas layers. Initialize all fields
+	 * except {@link #rootPane}.
+	 * 
+	 * @param createGameplayManager Whether or not to set up with
+	 *                              {@link GameplayManager}. True for actual games.
+	 *                              False if you just want a map with monsters
+	 *                              moving (see {@link application.HomeScreen}).
 	 */
 	public static void start(boolean createGameplayManager) {
 		destroy();
@@ -191,8 +204,7 @@ public class GameSingleton {
 	}
 
 	/**
-	 * End the game.
-	 * Uses {@link GameController#stop()}.
+	 * End the game. Uses {@link GameController#stop()}.
 	 */
 	public static void destroy() {
 		if (controller != null && controller.isActive())
@@ -200,16 +212,14 @@ public class GameSingleton {
 	}
 
 	/**
-	 * Pause the game.
-	 * Uses {@link GameController#pause()}.
+	 * Pause the game. Uses {@link GameController#pause()}.
 	 */
 	public static void pause() {
 		controller.pause();
 	}
 
 	/**
-	 * Resume the game.
-	 * Uses {@link GameController#resume()}.
+	 * Resume the game. Uses {@link GameController#resume()}.
 	 */
 	public static void resume() {
 		controller.resume();
