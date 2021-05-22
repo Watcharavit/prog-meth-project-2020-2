@@ -22,8 +22,6 @@ class GameplayManager {
 		Pane playersUiPane = new Pane();
 		Pane timerUiPane = new Pane();
 		uiRoot.getChildren().addAll(playersUiPane, timerUiPane);
-		uiRoot.setMinWidth(180);
-		uiRoot.setMaxWidth(180);
 		Player[] players = PlayersAdder.createPlayers(playersUiPane);
 		GameSingleton.addPhantomEntity(new GameTimerDaemon(players, timerUiPane, overlayUiPane));
 		GameSingleton.addPhantomEntity(new EquipmentsGranterDaemon(players));

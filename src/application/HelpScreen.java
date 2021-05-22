@@ -20,7 +20,6 @@ import javafx.scene.text.FontWeight;
 class HelpScreen extends StackPane {
 
 	public HelpScreen() {
-
 		VBox howToPlay = new VBox();
 		howToPlay.setAlignment(Pos.TOP_CENTER);
 		howToPlay.setPrefHeight(600);

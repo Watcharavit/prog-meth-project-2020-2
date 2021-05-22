@@ -6,7 +6,6 @@ import application.AppSingleton;
 import entity.PhantomEntity;
 import entity.livings.Player;
 import game.GameSingleton;
-import gui.UnfocusableButton;
 import interfaces.Updatable;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -111,14 +110,14 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			winner.setOpacity(0.85);
 
-			Button restartButton = new UnfocusableButton("Restart");
+			Button restartButton = new Button("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
-				GameSingleton.start();
+				GameSingleton.start(true);
 			});
 
-			Button homeButton = new UnfocusableButton("Back to Main Menu");
+			Button homeButton = new Button("Back to Main Menu");
 			homeButton.setOnAction((ActionEvent e) -> {
-				GameSingleton.start();
+				GameSingleton.start(false);
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);

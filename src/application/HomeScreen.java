@@ -40,8 +40,8 @@ class HomeScreen extends HBox {
 
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
-			GameSingleton.start();
-			AppSingleton.switchToGame();
+			AppSingleton.hideHome();
+			GameSingleton.start(true);
 		});
 		gameButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
 		gameButton.setPrefHeight(40);
