@@ -17,8 +17,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-class PauseScreen extends StackPane {
+/**
+ * This screen is to be shown when the game is paused.
+ * This screen contains buttons for: Resume, Restart, How to Play, and Back to Main Menu.
+ * @author Wisha
+ *
+ */
+class PauseScreen extends Screen {
 	protected PauseScreen() {
+		
+		StackPane stack = new StackPane();
 		Pane pauseOverlayBackground = new Pane();
 		pauseOverlayBackground
 				.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -63,6 +71,7 @@ class PauseScreen extends StackPane {
 		});
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton, helpButton, homeButton);
 
-		this.getChildren().addAll(pauseOverlayBackground, pauseMenu);
+		stack.getChildren().addAll(pauseOverlayBackground, pauseMenu);
+		this.getChildren().add(stack);
 	}
 }
