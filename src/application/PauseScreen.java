@@ -18,13 +18,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
- * This screen is to be shown when the game is paused.
- * This screen contains buttons for: Resume, Restart, How to Play, and Back to Main Menu.
+ * This screen is to be shown when the game is paused. This screen contains
+ * buttons for: Resume, Restart, How to Play, and Back to Main Menu.
  *
  */
 class PauseScreen extends Screen {
 	protected PauseScreen() {
-		
+
 		StackPane stack = new StackPane();
 		Pane pauseOverlayBackground = new Pane();
 		pauseOverlayBackground

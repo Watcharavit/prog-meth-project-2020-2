@@ -3,8 +3,7 @@ package game;
 import javafx.animation.AnimationTimer;
 
 /**
- * The game timer implementation.
- * This uses JavaFX's AnimationTimer.
+ * The game timer implementation. This uses JavaFX's AnimationTimer.
  *
  */
 class GameLoopTimer extends AnimationTimer {
@@ -16,10 +15,9 @@ class GameLoopTimer extends AnimationTimer {
 	private boolean isActive = false;
 
 	/**
-	 * Handle a frame.
-	 * Calculate the amount of time sine {@link #lastFrameNano}.
-	 * Update {@link #lastFrameNano}.
-	 * If not {@link #isPaused}, run {@link #tick(long)}. 
+	 * Handle a frame. Calculate the amount of time sine {@link #lastFrameNano}.
+	 * Update {@link #lastFrameNano}. If not {@link #isPaused}, run
+	 * {@link #tick(long)}.
 	 */
 	@Override
 	public void handle(long nowNano) {
@@ -41,6 +39,7 @@ class GameLoopTimer extends AnimationTimer {
 		this.isActive = true;
 		super.start();
 	}
+
 	/**
 	 * Pause the timer.
 	 */
@@ -56,8 +55,8 @@ class GameLoopTimer extends AnimationTimer {
 	}
 
 	/**
-	 * Stop and destroy the timer.
-	 * {@link #isActive} will return false after this runs.
+	 * Stop and destroy the timer. {@link #isActive} will return false after this
+	 * runs.
 	 */
 	@Override
 	public void stop() {
@@ -67,6 +66,7 @@ class GameLoopTimer extends AnimationTimer {
 
 	/**
 	 * Getter for {@link #isActive}
+	 * 
 	 * @return Whether or not the timer is still alive.
 	 */
 	protected boolean isActive() {
@@ -75,6 +75,7 @@ class GameLoopTimer extends AnimationTimer {
 
 	/**
 	 * Ran on every frame. To be overriden.
+	 * 
 	 * @param frameTimeNano The amount of time since last frame in nanoseconds.
 	 */
 	protected void tick(long frameTimeNano) {

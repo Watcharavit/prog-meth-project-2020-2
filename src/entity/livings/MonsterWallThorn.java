@@ -13,7 +13,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	 * Size of Wall Thorn Monster.
 	 */
 	public static final double SIZE = 0.8;
-	
+
 	/**
 	 * Speed of Wall Thorn Monster.
 	 */

@@ -3,7 +3,7 @@ package entity;
 import game.Tile;
 
 public abstract class StillObject extends PhysicalEntity {
-	
+
 	/**
 	 * Its tile.
 	 */
@@ -11,6 +11,7 @@ public abstract class StillObject extends PhysicalEntity {
 
 	/**
 	 * Set tile.
+	 * 
 	 * @param tile Its tile.
 	 */
 	public void setTile(Tile tile) {

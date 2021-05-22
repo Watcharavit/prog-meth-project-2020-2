@@ -2,7 +2,6 @@ package entity;
 
 import resources.Sprite;
 
-
 /**
  * Override in sub class.
  */

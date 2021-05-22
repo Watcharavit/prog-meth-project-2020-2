@@ -121,8 +121,8 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this bomb flame should be gone. If yes, then
-	 * remove it and set tile to an specific object after it is gone.
+	 * Update every 1/60 second Check if this bomb flame should be gone. If yes,
+	 * then remove it and set tile to an specific object after it is gone.
 	 */
 	@Override
 	public void update(double ticksPassed) {

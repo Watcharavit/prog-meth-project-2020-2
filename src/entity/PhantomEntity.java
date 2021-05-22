@@ -1,6 +1,5 @@
 package entity;
 
-
 /**
  * Override in sub class.
  */

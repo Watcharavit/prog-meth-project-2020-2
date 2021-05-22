@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * This is the entrypoint of the application. It extends JavaFX's Application class.
+ * This is the entrypoint of the application. It extends JavaFX's Application
+ * class.
  *
  */
 

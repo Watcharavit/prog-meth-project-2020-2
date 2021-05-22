@@ -10,42 +10,42 @@ import logic.Direction;
 import resources.SpritesLibrary;
 
 public class BombPhantom extends PhantomEntity implements Updatable {
-	
+
 	/**
 	 * Life time of bomb flame.
 	 */
 	static final int DEFAULT_FLAME_LIFETIME = 60;
-	
+
 	/**
 	 * 
 	 */
 	static final int TICK_PER_RADIUS = 1;
-	
+
 	/**
 	 * 
 	 */
 	private int explodeRadius = 0;
-	
+
 	/**
 	 * 
 	 */
 	private double totalTicks = 0;
-	
+
 	/**
 	 * 
 	 */
 	final int radius, x, y;
-	
+
 	/**
 	 * 
 	 */
 	private final Player placer;
-	
+
 	/**
 	 * 
 	 */
 	private final double phantomLifetime;
-	
+
 	/**
 	 * 
 	 */

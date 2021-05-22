@@ -18,14 +18,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- * This is the How to Play screen. It consists mostly of Labels explaining the game.
+ * This is the How to Play screen. It consists mostly of Labels explaining the
+ * game.
  *
  */
 class HelpScreen extends Screen {
 
 	public HelpScreen() {
 		StackPane stack = new StackPane();
-		
+
 		VBox howToPlay = new VBox();
 		howToPlay.setAlignment(Pos.TOP_CENTER);
 		howToPlay.setPrefHeight(600);
@@ -76,7 +77,7 @@ class HelpScreen extends Screen {
 		stack.getChildren().addAll(crown, howToPlay);
 		stack.setBackground(
 				new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		
+
 		this.getChildren().add(stack);
 	}
 }

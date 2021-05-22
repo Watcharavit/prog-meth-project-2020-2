@@ -11,8 +11,9 @@ import interfaces.Passable;
 /**
  * Handles addition/removal and movement of {@link entity.Being}s in the game.
  * 
- * We store beings in a set, but also store each one as reference in the {@link Tile} it is on.
- * This allow us to only look at beings in nearby tiles when checking for collision.
+ * We store beings in a set, but also store each one as reference in the
+ * {@link Tile} it is on. This allow us to only look at beings in nearby tiles
+ * when checking for collision.
  */
 class BeingsManager {
 	/** All tiles in the game. Reference to {@link GameSingleton#tiles}. */
@@ -29,8 +30,10 @@ class BeingsManager {
 	}
 
 	/**
-	 * Add a being to the game world.
-	 * Trigger {@link interfaces.Passable} and/or {@link interfaces.Collidable} if it is on some objects and/or colliding with some other beings.
+	 * Add a being to the game world. Trigger {@link interfaces.Passable} and/or
+	 * {@link interfaces.Collidable} if it is on some objects and/or colliding with
+	 * some other beings.
+	 * 
 	 * @param being The being to add.
 	 */
 	protected void addBeing(Being being) {
@@ -44,6 +47,7 @@ class BeingsManager {
 
 	/**
 	 * Remove a being from the game world.
+	 * 
 	 * @param being The being to remove.
 	 */
 	protected void removeBeing(Being being) {
@@ -55,10 +59,12 @@ class BeingsManager {
 
 	/**
 	 * A utility function to get an array of tiles a being might be on.
-	 * @param x The x position of the being.
-	 * @param y The y position of the being.
+	 * 
+	 * @param x           The x position of the being.
+	 * @param y           The y position of the being.
 	 * @param beingRadius The radius (size / 2) of the being.
-	 * @return An array of tiles at the top-left, top-right, bottom-left, and bottom-right corner of the being.
+	 * @return An array of tiles at the top-left, top-right, bottom-left, and
+	 *         bottom-right corner of the being.
 	 */
 	private Tile[] getCornerTiles(double x, double y, double beingRadius) {
 		int l = (int) (x - beingRadius);
@@ -77,20 +83,25 @@ class BeingsManager {
 	private static final Being[] emptyBeingsArray = {};
 
 	/**
-	 * Move a being.
-	 * This function does the following:
+	 * Move a being. This function does the following:
 	 * <ul>
-	 * <li>Check that moving to the new position would not move any of the being's four corner into an not-{@link interfaces.Passable} tile.</li>
+	 * <li>Check that moving to the new position would not move any of the being's
+	 * four corner into an not-{@link interfaces.Passable} tile.</li>
 	 * <li>If some of the tiles are not pass-able, give up and return false.</li>
-	 * <li>Check for collision with beings around this one and call {@link interfaces.Collidable#collide(Being)} accordingly.</li>
-	 * <li>If any collision is not pass-through ({@link interfaces.Collidable#getCanPassThrough()}), give up and return false.</li>
-	 * <li>Call {@link interfaces.Passable#pass(Being)} for tiles that the being will be on.</li>
+	 * <li>Check for collision with beings around this one and call
+	 * {@link interfaces.Collidable#collide(Being)} accordingly.</li>
+	 * <li>If any collision is not pass-through
+	 * ({@link interfaces.Collidable#getCanPassThrough()}), give up and return
+	 * false.</li>
+	 * <li>Call {@link interfaces.Passable#pass(Being)} for tiles that the being
+	 * will be on.</li>
 	 * <li>Set the being's new X and Y position.</li>
 	 * <li>Move the player reference to a new tile if needed.</li>
 	 * </ul>
+	 * 
 	 * @param being The being to be moved.
-	 * @param dx Change in X axis.
-	 * @param dy Change in Y axis.
+	 * @param dx    Change in X axis.
+	 * @param dy    Change in Y axis.
 	 * @return Whether or not the move was successful.
 	 */
 	protected boolean moveBeing(Being being, double dx, double dy) {
@@ -177,8 +188,11 @@ class BeingsManager {
 	}
 
 	/**
-	 * Trigger {@link interfaces.Passable} and/or {@link interfaces.Collidable} if for beings around a given tile.
-	 * This is useful when the tile object changes (e.g. {@link entity.terrains.Floor} changes to {@link entity.bomb.BombFlame}).
+	 * Trigger {@link interfaces.Passable} and/or {@link interfaces.Collidable} if
+	 * for beings around a given tile. This is useful when the tile object changes
+	 * (e.g. {@link entity.terrains.Floor} changes to
+	 * {@link entity.bomb.BombFlame}).
+	 * 
 	 * @param tile The tile around which to update beings.
 	 */
 	protected void updateBeingsAroundTile(Tile tile) {

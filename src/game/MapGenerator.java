@@ -11,12 +11,12 @@ import entity.terrains.TempWall;
  */
 class MapGenerator {
 	/**
-	 * Generate the game map.
-	 * Basic rules:
+	 * Generate the game map. Basic rules:
 	 * <ul>
 	 * <li>Tiles at the edge are {@link entity.terrains.PermWall}.</li>
 	 * <li>Tiles at x-odd+y-odd positions are {@link entity.terrains.PermWall}.</li>
-	 * <li>The rest have 30% chance to be {@link entity.terrains.TempWall} and 70% to be {@link entity.terrains.Floor}.</li>
+	 * <li>The rest have 30% chance to be {@link entity.terrains.TempWall} and 70%
+	 * to be {@link entity.terrains.Floor}.</li>
 	 * <li>The center tile is {@link entity.terrains.KingFloor}.</li>
 	 * </ul>
 	 */
