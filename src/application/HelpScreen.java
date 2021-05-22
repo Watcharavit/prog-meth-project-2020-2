@@ -17,9 +17,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-class HelpScreen extends StackPane {
+/**
+ * This is the How to Play screen. It consists mostly of Labels explaining the game.
+ *
+ */
+class HelpScreen extends Screen {
 
 	public HelpScreen() {
+		StackPane stack = new StackPane();
+		
 		VBox howToPlay = new VBox();
 		howToPlay.setAlignment(Pos.TOP_CENTER);
 		howToPlay.setPrefHeight(600);
@@ -67,9 +73,10 @@ class HelpScreen extends StackPane {
 		ImageView crown = new ImageView(new Image("sprites/crown.png"));
 		crown.setOpacity(0.25);
 
-		this.getChildren().add(howToPlay);
-		this.getChildren().add(crown);
-		this.setBackground(
+		stack.getChildren().addAll(crown, howToPlay);
+		stack.setBackground(
 				new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		this.getChildren().add(stack);
 	}
 }

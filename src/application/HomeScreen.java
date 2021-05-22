@@ -18,11 +18,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import resources.MusicsLibrary;
 
-class HomeScreen extends HBox implements Focusable {
+/**
+ * The Home Screen displays a large logo, a Start Game button, and a How to Play button.
+ * This screen uses {@link GameScreen} as animated background.
+ *
+ */
+class HomeScreen extends Screen {
 
 	private final Button gameButton, helpButton;
 
 	protected HomeScreen() {
+		HBox container = new HBox();
 		VBox right = new VBox();
 		right.setPrefWidth(600);
 		VBox left = new VBox();
@@ -56,9 +62,14 @@ class HomeScreen extends HBox implements Focusable {
 
 		left.getChildren().addAll(gameButton, helpButton);
 
-		this.getChildren().addAll(left, right);
+		container.getChildren().addAll(left, right);
+		
+		this.getChildren().add(container);
 	}
 
+	/**
+	 * Upon focus, play the screen's music.
+	 */
 	@Override
 	public void onFocus() {
 		MusicsLibrary.playMusic(MusicsLibrary.MAIN_MENU);

@@ -10,14 +10,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import resources.MusicsLibrary;
 
-class GameScreen extends StackPane implements Focusable {
-	private final Pane gamePane;
-
+/**
+ * The screen containing the game itself. This screen also serves as background for {@link HomeScreen}.
+ * This class passes a large Pane to {@link game.GameSingleton} to draw the game content.
+ * This class creates a floating Pause button on the bottom left of the screen.
+ *
+ */
+class GameScreen extends Screen {
 	protected GameScreen() {
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
 
-		gamePane = new Pane();
+		Pane gamePane = new Pane();
 		GameSingleton.initialize(gamePane);
 		container.getChildren().add(gamePane);
 
@@ -42,6 +46,9 @@ class GameScreen extends StackPane implements Focusable {
 		GameSingleton.start(false);
 	}
 
+	/**
+	 * Upon focus, play the screen's music.
+	 */
 	@Override
 	public void onFocus() {
 		MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);

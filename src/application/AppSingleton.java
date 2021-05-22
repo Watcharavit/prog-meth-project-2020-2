@@ -1,6 +1,7 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -9,28 +10,30 @@ import javafx.stage.Stage;
 /**
  * This is a singleton class that handles navigation between screens in the application.
  * It works as a stack navigator: screens are pushed on top and popped of.
- * @author Wisha
+ * 
+ * A trick we use here is to make the {@link HomeScreen} transparent,
+ * so we can have the {@link GameScreen} below as moving background.
  *
  */
 public class AppSingleton {
-	private static GameScreen gameScreen;
-	private static HomeScreen homeScreen;
-	private static PauseScreen pauseScreen;
-	private static HelpScreen helpScreen;
+	/** One screen in the navigator */
+	private static Screen homeScreen, gameScreen, pauseScreen, helpScreen;
+	
+	/** The StackPane containing the screens */
 	private static StackPane screensStack;
-	private static Scene rootScene;
 
 	/**
 	 * Initialize the StackPane and the screens. Put everything on the given stage.
-	 * @param primaryStage the stage on which we build the navigator.
+	 * @param primaryStage The stage on which we build this navigator.
 	 */
 	public static void start(Stage primaryStage) {
 		screensStack = new StackPane();
+		
 		gameScreen = new GameScreen();
 		homeScreen = new HomeScreen();
 		pauseScreen = new PauseScreen();
 		helpScreen = new HelpScreen();
-		rootScene = new Scene(screensStack);
+		Scene rootScene = new Scene(screensStack);
 
 		primaryStage.setScene(rootScene);
 
@@ -49,62 +52,79 @@ public class AppSingleton {
 		showHome();
 	}
 
-	private static void showScreen(Node node) {
+	/**
+	 * Push a screen onto the stack, disable the the screen below, and call {@link Screen#onFocus()}.
+	 *  
+	 * @param node The screen to show.
+	 */
+	private static void showScreen(Screen node) {
 		ObservableList<Node> children = screensStack.getChildren();
 		if (children.size() >= 1) {
-			Node lastChildren = children.get(children.size() - 1);
-			lastChildren.setDisable(true);
+			Node lastChild = children.get(children.size() - 1);
+			lastChild.setDisable(true);
 		}
 
 		children.add(node);
 
-		if (node instanceof Focusable) {
-			((Focusable) node).onFocus();
-		}
+		node.onFocus();
 	}
 
-	private static void hideScreen(Node node) {
+	/**
+	 * Remove a screen from the stack and enable and focus the new visible screen.
+	 * @param node The screen to remove.
+	 */
+	private static void hideScreen(Screen node) {
 		ObservableList<Node> children = screensStack.getChildren();
 		children.remove(node);
 
 		if (children.size() >= 1) {
-			Node lastChildren = children.get(children.size() - 1);
-			lastChildren.setDisable(false);
-			if (lastChildren instanceof Focusable) {
-				((Focusable) lastChildren).onFocus();
-			}
+			Node lastChild = children.get(children.size() - 1);
+			lastChild.setDisable(false);
+			((Screen) lastChild).onFocus();
 		}
 	}
 
 	/**
+	 * Show home screen.
 	 * @see HomeScreen
 	 */
 	protected static void showHome() {
 		showScreen(homeScreen);
 	}
 
+	/**
+	 * Hide home screen.
+	 */
 	protected static void hideHome() {
 		hideScreen(homeScreen);
 	}
 
 	/**
+	 * Show pause screen.
 	 * @see PauseScreen
 	 */
 	protected static void showPause() {
 		showScreen(pauseScreen);
 	}
 
+	/**
+	 * Hide pause screen.
+	 */
 	protected static void hidePause() {
 		hideScreen(pauseScreen);
 	}
 
 	/**
+	 * Show help screen.
 	 * @see HelpScreen
 	 */
 	protected static void showHelp() {
 		showScreen(helpScreen);
 	}
 
+	/**
+	 * Hide help screen.
+	 */
 	protected static void hideHelp() {
 		hideScreen(helpScreen);
 	}
