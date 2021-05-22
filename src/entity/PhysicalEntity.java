@@ -5,8 +5,6 @@ import resources.Sprite;
 
 /**
  * Override in sub class.
- * @author Watch
- *
  */
 public abstract class PhysicalEntity extends Entity {
 

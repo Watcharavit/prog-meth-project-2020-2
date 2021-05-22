@@ -7,10 +7,17 @@ import logic.Direction;
 
 public class EquipmentPuncher extends Equipment {
 
+	/**
+	 * 
+	 * @param user Player who uses this equipment.
+	 */
 	public EquipmentPuncher(Player user) {
 		super(user);
 	}
 
+	/**
+	 * Punch living being at the direction this user is facing.
+	 */
 	@Override
 	protected void useEquipment() {
 		super.setCooldown(30.0);

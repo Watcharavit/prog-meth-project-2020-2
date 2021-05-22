@@ -9,10 +9,17 @@ import logic.Direction;
 
 public class EquipmentBombKicker extends Equipment {
 
+	/**
+	 * 
+	 * @param user Player who uses this equipment.
+	 */
 	public EquipmentBombKicker(Player user) {
 		super(user);
 	}
 
+	/**
+	 * Kick bomb to the end of the direction this user is facing.
+	 */
 	@Override
 	protected void useEquipment() {
 		Direction facing = user.getFacing();

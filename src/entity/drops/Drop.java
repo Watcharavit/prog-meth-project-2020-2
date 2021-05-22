@@ -12,10 +12,8 @@ import resources.SoundsLibrary;
 
 /**
  * Drop Item that can be picked by Player.
- * @author Watch
- *
  */
-public abstract class Drop extends StillObject implements Passable, Bombable {
+abstract class Drop extends StillObject implements Passable, Bombable {
 	
 	/**
 	 * If being that pass item is Player, then Player collects it.
