@@ -10,7 +10,16 @@ import interfaces.Bombable;
 import interfaces.Passable;
 import resources.SoundsLibrary;
 
-abstract class Drop extends StillObject implements Passable, Bombable {
+/**
+ * Drop Item that can be picked by Player.
+ * @author Watch
+ *
+ */
+public abstract class Drop extends StillObject implements Passable, Bombable {
+	
+	/**
+	 * If being that pass item is Player, then Player collects it.
+	 */
 	@Override
 	public void pass(Being character) {
 		if (character instanceof Player) {
@@ -23,8 +32,15 @@ abstract class Drop extends StillObject implements Passable, Bombable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param player Player that walk pass.
+	 */
 	protected abstract void onPicked(Player player);
 
+	/**
+	 * Object after it picked.
+	 */
 	@Override
 	public StillObject getAfterBombed() {
 		return new Floor();

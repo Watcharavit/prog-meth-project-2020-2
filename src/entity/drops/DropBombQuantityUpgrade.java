@@ -6,11 +6,17 @@ import resources.SpritesLibrary;
 
 public class DropBombQuantityUpgrade extends Drop {
 
+	/**
+	 * @return Specific sprite.
+	 */
 	@Override
 	public Sprite getSprite() {
 		return SpritesLibrary.BOMB_QUANTITY;
 	}
 
+	/**
+	 * Increase player's bomb available by 1.
+	 */
 	@Override
 	protected void onPicked(Player player) {
 		player.incrementBombsNumber();
