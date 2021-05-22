@@ -38,7 +38,6 @@ class HomeScreen extends HBox {
 		right.getChildren().add(title);
 		right.setAlignment(Pos.CENTER);
 
-
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
 			GameSingleton.start();

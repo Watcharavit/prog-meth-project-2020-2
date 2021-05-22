@@ -82,34 +82,35 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			VBox scoreBoard = new VBox();
 			Player winnerPlayer = player[0];
 			String winnerName = "player 1";
-			for(int i=0; i<player.length;i++) {
-				Label playerScore = new Label(player[i].getName()+ "'s score = "+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
+			for (int i = 0; i < player.length; i++) {
+				Label playerScore = new Label(player[i].getName() + "'s score = "
+						+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
 				playerScore.setFont(new Font(25));
 				playerScore.setTextFill(Color.BLACK);
 				scoreBoard.getChildren().add(playerScore);
-				if(winnerPlayer.getKingTime() < player[i].getKingTime()) {
+				if (winnerPlayer.getKingTime() < player[i].getKingTime()) {
 					winnerPlayer = player[i];
 				}
 			}
-			
-			if (winnerPlayer.getKingTime()==0) {
+
+			if (winnerPlayer.getKingTime() == 0) {
 				winnerName = "Draw!";
+			} else {
+				winnerName = winnerPlayer.getName() + " Wins!";
 			}
-			else {
-				winnerName = winnerPlayer.getName()+ " Wins!";
-			}
-			
+
 			scoreBoard.setAlignment(Pos.CENTER);
 			scoreBoard.setSpacing(7);
-			scoreBoard.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+			scoreBoard.setBackground(
+					new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			scoreBoard.setOpacity(0.85);
-			
+
 			Label winner = new Label(winnerName);
 			winner.setFont(Font.font("Courier New", FontWeight.BOLD, 40));
 			winner.setTextFill(Color.BLACK);
 			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			winner.setOpacity(0.85);
-			
+
 			Button restartButton = new UnfocusableButton("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
 				GameSingleton.start();
