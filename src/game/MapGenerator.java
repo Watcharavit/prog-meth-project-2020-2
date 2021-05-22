@@ -5,7 +5,21 @@ import entity.terrains.KingFloor;
 import entity.terrains.PermWall;
 import entity.terrains.TempWall;
 
+/**
+ * Generate the game map.
+ *
+ */
 class MapGenerator {
+	/**
+	 * Generate the game map.
+	 * Basic rules:
+	 * <ul>
+	 * <li>Tiles at the edge are {@link entity.terrains.PermWall}.</li>
+	 * <li>Tiles at x-odd+y-odd positions are {@link entity.terrains.PermWall}.</li>
+	 * <li>The rest have 30% chance to be {@link entity.terrains.TempWall} and 70% to be {@link entity.terrains.Floor}.</li>
+	 * <li>The center tile is {@link entity.terrains.KingFloor}.</li>
+	 * </ul>
+	 */
 	protected static void generateMap() {
 		Tile[][] tiles = GameSingleton.tiles;
 		int width = tiles.length;

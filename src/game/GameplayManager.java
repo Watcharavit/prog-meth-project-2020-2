@@ -15,7 +15,19 @@ import logic.PlayerControl;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * Manage the players and spawn the daemons.
+ * 
+ */
 class GameplayManager {
+	/**
+	 * Set up the game.
+	 * Add two players using {@link PlayersAdder}.
+	 * Spawn {@link entity.daemons.GameTimerDaemon} and {@link entity.daemons.EquipmentsGranterDaemon}.
+	 * 
+	 * @param uiPane A JavaFX Pane to display the players' info UI.
+	 * @param overlayUiPane A JavaFX Pane to display the game end UI.
+	 */
 	protected static void setupGameplay(Pane uiPane, Pane overlayUiPane) {
 		VBox uiRoot = new VBox();
 		uiPane.getChildren().add(uiRoot);
@@ -27,9 +39,16 @@ class GameplayManager {
 		GameSingleton.addPhantomEntity(new EquipmentsGranterDaemon(players));
 	}
 
+	/**
+	 * Handle adding players to the game.
+	 * Currently add two players. Can be modified to add more very easily.
+	 */
 	static class PlayersAdder {
+		/** Keymap for the player. */
 		private final static HashMap<PlayerControl, KeyCode> player1Control = new HashMap<PlayerControl, KeyCode>();
+		/** Keymap for the player. */
 		private final static HashMap<PlayerControl, KeyCode> player2Control = new HashMap<PlayerControl, KeyCode>();
+		
 		static {
 			player1Control.put(PlayerControl.MOVE_UP, KeyCode.W);
 			player1Control.put(PlayerControl.MOVE_LEFT, KeyCode.A);
@@ -46,6 +65,11 @@ class GameplayManager {
 			player2Control.put(PlayerControl.USE_EQUIPMENT, KeyCode.L);
 		}
 
+		/**
+		 * Create two players and add them to the game.
+		 * @param uiPane The containing Pane in which we will display players' info UI.
+		 * @return Array of created players.
+		 */
 		protected static Player[] createPlayers(Pane uiPane) {
 			VBox containerBox = new VBox();
 			Player[] allPlayers = {
@@ -60,6 +84,10 @@ class GameplayManager {
 			return allPlayers;
 		}
 
+		/**
+		 * Clear the map tiles around the given player.
+		 * @param player The player.
+		 */
 		private static void clearTilesAroundPlayer(Player player) {
 			int x = (int) player.getX();
 			int y = (int) player.getY();
@@ -71,6 +99,16 @@ class GameplayManager {
 			}
 		}
 
+		/**
+		 * Create a player and add them to the game. 
+		 * @param name The name of this player. (usually "Player {1,2}")
+		 * @param keyMap This player's controls Keymap.
+		 * @param spawnTile The tile at which this player should spawn
+		 * @param normalSprite The sprite for this player.
+		 * @param dyingSprite The sprite for this player when dying (see {@link entity.livings.LivingBeing}).
+		 * @param containingUiBox The JavaFX VBox to display this player's information in. 
+		 * @return The player object.
+		 */
 		private static Player createPlayer(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile,
 				Sprite normalSprite, Sprite dyingSprite, VBox containingUiBox) {
 			Pane playerPane = new Pane();
