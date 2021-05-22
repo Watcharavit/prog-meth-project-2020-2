@@ -20,6 +20,9 @@ class BeingsManager {
 	/** All beings in the game. Reference to {@link GameSingleton#allBeings}. */
 	HashSet<Being> allBeings;
 
+	/**
+	 * Construct the instance. Initialize the fields.
+	 */
 	protected BeingsManager() {
 		this.tiles = GameSingleton.tiles;
 		this.allBeings = GameSingleton.allBeings;
