@@ -90,10 +90,14 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 				scoreBoard.getChildren().add(playerScore);
 				if(winnerPlayer.getKingTime() < player[i].getKingTime()) {
 					winnerPlayer = player[i];
-					winnerName = player[i].getName()+ " wins!!";
-				}else if(winnerPlayer.getKingTime()==0) {
-					winnerName = "Draws !!";
 				}
+			}
+			
+			if (winnerPlayer.getKingTime()==0) {
+				winnerName = "Draw!";
+			}
+			else {
+				winnerName = winnerPlayer.getName()+ " Wins!";
 			}
 			
 			scoreBoard.setAlignment(Pos.CENTER);
