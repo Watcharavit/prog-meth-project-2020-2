@@ -23,16 +23,62 @@ import resources.SoundsLibrary;
 import resources.Sprite;
 
 public class Player extends LivingBeing implements Updatable {
+	/**
+	 * Size of Player.
+	 */
 	public static final double SIZE = 0.6;
+
+	/**
+	 * Speed of Player.
+	 */
 	private static final double SPEED = 0.1;
+
+	/**
+	 * Equipment that player is having.
+	 */
 	private Equipment equipment;
+
+	/**
+	 * Attribute of player's bomb.
+	 */
 	private int bombsNumber, bombsPlacedNumber, bombRadius;
+
+	/**
+	 * Player's score.
+	 */
 	private double kingTime;
+
+	/**
+	 * Player's name.
+	 */
 	private final String name;
+
+	/**
+	 * Player's control.
+	 */
 	private final Map<PlayerControl, KeyCode> keyMap;
+
+	/**
+	 * Player's graphic.
+	 */
 	private final Sprite normalSprite, dyingSprite;
+
+	/**
+	 * Player's board attribute.
+	 */
 	private final PlayerUi ui;
 
+	/**
+	 * create Player with specific given name, spawn tile, control, direction and
+	 * set all bomb's attribute to 1.
+	 * 
+	 * @param name         Player's name.
+	 * @param keyMap       Player's control.
+	 * @param spawnTile    Position that Player spawns.
+	 * @param normalSprite Player's graphic.
+	 * @param dyingSprite  Player's graphic.
+	 * @param uiPane       Player's board attribute.
+	 */
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
 			Sprite dyingSprite, Pane uiPane) {
 		super(spawnTile, SIZE, Direction.random());
@@ -49,6 +95,11 @@ public class Player extends LivingBeing implements Updatable {
 		this.ui = new PlayerUi(uiPane, this);
 	}
 
+	/**
+	 * Update every 1/60 second Check if this player is dead or not. If it is then
+	 * respawn. Otherwise set the direction it is going and movement it is going to
+	 * do. Do the actions it from player (real life).
+	 */
 	@Override
 	public void update(double ticksPassed) {
 		super.update(ticksPassed);
@@ -81,6 +132,9 @@ public class Player extends LivingBeing implements Updatable {
 		}
 	}
 
+	/**
+	 * Place the bomb if it is possible together with playing sound.
+	 */
 	private void placeBomb() {
 		int x = (int) super.getX();
 		int y = (int) super.getY();
@@ -96,6 +150,11 @@ public class Player extends LivingBeing implements Updatable {
 		}
 	}
 
+	/**
+	 * Set the available equipment for this Player.
+	 * 
+	 * @param equipment Equipment that player is having.
+	 */
 	public void setEquipment(Equipment equipment) {
 		if (this.equipment != null)
 			GameSingleton.removePhantomEntity(this.equipment);
@@ -104,11 +163,19 @@ public class Player extends LivingBeing implements Updatable {
 		this.equipment = equipment;
 	}
 
+	/**
+	 * Return spawn cooldown.
+	 * 
+	 * @return always return 60.0
+	 */
 	@Override
 	protected double getSpawnCooldown() {
 		return 60.0;
 	}
 
+	/**
+	 * Penalty when Player is death.
+	 */
 	@Override
 	public void onDeath() {
 		bombRadius = (Math.max(1, bombRadius - 3));
@@ -118,50 +185,82 @@ public class Player extends LivingBeing implements Updatable {
 		SoundsLibrary.PLAYER_DIE.play();
 	}
 
+	/**
+	 * Play sound for Player respawn.
+	 */
 	@Override
 	protected void onSpawn() {
 		SoundsLibrary.PLAYER_RESPAWN.play();
 	}
 
+	/**
+	 * Does't do anything.
+	 */
 	@Override
 	protected void onAlive() {
 
 	}
 
+	/**
+	 * @return return Player image.
+	 */
 	@Override
 	protected Sprite getAliveSprite() {
 		return normalSprite;
 	}
 
+	/**
+	 * @return return dying Player image.
+	 */
 	@Override
 	protected Sprite getDyingSprite() {
 		return dyingSprite;
 	}
 
+	/**
+	 * Reduce bomb available number and shows on Player's board attribute.
+	 */
 	public void returnBomb() {
 		bombsPlacedNumber -= 1;
 		ui.refreshBombsNumber();
 	}
 
+	/**
+	 * Increase bomb available number and shows on Player's board attribute.
+	 */
 	public void incrementBombsNumber() {
 		bombsNumber += 1;
 		ui.refreshBombsNumber();
 	}
 
+	/**
+	 * Increase bomb radius and shows on Player's board attribute.
+	 */
 	public void incrementBombRadius() {
 		bombRadius += 1;
 		ui.refreshBombRadius();
 	}
 
+	/**
+	 * Increase Player's score and shows on Player's board attribute.
+	 */
 	public void incrementKingTime(double ticks) {
 		kingTime += ticks;
 		ui.refreshKingTime();
 	}
 
+	/**
+	 * 
+	 * @return Player's score.
+	 */
 	public double getKingTime() {
 		return kingTime;
 	}
 
+	/**
+	 * 
+	 * @return Player's name
+	 */
 	public String getName() {
 		return this.name;
 	}
@@ -174,6 +273,9 @@ public class Player extends LivingBeing implements Updatable {
 		private final Label kingTimeLabel;
 		private double kingTimeDebounced = -1;
 
+		/**
+		 * Create Player's board attribute and remaining time.
+		 */
 		private PlayerUi(Pane root, Player player) {
 			this.player = player;
 
@@ -194,6 +296,9 @@ public class Player extends LivingBeing implements Updatable {
 			refreshKingTime();
 		}
 
+		/**
+		 * Refresh bomb available number and shows on Player's board attribute.
+		 */
 		protected void refreshBombsNumber() {
 			int total = player.bombsNumber;
 			int used = player.bombsPlacedNumber;
@@ -203,6 +308,9 @@ public class Player extends LivingBeing implements Updatable {
 			this.bombsNumberLabel.setText(r);
 		}
 
+		/**
+		 * Refresh bomb radius and shows on Player's board attribute.
+		 */
 		protected void refreshBombRadius() {
 			int radius = player.bombRadius;
 			Formatter f = new Formatter();
@@ -211,6 +319,9 @@ public class Player extends LivingBeing implements Updatable {
 			this.bombRadiusLabel.setText(r);
 		}
 
+		/**
+		 * Refresh Player's score and shows on Player's board attribute.
+		 */
 		protected void refreshKingTime() {
 			double kingTime = player.kingTime;
 			double v = Math.floor(kingTime / 6.0);

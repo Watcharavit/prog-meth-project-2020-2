@@ -9,14 +9,35 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 public class MonsterGhost extends Monster implements Collidable, Updatable {
-	public static final double SIZE = 0.8, SPEED = 0.1;
+	/**
+	 * Size of Ghost Monster.
+	 */
+	public static final double SIZE = 0.8;
 
+	/**
+	 * Movement speed of Ghost Monster.
+	 */
+	public static final double SPEED = 0.1;
+
+	/**
+	 * Time it takes before Ghost Monster respawn.
+	 */
 	private double hiddenTime = 0;
 
+	/**
+	 * create Ghost Monster with given spawn tile, direction.
+	 * 
+	 * @param spawnTile Position that living being spawns.
+	 * @param direction Direction that this living being is going.
+	 */
 	public MonsterGhost(Tile spawnTile) {
 		super(spawnTile, SIZE, SPEED, Direction.random());
 	}
 
+	/**
+	 * Update every 1/60 second Check if this monster is dead or not. If it is
+	 * alive, then move it to random direction. Otherwise respawn it.
+	 */
 	@Override
 	public void update(double ticksPassed) {
 		super.update(ticksPassed);
@@ -31,6 +52,9 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 		}
 	}
 
+	/**
+	 * If it collides with player, kill the player.
+	 */
 	@Override
 	public void collide(Being otherCharacter) {
 		if (super.isDead())
@@ -40,33 +64,52 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 		}
 	}
 
+	/**
+	 * Check if Ghost Monster can be pass through.
+	 * 
+	 * @return Always return true.
+	 */
 	@Override
 	public boolean getCanPassThrough() {
 		return true;
 	}
 
+	/**
+	 * @return Ghost Monster cooldown.
+	 */
 	@Override
 	protected double getSpawnCooldown() {
 		return 240.0;
 	}
 
+	/**
+	 * Does't do anything.
+	 */
 	@Override
 	protected void onDeath() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Time waiting before Ghost Monster respawns.
+	 */
 	@Override
 	protected void onSpawn() {
 		this.hiddenTime = 300.0;
 	}
 
+	/**
+	 * Does't do anything.
+	 */
 	@Override
 	protected void onAlive() {
-		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * @return return Transparent image if Ghost Monster is waiting for respawns.
+	 *         Otherwise, return Ghost image.
+	 */
 	@Override
 	protected Sprite getAliveSprite() {
 		if (super.isDead() && this.hiddenTime > 0)
@@ -75,6 +118,9 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 			return SpritesLibrary.GHOST;
 	}
 
+	/**
+	 * @return return dying image of Ghost Monster.
+	 */
 	@Override
 	protected Sprite getDyingSprite() {
 		return SpritesLibrary.GHOST_DYING;
