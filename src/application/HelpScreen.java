@@ -25,24 +25,20 @@ class HelpScreen extends StackPane {
 		howToPlay.setPrefHeight(600);
 		howToPlay.setPrefWidth(780);
 
-		Label title = new Label("How to play");
-		title.setFont(Font.font("Courier New", FontWeight.BOLD, 36));
-		title.setTextFill(Color.WHITE);
-		title.setPadding(new Insets(35, 20, 25, 20));
-		title.setBackground(
-				new Background(new BackgroundFill(Color.DARKORANGE, CornerRadii.EMPTY, new Insets(7, 10, 5, 10))));
+		ImageView title = new ImageView(new Image("sprites/how_to_play.png"));
+		title.setFitHeight(120);
 
 		String manualInformation = "Player 1 control: A, S, D, W, Spacebar = placing bomb , C = using equipment\r\n"
 				+ "Player2 control: Left, Right, Up, Down, Enter = placing bomb,  L = using equipment\r\n" + "\r\n"
 				+ "Equipment: get it according to the score \r\n" + "	Bombkicker = can kick a bomb\r\n"
 				+ "	mitt = can kill everything except thorn monster\r\n" + "\r\n"
 				+ "Item: Item drops randomly when you break the wall\r\n" + "	Item to increase bomb radius by 1\r\n"
-				+ "	Item to increase bomb�s number you can place by 1\r\n" + "\r\n" + "Rules \r\n"
+				+ "	Item to increase bomb's number you can place by 1\r\n" + "\r\n" + "Rules \r\n"
 				+ "1. There is King Floor in the middle of the map, you will get a score \r\n"
 				+ "   by standing on that floor.\r\n"
 				+ "2. Player who has lower score gets Puncher and higher score gets Bombkicker.\r\n"
-				+ "3. Game�s time is 5 minutes,then the game ends.Player with higher score wins.\r\n"
-				+ "4. If you die, your bomb radius and bomb�s number get reduce by 3. \r\n"
+				+ "3. Game's time is 5 minutes,then the game ends.Player with higher score wins.\r\n"
+				+ "4. If you die, your bomb radius and bomb's number get reduce by 3. \r\n"
 				+ "   The lowest you can have is 1 so do not worry about not being able \r\n"
 				+ "   to place a bomb.\r\n"
 				+ "5. You can kill a ghost by using a bomb or a mitt, but you cannot do anything \r\n"
@@ -50,7 +46,6 @@ class HelpScreen extends StackPane {
 		Label manual = new Label(manualInformation);
 		manual.setPadding(new Insets(10, 20, 10, 20));
 		manual.setFont(Font.font("Courier New", FontWeight.BOLD, 15));
-//		manual.setBackground(new Background(new BackgroundFill(Color.AZURE, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		HBox buttonPane = new HBox();
 		buttonPane.setPrefHeight(40);

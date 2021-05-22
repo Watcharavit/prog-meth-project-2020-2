@@ -12,6 +12,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -33,7 +35,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 5;
+		remainingTime = 60 * 1;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
@@ -74,11 +76,8 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			endGameMenu.setAlignment(Pos.CENTER);
 			endGameMenu.setSpacing(24);
 
-			Label endLabel = new Label("Game Ended");
-			endLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 60));
-			endLabel.setTextFill(Color.BLACK);
-			endLabel.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-			endLabel.setOpacity(0.85);
+			ImageView endLabel = new ImageView(new Image("sprites/game_ended.png"));
+			endLabel.setOpacity(0.95);
 
 			VBox scoreBoard = new VBox();
 			Player winnerPlayer = player[0];
@@ -110,7 +109,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			winner.setFont(Font.font("Courier New", FontWeight.BOLD, 40));
 			winner.setTextFill(Color.BLACK);
 			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-			winner.setOpacity(0.85);
+			winner.setOpacity(0.95);
 
 			Button restartButton = new Button("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
@@ -124,7 +123,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);
-			endGameMenu.setPadding(new Insets(72, 0, 0, 300));
+			endGameMenu.setPadding(new Insets(72, 0, 0, 95));
 			this.getChildren().addAll(endGameMenu);
 		}
 	}

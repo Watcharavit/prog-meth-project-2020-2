@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -29,12 +31,8 @@ class HomeScreen extends HBox implements Focusable {
 		left.setAlignment(Pos.CENTER);
 		left.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
-		Label title = new Label("King of Bomb");
-		title.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 60));
-		title.setTextFill(Color.BLACK);
-		title.setPadding(new Insets(18, 3, 18, 3));
-		title.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		title.setOpacity(0.85);
+		ImageView title = new ImageView(new Image("sprites/game_title.png"));
+		title.setOpacity(0.95);
 
 		right.getChildren().add(title);
 		right.setAlignment(Pos.CENTER);
