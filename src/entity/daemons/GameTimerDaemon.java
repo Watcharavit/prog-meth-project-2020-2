@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import resources.MusicsLibrary;
 
 public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	private double remainingTime;
@@ -32,7 +33,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 60 * 5;
+		remainingTime = 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
@@ -59,6 +60,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	private void end() {
 		GameSingleton.destroy();
 		endPane.getChildren().add(new EndView(players));
+		MusicsLibrary.playMusic(MusicsLibrary.GAME_END);
 	}
 
 	class EndView extends Pane {
@@ -113,6 +115,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			Button restartButton = new Button("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
 				GameSingleton.start(true);
+				MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
 			});
 
 			Button homeButton = new Button("Back to Main Menu");

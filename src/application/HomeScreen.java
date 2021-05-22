@@ -14,8 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import resources.MusicsLibrary;
 
-class HomeScreen extends HBox {
+class HomeScreen extends HBox implements Focusable {
 
 	private final Button gameButton, helpButton;
 
@@ -60,4 +61,8 @@ class HomeScreen extends HBox {
 		this.getChildren().addAll(left, right);
 	}
 
+	@Override
+	public void onFocus() {
+		MusicsLibrary.playMusic(MusicsLibrary.MAIN_MENU);
+	}
 }

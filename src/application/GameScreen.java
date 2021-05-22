@@ -8,8 +8,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import resources.MusicsLibrary;
 
-class GameScreen extends StackPane {
+class GameScreen extends StackPane implements Focusable {
 	private final Pane gamePane;
 
 	protected GameScreen() {
@@ -41,4 +42,8 @@ class GameScreen extends StackPane {
 		GameSingleton.start(false);
 	}
 
+	@Override
+	public void onFocus() {
+		MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
+	}
 }
