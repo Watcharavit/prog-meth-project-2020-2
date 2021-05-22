@@ -1,8 +1,8 @@
 package entity.drops;
 
 import entity.livings.Player;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class DropBombQuantityUpgrade extends Drop {
 

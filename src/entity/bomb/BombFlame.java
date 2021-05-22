@@ -5,11 +5,11 @@ import entity.StillObject;
 import entity.livings.LivingBeing;
 import entity.livings.Player;
 import game.GameSingleton;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class BombFlame extends Being implements Updatable, Collidable {
 	private static final double SIZE = 1.0;
@@ -32,6 +32,7 @@ public class BombFlame extends Being implements Updatable, Collidable {
 			((LivingBeing) character).die();
 		}
 	}
+
 	@Override
 	public boolean getCanPassThrough() {
 		return true;

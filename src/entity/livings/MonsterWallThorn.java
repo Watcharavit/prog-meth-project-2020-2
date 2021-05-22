@@ -2,11 +2,11 @@ package entity.livings;
 
 import entity.Being;
 import game.Tile;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Collidable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	public static final double SIZE = 0.8, SPEED = 0.05;
@@ -39,7 +39,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	public void die() {
 		// This thing can't die.
 	}
-	
+
 	@Override
 	public boolean getCanPassThrough() {
 		return false;

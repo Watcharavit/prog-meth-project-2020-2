@@ -1,4 +1,4 @@
-package graphics;
+package resources;
 
 public final class SpritesLibrary {
 	public static final Sprite BOMB = new Sprite(0);
@@ -20,7 +20,7 @@ public final class SpritesLibrary {
 	public static final Sprite BLAST_CENTER = new Sprite(16);
 	public static final Sprite BLAST_BOTTOM = new Sprite(17);
 	public static final Sprite BLAST_LEFT = new Sprite(18);
-	public static final Sprite BLAST_TOP = new Sprite(19);	
+	public static final Sprite BLAST_TOP = new Sprite(19);
 	public static final Sprite BLAST_HORIZONTAL = new Sprite(20);
 	public static final Sprite BLAST_RIGHT = new Sprite(21);
 	public static final Sprite BLAST_VERTICAL = new Sprite(22);

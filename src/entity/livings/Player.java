@@ -1,7 +1,5 @@
 package entity.livings;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Formatter;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +10,6 @@ import entity.equipments.Equipment;
 import entity.terrains.Floor;
 import game.GameSingleton;
 import game.Tile;
-import graphics.Sprite;
 import interfaces.Updatable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,11 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import logic.Direction;
 import logic.PlayerControl;
+import resources.SoundsLibrary;
+import resources.Sprite;
 
 public class Player extends LivingBeing implements Updatable {
 	public static final double SIZE = 0.6;
@@ -36,7 +32,6 @@ public class Player extends LivingBeing implements Updatable {
 	private final Map<PlayerControl, KeyCode> keyMap;
 	private final Sprite normalSprite, dyingSprite;
 	private final PlayerUi ui;
-	//private final Media sound = new Media(new File("/ProgMeth Project/res/bombplaced.wav").toURI().toString());
 
 	public Player(String name, Map<PlayerControl, KeyCode> keyMap, Tile spawnTile, Sprite normalSprite,
 			Sprite dyingSprite, Pane uiPane) {
@@ -45,7 +40,7 @@ public class Player extends LivingBeing implements Updatable {
 		this.bombsNumber = 1;
 		this.bombsPlacedNumber = 0;
 		this.bombRadius = 1;
-		
+
 		this.name = name;
 		this.keyMap = keyMap;
 		this.kingTime = 0;
@@ -96,7 +91,7 @@ public class Player extends LivingBeing implements Updatable {
 				GameSingleton.setTileObject(x, y, bomb);
 				bombsPlacedNumber += 1;
 				ui.refreshBombsNumber();
-				this.playSound();
+				SoundsLibrary.BOMB_PLACED.play();
 			}
 		}
 	}
@@ -120,20 +115,12 @@ public class Player extends LivingBeing implements Updatable {
 		bombsNumber = (Math.max(1, bombsNumber - 3));
 		ui.refreshBombsNumber();
 		ui.refreshBombRadius();
-	}
-	
-	private void playSound() {
-//        MediaPlayer mediaPlayer = new MediaPlayer(this.sound);
-//        mediaPlayer.play();
-		URL sound = getClass().getResource("bombplaced.wav");
-		System.out.println(sound);
-		AudioClip clip = new AudioClip(sound.toString());
-		clip.play();
+		SoundsLibrary.PLAYER_DIE.play();
 	}
 
 	@Override
 	protected void onSpawn() {
-
+		SoundsLibrary.PLAYER_RESPAWN.play();
 	}
 
 	@Override
@@ -170,7 +157,7 @@ public class Player extends LivingBeing implements Updatable {
 		kingTime += ticks;
 		ui.refreshKingTime();
 	}
-	
+
 	public double getKingTime() {
 		return kingTime;
 	}
@@ -192,18 +179,17 @@ public class Player extends LivingBeing implements Updatable {
 			this.bombsNumberLabel = new Label();
 			this.bombRadiusLabel = new Label();
 			this.kingTimeLabel = new Label();
-			
+
 			this.setPadding(new Insets(24));
 
 			this.getChildren().addAll(nameLabel, bombsNumberLabel, bombRadiusLabel, kingTimeLabel);
 			this.setAlignment(Pos.BASELINE_LEFT);
-			
-			
+
 			refreshBombsNumber();
 			refreshBombRadius();
 			refreshKingTime();
 		}
-		
+
 		protected void refreshBombsNumber() {
 			int total = player.bombsNumber;
 			int used = player.bombsPlacedNumber;
@@ -212,7 +198,7 @@ public class Player extends LivingBeing implements Updatable {
 			f.close();
 			this.bombsNumberLabel.setText(r);
 		}
-		
+
 		protected void refreshBombRadius() {
 			int radius = player.bombRadius;
 			Formatter f = new Formatter();
@@ -220,7 +206,7 @@ public class Player extends LivingBeing implements Updatable {
 			f.close();
 			this.bombRadiusLabel.setText(r);
 		}
-		
+
 		protected void refreshKingTime() {
 			double kingTime = player.kingTime;
 			double v = Math.floor(kingTime / 6.0);

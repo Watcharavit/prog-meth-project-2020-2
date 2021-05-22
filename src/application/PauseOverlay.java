@@ -51,12 +51,13 @@ class PauseOverlay extends StackPane {
 
 		Button helpButton = new UnfocusableButton("How to Play");
 		helpButton.setOnAction((ActionEvent e) -> {
-			screenInstance.switchToHelp();
+			AppSingleton.showHelp();
 		});
 
 		Button homeButton = new UnfocusableButton("Back to Main Menu");
 		homeButton.setOnAction((ActionEvent e) -> {
-			screenInstance.switchToHome();
+			screenInstance.resume();
+			AppSingleton.switchToHome();
 		});
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton, helpButton, homeButton);
 

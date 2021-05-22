@@ -3,10 +3,10 @@ package entity.terrains;
 
 import entity.Being;
 import entity.StillObject;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Passable;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class Floor extends StillObject implements Passable, Bombable {
 

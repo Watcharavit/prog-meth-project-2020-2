@@ -4,10 +4,10 @@ import entity.StillObject;
 import entity.livings.Player;
 import game.GameSingleton;
 import game.Tile;
-import graphics.Sprite;
-import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Updatable;
+import resources.Sprite;
+import resources.SpritesLibrary;
 
 public class BombObject extends StillObject implements Updatable, Bombable {
 	private final Player placer;

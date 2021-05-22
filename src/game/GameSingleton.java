@@ -18,6 +18,8 @@ public class GameSingleton {
 	public final static int HEIGHT = 25;
 	protected final static int TILE_SIZE = 24;
 
+	private static Pane rootPane;
+
 	protected static Tile[][] tiles;
 	protected static HashSet<Being> allBeings;
 	private static InputManager inputManager;
@@ -67,13 +69,22 @@ public class GameSingleton {
 		return beingsManager.moveBeing(being, dx, dy);
 	}
 
-	public static void initialize(Pane root) {
-		root.getChildren().clear();
+	public static void initialize(Pane pane) {
+		rootPane = pane;
+	}
+
+	public static void start() {
+		destroy();
+
+		rootPane.getChildren().clear();
+
+		StackPane rootStack = new StackPane();
 
 		HBox container = new HBox();
 
 		VBox leftPart = new VBox();
 		Pane gameUiPane = new Pane();
+		Pane endOverlayPane = new Pane();
 		leftPart.getChildren().add(gameUiPane);
 		container.getChildren().add(leftPart);
 
@@ -88,7 +99,8 @@ public class GameSingleton {
 		layers.getChildren().add(beingsCanvas);
 		container.getChildren().add(layers);
 
-		root.getChildren().add(container);
+		rootStack.getChildren().addAll(container, endOverlayPane);
+		rootPane.getChildren().add(rootStack);
 
 		allBeings = new HashSet<Being>();
 		tiles = new Tile[WIDTH][HEIGHT];
@@ -97,17 +109,18 @@ public class GameSingleton {
 				tiles[i][j] = new Tile(i, j);
 			}
 		}
-		inputManager = new InputManager(root);
+		inputManager = new InputManager(rootPane);
 		controller = new GameController(objectsCanvas, beingsCanvas);
 		beingsManager = new BeingsManager();
 		MapGenerator.generateMap();
 		MonsterGenerator.generateMonsters();
-		GameplayManager.setupGameplay(gameUiPane);
+		GameplayManager.setupGameplay(gameUiPane, endOverlayPane);
 		controller.start();
 	}
 
 	public static void destroy() {
-		controller.stop();
+		if (controller != null && controller.isActive())
+			controller.stop();
 	}
 
 	public static void pause() {

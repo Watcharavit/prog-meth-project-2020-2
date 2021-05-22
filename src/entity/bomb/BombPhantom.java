@@ -4,10 +4,10 @@ import entity.PhantomEntity;
 import entity.StillObject;
 import entity.livings.Player;
 import game.GameSingleton;
-import graphics.SpritesLibrary;
 import interfaces.Bombable;
 import interfaces.Updatable;
 import logic.Direction;
+import resources.SpritesLibrary;
 
 public class BombPhantom extends PhantomEntity implements Updatable {
 	static final int DEFAULT_FLAME_LIFETIME = 60;
@@ -58,7 +58,8 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 		StillObject tileObject = GameSingleton.getTileObject(x, y);
 		if (tileObject instanceof Bombable) {
 			Bombable casted = ((Bombable) tileObject);
-			BombFlame flame = new BombFlame(x, y, placer, phantomLifetime, casted.getAfterBombed(), SpritesLibrary.BLAST_CENTER);
+			BombFlame flame = new BombFlame(x, y, placer, phantomLifetime, casted.getAfterBombed(),
+					SpritesLibrary.BLAST_CENTER);
 			GameSingleton.addBeing(flame);
 			casted.bombed();
 		}

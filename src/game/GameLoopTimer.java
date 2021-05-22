@@ -3,8 +3,9 @@ package game;
 import javafx.animation.AnimationTimer;
 
 class GameLoopTimer extends AnimationTimer {
-	long lastFrameNano;
-	boolean isPaused = false;
+	private long lastFrameNano;
+	private boolean isPaused = false;
+	private boolean isActive = false;
 
 	@Override
 	public void handle(long nowNano) {
@@ -20,6 +21,7 @@ class GameLoopTimer extends AnimationTimer {
 	@Override
 	public void start() {
 		this.lastFrameNano = System.nanoTime();
+		this.isActive = true;
 		super.start();
 	}
 
@@ -29,6 +31,16 @@ class GameLoopTimer extends AnimationTimer {
 
 	protected void resume() {
 		isPaused = false;
+	}
+
+	@Override
+	public void stop() {
+		this.isActive = false;
+		super.stop();
+	}
+
+	protected boolean isActive() {
+		return isActive;
 	}
 
 	protected void tick(long frameTimeNano) {
