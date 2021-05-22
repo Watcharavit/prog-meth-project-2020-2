@@ -5,7 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import resources.MusicsLibrary;
 
 public class AppSingleton {
 	private static GameScreen gameScreen;
@@ -45,7 +44,7 @@ public class AppSingleton {
 		}
 
 		children.add(node);
-		
+
 		if (node instanceof Focusable) {
 			((Focusable) node).onFocus();
 		}
