@@ -1,7 +1,6 @@
 package application;
 
 import game.GameSingleton;
-import gui.UnfocusableButton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,14 +8,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import resources.MusicsLibrary;
 
-class GameScreen extends StackPane {
-	private boolean isPaused = false;
-	private final StackPane pauseOverlay;
+class GameScreen extends StackPane implements Focusable {
 	private final Pane gamePane;
 
 	protected GameScreen() {
-
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
 
@@ -24,41 +21,29 @@ class GameScreen extends StackPane {
 		GameSingleton.initialize(gamePane);
 		container.getChildren().add(gamePane);
 
-		Button pauseButton = new UnfocusableButton("Pause (ESC)");
+		Button pauseButton = new Button("Pause (ESC)");
+		pauseButton.setFocusTraversable(false);
 		pauseButton.setOnAction((ActionEvent e) -> {
-			this.pause();
+			GameSingleton.pause();
+			AppSingleton.showPause();
 		});
 		container.getChildren().add(pauseButton);
 
 		this.getChildren().add(container);
 
-		pauseOverlay = new PauseOverlay(this);
-
 		this.setOnKeyPressed((KeyEvent e) -> {
 			KeyCode code = e.getCode();
 			if (code == KeyCode.ESCAPE) {
-				if (isPaused)
-					this.resume();
-				else
-					this.pause();
+				GameSingleton.pause();
+				AppSingleton.showPause();
 			}
 		});
-		GameSingleton.start();
+
+		GameSingleton.start(false);
 	}
 
-	protected void pause() {
-		isPaused = true;
-		this.getChildren().add(pauseOverlay);
-		GameSingleton.pause();
-	}
-
-	protected void resume() {
-		isPaused = false;
-		this.getChildren().remove(pauseOverlay);
-		GameSingleton.resume();
-	}
-
-	protected void restart() {
-		GameSingleton.start();
+	@Override
+	public void onFocus() {
+		MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
 	}
 }

@@ -1,55 +1,90 @@
 package application;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import resources.MusicsLibrary;
 
 public class AppSingleton {
 	private static GameScreen gameScreen;
 	private static HomeScreen homeScreen;
+	private static PauseScreen pauseScreen;
 	private static HelpScreen helpScreen;
-	private static StackPane rootStack;
+	private static StackPane screensStack;
 	private static Scene rootScene;
 
 	public static void start(Stage primaryStage) {
-
-		rootStack = new StackPane();
+		screensStack = new StackPane();
 		gameScreen = new GameScreen();
 		homeScreen = new HomeScreen();
-		rootScene = new Scene(rootStack);
-
+		pauseScreen = new PauseScreen();
 		helpScreen = new HelpScreen();
+		rootScene = new Scene(screensStack);
+
+		primaryStage.setScene(rootScene);
 
 		resetToHome();
-		primaryStage.setScene(rootScene);
+
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
 	public static void resetToHome() {
-		switchToHome();
+		screensStack.getChildren().clear();
+		screensStack.getChildren().add(gameScreen);
+		showHome();
 	}
 
-	protected static void switchToGame() {
-		rootStack.getChildren().clear();
-		rootStack.getChildren().add(gameScreen);
-		MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
+	private static void showScreen(Node node) {
+		ObservableList<Node> children = screensStack.getChildren();
+		if (children.size() >= 1) {
+			Node lastChildren = children.get(children.size() - 1);
+			lastChildren.setDisable(true);
+		}
+
+		children.add(node);
+
+		if (node instanceof Focusable) {
+			((Focusable) node).onFocus();
+		}
 	}
 
-	protected static void switchToHome() {
-		rootStack.getChildren().clear();
-		rootStack.getChildren().add(gameScreen);
-		rootStack.getChildren().add(homeScreen);
-		MusicsLibrary.playMusic(MusicsLibrary.MAIN_MENU);
+	private static void hideScreen(Node node) {
+		ObservableList<Node> children = screensStack.getChildren();
+		children.remove(node);
+
+		if (children.size() >= 1) {
+			Node lastChildren = children.get(children.size() - 1);
+			lastChildren.setDisable(false);
+			if (lastChildren instanceof Focusable) {
+				((Focusable) lastChildren).onFocus();
+			}
+		}
+	}
+
+	protected static void showHome() {
+		showScreen(homeScreen);
+	}
+
+	protected static void hideHome() {
+		hideScreen(homeScreen);
+	}
+
+	protected static void showPause() {
+		showScreen(pauseScreen);
+	}
+
+	protected static void hidePause() {
+		hideScreen(pauseScreen);
 	}
 
 	protected static void showHelp() {
-		rootStack.getChildren().add(helpScreen);
+		showScreen(helpScreen);
 	}
 
 	protected static void hideHelp() {
-		rootStack.getChildren().remove(helpScreen);
+		hideScreen(helpScreen);
 	}
 
 }

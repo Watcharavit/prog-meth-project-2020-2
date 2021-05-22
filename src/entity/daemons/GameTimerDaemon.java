@@ -6,7 +6,6 @@ import application.AppSingleton;
 import entity.PhantomEntity;
 import entity.livings.Player;
 import game.GameSingleton;
-import gui.UnfocusableButton;
 import interfaces.Updatable;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -16,12 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import resources.MusicsLibrary;
 
 public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	private double remainingTime;
@@ -34,7 +33,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 60 * 0.5;
+		remainingTime = 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
@@ -61,6 +60,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	private void end() {
 		GameSingleton.destroy();
 		endPane.getChildren().add(new EndView(players));
+		MusicsLibrary.playMusic(MusicsLibrary.GAME_END);
 	}
 
 	class EndView extends Pane {
@@ -83,38 +83,44 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			VBox scoreBoard = new VBox();
 			Player winnerPlayer = player[0];
 			String winnerName = "player 1";
-			for(int i=0; i<player.length;i++) {
-				Label playerScore = new Label(player[i].getName()+ "'s score = "+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
+			for (int i = 0; i < player.length; i++) {
+				Label playerScore = new Label(player[i].getName() + "'s score = "
+						+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
 				playerScore.setFont(new Font(25));
 				playerScore.setTextFill(Color.BLACK);
 				scoreBoard.getChildren().add(playerScore);
-				if(winnerPlayer.getKingTime() < player[i].getKingTime()) {
+				if (winnerPlayer.getKingTime() < player[i].getKingTime()) {
 					winnerPlayer = player[i];
-					winnerName = player[i].getName()+ " wins!!";
-				}else if(winnerPlayer.getKingTime()==0) {
-					winnerName = "Draws !!";
 				}
 			}
-			
+
+			if (winnerPlayer.getKingTime() == 0) {
+				winnerName = "Draw!";
+			} else {
+				winnerName = winnerPlayer.getName() + " Wins!";
+			}
+
 			scoreBoard.setAlignment(Pos.CENTER);
 			scoreBoard.setSpacing(7);
-			scoreBoard.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+			scoreBoard.setBackground(
+					new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			scoreBoard.setOpacity(0.85);
-			
+
 			Label winner = new Label(winnerName);
 			winner.setFont(Font.font("Courier New", FontWeight.BOLD, 40));
 			winner.setTextFill(Color.BLACK);
 			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			winner.setOpacity(0.85);
-			
-			Button restartButton = new UnfocusableButton("Restart");
+
+			Button restartButton = new Button("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
-				GameSingleton.start();
+				GameSingleton.start(true);
+				MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
 			});
 
-			Button homeButton = new UnfocusableButton("Back to Main Menu");
+			Button homeButton = new Button("Back to Main Menu");
 			homeButton.setOnAction((ActionEvent e) -> {
-				GameSingleton.start();
+				GameSingleton.start(false);
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);

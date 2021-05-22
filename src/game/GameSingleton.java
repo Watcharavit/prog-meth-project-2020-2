@@ -73,9 +73,8 @@ public class GameSingleton {
 		rootPane = pane;
 	}
 
-	public static void start() {
+	public static void start(boolean createGameplayManager) {
 		destroy();
-
 		rootPane.getChildren().clear();
 
 		StackPane rootStack = new StackPane();
@@ -87,6 +86,8 @@ public class GameSingleton {
 		Pane endOverlayPane = new Pane();
 		leftPart.getChildren().add(gameUiPane);
 		container.getChildren().add(leftPart);
+		gameUiPane.setMinWidth(180);
+		gameUiPane.setMaxWidth(180);
 
 		StackPane layers = new StackPane();
 		Canvas objectsCanvas = new Canvas();
@@ -114,7 +115,8 @@ public class GameSingleton {
 		beingsManager = new BeingsManager();
 		MapGenerator.generateMap();
 		MonsterGenerator.generateMonsters();
-		GameplayManager.setupGameplay(gameUiPane, endOverlayPane);
+		if (createGameplayManager)
+			GameplayManager.setupGameplay(gameUiPane, endOverlayPane);
 		controller.start();
 	}
 

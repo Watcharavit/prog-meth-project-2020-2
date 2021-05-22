@@ -1,6 +1,6 @@
 package application;
 
-import gui.UnfocusableButton;
+import game.GameSingleton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-class PauseOverlay extends StackPane {
-	protected PauseOverlay(GameScreen screenInstance) {
+class PauseScreen extends StackPane {
+	protected PauseScreen() {
 		Pane pauseOverlayBackground = new Pane();
 		pauseOverlayBackground
 				.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -34,30 +34,32 @@ class PauseOverlay extends StackPane {
 		this.setOnKeyPressed((KeyEvent e) -> {
 			KeyCode code = e.getCode();
 			if (code == KeyCode.ESCAPE) {
-				screenInstance.resume();
+				AppSingleton.hidePause();
+				GameSingleton.resume();
 			}
 		});
 
-		Button resumeButton = new UnfocusableButton("Resume (ESC)");
+		Button resumeButton = new Button("Resume (ESC)");
 		resumeButton.setOnAction((ActionEvent e) -> {
-			screenInstance.resume();
+			AppSingleton.hidePause();
+			GameSingleton.resume();
 		});
 
-		Button restartButton = new UnfocusableButton("Restart");
+		Button restartButton = new Button("Restart");
 		restartButton.setOnAction((ActionEvent e) -> {
-			screenInstance.restart();
-			screenInstance.resume();
+			AppSingleton.hidePause();
+			GameSingleton.start(true);
 		});
 
-		Button helpButton = new UnfocusableButton("How to Play");
+		Button helpButton = new Button("How to Play");
 		helpButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.showHelp();
 		});
 
-		Button homeButton = new UnfocusableButton("Back to Main Menu");
+		Button homeButton = new Button("Back to Main Menu");
 		homeButton.setOnAction((ActionEvent e) -> {
-			screenInstance.resume();
-			AppSingleton.switchToHome();
+			AppSingleton.resetToHome();
+			GameSingleton.start(false);
 		});
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton, helpButton, homeButton);
 

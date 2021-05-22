@@ -14,8 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import resources.MusicsLibrary;
 
-class HomeScreen extends HBox {
+class HomeScreen extends HBox implements Focusable {
 
 	private final Button gameButton, helpButton;
 
@@ -38,11 +39,10 @@ class HomeScreen extends HBox {
 		right.getChildren().add(title);
 		right.setAlignment(Pos.CENTER);
 
-
 		gameButton = new Button("Start Game");
 		gameButton.setOnAction((ActionEvent e) -> {
-			GameSingleton.start();
-			AppSingleton.switchToGame();
+			AppSingleton.hideHome();
+			GameSingleton.start(true);
 		});
 		gameButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
 		gameButton.setPrefHeight(40);
@@ -61,4 +61,8 @@ class HomeScreen extends HBox {
 		this.getChildren().addAll(left, right);
 	}
 
+	@Override
+	public void onFocus() {
+		MusicsLibrary.playMusic(MusicsLibrary.MAIN_MENU);
+	}
 }
