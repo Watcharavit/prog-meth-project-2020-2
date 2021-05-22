@@ -13,18 +13,15 @@ import resources.MusicsLibrary;
 /**
  * The screen containing the game itself. This screen also serves as background for {@link HomeScreen}.
  * This class passes a large Pane to {@link game.GameSingleton} to draw the game content.
- * THis class creates a floating Pause button on the bottom left of the screen.
- * @author Wisha
+ * This class creates a floating Pause button on the bottom left of the screen.
  *
  */
 class GameScreen extends Screen {
-	private final Pane gamePane;
-
 	protected GameScreen() {
 		StackPane container = new StackPane();
 		container.setAlignment(Pos.BOTTOM_LEFT);
 
-		gamePane = new Pane();
+		Pane gamePane = new Pane();
 		GameSingleton.initialize(gamePane);
 		container.getChildren().add(gamePane);
 

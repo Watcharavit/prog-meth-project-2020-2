@@ -20,7 +20,6 @@ import javafx.scene.text.Font;
 /**
  * This screen is to be shown when the game is paused.
  * This screen contains buttons for: Resume, Restart, How to Play, and Back to Main Menu.
- * @author Wisha
  *
  */
 class PauseScreen extends Screen {

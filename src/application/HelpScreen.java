@@ -19,7 +19,6 @@ import javafx.scene.text.FontWeight;
 
 /**
  * This is the How to Play screen. It consists mostly of Labels explaining the game.
- * @author Watcharavit
  *
  */
 class HelpScreen extends Screen {

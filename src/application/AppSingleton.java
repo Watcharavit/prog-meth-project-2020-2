@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  * 
  * A trick we use here is to make the {@link HomeScreen} transparent,
  * so we can have the {@link GameScreen} below as moving background.
- * @author Wisha
  *
  */
 public class AppSingleton {
@@ -86,34 +85,46 @@ public class AppSingleton {
 	}
 
 	/**
+	 * Show home screen.
 	 * @see HomeScreen
 	 */
 	protected static void showHome() {
 		showScreen(homeScreen);
 	}
 
+	/**
+	 * Hide home screen.
+	 */
 	protected static void hideHome() {
 		hideScreen(homeScreen);
 	}
 
 	/**
+	 * Show pause screen.
 	 * @see PauseScreen
 	 */
 	protected static void showPause() {
 		showScreen(pauseScreen);
 	}
 
+	/**
+	 * Hide pause screen.
+	 */
 	protected static void hidePause() {
 		hideScreen(pauseScreen);
 	}
 
 	/**
+	 * Show help screen.
 	 * @see HelpScreen
 	 */
 	protected static void showHelp() {
 		showScreen(helpScreen);
 	}
 
+	/**
+	 * Hide help screen.
+	 */
 	protected static void hideHelp() {
 		hideScreen(helpScreen);
 	}

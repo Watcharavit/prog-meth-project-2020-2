@@ -21,7 +21,6 @@ import resources.MusicsLibrary;
 /**
  * The Home Screen displays a large logo, a Start Game button, and a How to Play button.
  * This screen uses {@link GameScreen} as animated background.
- * @author Wisha
  *
  */
 class HomeScreen extends Screen {

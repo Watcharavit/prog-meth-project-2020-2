@@ -4,7 +4,6 @@ import javafx.scene.layout.StackPane;
 
 /**
  * This is the abstract class extended by screens.
- * @author Wisha
  *
  */
 abstract class Screen extends StackPane {
