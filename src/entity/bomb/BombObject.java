@@ -10,18 +10,49 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 public class BombObject extends StillObject implements Updatable, Bombable {
+
+	/**
+	 * Player who place this bomb.
+	 */
 	private final Player placer;
+
+	/**
+	 * Bomb radius.
+	 */
 	public final int radius;
+
+	/**
+	 * Time left until bomb explode.
+	 */
 	private double remainingTicks = 105;
+
+	/**
+	 * Boolean to make sure a bomb explode only once.
+	 */
 	private boolean explosionLock = false;
+
+	/**
+	 * Object at the position before in replaces by a bomb.
+	 */
 	private final Bombable originalObject;
 
+	/**
+	 * Construct bomb.
+	 * 
+	 * @param placer         Player who place this bomb.
+	 * @param radius         Bomb radius.
+	 * @param originalObject Object at the position before in replaces by a bomb.
+	 */
 	public BombObject(Player placer, int radius, Bombable originalObject) {
 		this.placer = placer;
 		this.radius = radius;
 		this.originalObject = originalObject;
 	}
 
+	/**
+	 * Update every 1/60 second Check if this bomb should be explode or not. If yes,
+	 * then explode.
+	 */
 	@Override
 	public void update(double ticksPassed) {
 		this.remainingTicks -= ticksPassed;
@@ -31,12 +62,20 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 		}
 	}
 
+	/**
+	 * Start the explosion of a bomb.
+	 */
 	private void startExplosion() {
 		Tile tile = super.getTile();
 		BombPhantom phantom = new BombPhantom(placer, radius, tile.x, tile.y);
 		phantom.startExplosion();
 	}
 
+	/**
+	 * If the bomb has not explode yet, then reduce number of bomb player can place.
+	 * 
+	 * @return True if the bomb has not explode. Otherwise return false.
+	 */
 	public boolean prepareForExplosion() {
 		if (!explosionLock) {
 			explosionLock = true;
@@ -48,17 +87,26 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 			return false;
 	}
 
+	/**
+	 * @return Its sprite.
+	 */
 	@Override
 	public Sprite getSprite() {
 		return SpritesLibrary.BOMB;
 	}
 
+	/**
+	 * Called when a bomb explode.
+	 */
 	@Override
 	public void bombed() {
 		if (prepareForExplosion())
 			startExplosion();
 	}
 
+	/**
+	 * @return Object after the bomb explode and completely gone.
+	 */
 	@Override
 	public StillObject getAfterBombed() {
 		return originalObject.getAfterBombed();
