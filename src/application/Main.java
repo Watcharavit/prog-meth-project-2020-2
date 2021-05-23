@@ -16,6 +16,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) {
+		stage.setTitle("King of Bombs");
 		AppSingleton.start(stage);
 	}
 }

@@ -166,7 +166,7 @@ public class GameSingleton {
 
 		VBox leftPart = new VBox();
 		Pane gameUiPane = new Pane();
-		Pane endOverlayPane = new Pane();
+		StackPane endOverlayPane = new StackPane();
 		leftPart.getChildren().add(gameUiPane);
 		container.getChildren().add(leftPart);
 		gameUiPane.setMinWidth(180);

@@ -6,6 +6,7 @@ import application.AppSingleton;
 import entity.PhantomEntity;
 import entity.livings.Player;
 import game.GameSingleton;
+import gui.StyledButton;
 import interfaces.Updatable;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -67,7 +69,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 60 * 5;
+		remainingTime = 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
@@ -109,7 +111,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	 * Create end screen and score board.
 	 *
 	 */
-	class EndView extends Pane {
+	class EndView extends StackPane {
 
 		/**
 		 * Create end screen and score board. Showing score of each player, the result
@@ -118,16 +120,17 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		 * @param player Players in the game.
 		 */
 		protected EndView(Player[] player) {
-			Pane EndScreenBackground = new Pane();
-			EndScreenBackground
+			StackPane stack = new StackPane();
+			Pane endScreenBackground = new Pane();
+			endScreenBackground
 					.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-			EndScreenBackground.setOpacity(0.7);
+			endScreenBackground.setOpacity(0.7);
 
 			VBox endGameMenu = new VBox();
 			endGameMenu.setAlignment(Pos.CENTER);
 			endGameMenu.setSpacing(24);
 
-			ImageView endLabel = new ImageView(new Image("sprites/game_ended.png"));
+			ImageView endLabel = new ImageView(new Image("images/game_ended.png"));
 			endLabel.setOpacity(0.95);
 
 			VBox scoreBoard = new VBox();
@@ -162,20 +165,21 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			winner.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 			winner.setOpacity(0.95);
 
-			Button restartButton = new Button("Restart");
+			Button restartButton = new StyledButton("Restart");
 			restartButton.setOnAction((ActionEvent e) -> {
 				GameSingleton.start(true);
 				MusicsLibrary.playMusic(MusicsLibrary.GAME_PLAY);
 			});
 
-			Button homeButton = new Button("Back to Main Menu");
+			Button homeButton = new StyledButton("Back to Main Menu");
 			homeButton.setOnAction((ActionEvent e) -> {
 				GameSingleton.start(false);
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);
-			endGameMenu.setPadding(new Insets(72, 0, 0, 95));
-			this.getChildren().addAll(endGameMenu);
+			//endGameMenu.setPadding(new Insets(72, 0, 0, 95));
+			stack.getChildren().addAll(endScreenBackground, endGameMenu);
+			this.getChildren().addAll(stack);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package application;
 
+import gui.StyledButton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,7 +33,7 @@ class HelpScreen extends Screen {
 		howToPlay.setPrefHeight(600);
 		howToPlay.setPrefWidth(780);
 
-		ImageView title = new ImageView(new Image("sprites/how_to_play.png"));
+		ImageView title = new ImageView(new Image("images/how_to_play.png"));
 		title.setFitHeight(120);
 
 		String manualInformation = "Player 1 control: A, S, D, W, Spacebar = placing bomb , C = using equipment\r\n"
@@ -58,9 +59,7 @@ class HelpScreen extends Screen {
 		buttonPane.setPrefHeight(40);
 		buttonPane.setPrefWidth(780);
 
-		Button backButton = new Button("Back");
-		backButton.setFont(Font.font("Courier New", FontWeight.NORMAL, 15));
-		backButton.setPrefHeight(40);
+		Button backButton = new StyledButton("Back");
 		backButton.setPrefWidth(70);
 		backButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.hideHelp();
@@ -71,7 +70,7 @@ class HelpScreen extends Screen {
 
 		howToPlay.getChildren().addAll(title, manual, buttonPane);
 
-		ImageView crown = new ImageView(new Image("sprites/crown.png"));
+		ImageView crown = new ImageView(new Image("images/crown.png"));
 		crown.setOpacity(0.25);
 
 		stack.getChildren().addAll(crown, howToPlay);

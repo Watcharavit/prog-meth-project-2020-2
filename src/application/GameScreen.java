@@ -1,13 +1,20 @@
 package application;
 
 import game.GameSingleton;
+import gui.StyledButton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import resources.MusicsLibrary;
 
 /**
@@ -26,7 +33,8 @@ class GameScreen extends Screen {
 		GameSingleton.initialize(gamePane);
 		container.getChildren().add(gamePane);
 
-		Button pauseButton = new Button("Pause (ESC)");
+		Button pauseButton = new StyledButton("Pause (ESC)", CornerRadii.EMPTY);
+		pauseButton.setPrefWidth(180);
 		pauseButton.setFocusTraversable(false);
 		pauseButton.setOnAction((ActionEvent e) -> {
 			GameSingleton.pause();

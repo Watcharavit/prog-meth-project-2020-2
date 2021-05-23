@@ -1,6 +1,7 @@
 package application;
 
 import game.GameSingleton;
+import gui.StyledButton;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -46,28 +47,33 @@ class PauseScreen extends Screen {
 			}
 		});
 
-		Button resumeButton = new Button("Resume (ESC)");
+		Button resumeButton = new StyledButton("Resume (ESC)");
 		resumeButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.hidePause();
 			GameSingleton.resume();
 		});
+		resumeButton.setPrefWidth(200);
 
-		Button restartButton = new Button("Restart");
+		Button restartButton = new StyledButton("Restart");
 		restartButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.hidePause();
 			GameSingleton.start(true);
 		});
+		restartButton.setPrefWidth(200);
 
-		Button helpButton = new Button("How to Play");
+		Button helpButton = new StyledButton("How to Play");
 		helpButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.showHelp();
 		});
+		helpButton.setPrefWidth(200);
 
-		Button homeButton = new Button("Back to Main Menu");
+		Button homeButton = new StyledButton("Back to Main Menu");
 		homeButton.setOnAction((ActionEvent e) -> {
 			AppSingleton.resetToHome();
 			GameSingleton.start(false);
 		});
+		homeButton.setPrefWidth(200);
+		
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton, helpButton, homeButton);
 
 		stack.getChildren().addAll(pauseOverlayBackground, pauseMenu);
