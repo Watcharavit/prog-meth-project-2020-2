@@ -69,7 +69,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 5;
+		remainingTime = 60 * 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
