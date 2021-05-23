@@ -22,6 +22,10 @@ import logic.PlayerControl;
 import resources.SoundsLibrary;
 import resources.Sprite;
 
+/**
+ * This class provides all information about each player.
+ *
+ */
 public class Player extends LivingBeing implements Updatable {
 	
 	/**
@@ -244,6 +248,7 @@ public class Player extends LivingBeing implements Updatable {
 
 	/**
 	 * Increase Player's score and shows on Player's board attribute.
+	 * @param ticks Time increase.
 	 */
 	public void incrementKingTime(double ticks) {
 		kingTime += ticks;

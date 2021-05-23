@@ -8,6 +8,10 @@ import logic.Direction;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * This class provides information about Wall Thorn Monster.
+ *
+ */
 public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	/**
 	 * Size of Wall Thorn Monster.

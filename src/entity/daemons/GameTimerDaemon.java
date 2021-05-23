@@ -24,24 +24,60 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import resources.MusicsLibrary;
 
+/**
+ * This is a class used to show attributes of players and time left before the
+ * game end.
+ *
+ */
 public class GameTimerDaemon extends PhantomEntity implements Updatable {
+
+	/**
+	 * Time left before the game ends.
+	 */
 	private double remainingTime;
+
+	/**
+	 * Time showed on screen before the game ends.
+	 */
 	private double remainingTimeDebounced;
+
+	/**
+	 * Label of remaining time shows on screen.
+	 */
 	private Label label;
+
+	/**
+	 * End screen that shows players score and winner.
+	 */
 	private Pane endPane;
+
+	/**
+	 * Array list of players in the game.
+	 */
 	private Player[] players;
 
+	/**
+	 * Initialize all fields. Set time limit of the game depends on you.
+	 * 
+	 * @param players     Array list of players in the game.
+	 * @param timerUiPane Time screen.
+	 * @param endUiPane   End screen.
+	 */
 	public GameTimerDaemon(Player[] players, Pane timerUiPane, Pane endUiPane) {
 		this.players = players;
 		this.endPane = endUiPane;
 
-		remainingTime = 60 * 1;
+		remainingTime = 60 * 60 * 5;
 
 		label = new Label();
 		label.setPadding(new Insets(24));
 		timerUiPane.getChildren().add(label);
 	}
 
+	/**
+	 * Update the game. If remaining time run out, then end the game. If not, update
+	 * time showed on screen to be real remaining time left.
+	 */
 	@Override
 	public void update(double ticksPassed) {
 		remainingTime -= ticksPassed;
@@ -59,13 +95,28 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 		}
 	}
 
+	/**
+	 * End this game {@link game.GameSingleton#destroy()}. Play soundtrack music of
+	 * the end scene.
+	 */
 	private void end() {
 		GameSingleton.destroy();
 		endPane.getChildren().add(new EndView(players));
 		MusicsLibrary.playMusic(MusicsLibrary.GAME_END);
 	}
 
+	/**
+	 * Create end screen and score board.
+	 *
+	 */
 	class EndView extends Pane {
+
+		/**
+		 * Create end screen and score board. Showing score of each player, the result
+		 * of the game. And choice if they want to play again or go back to main menu.
+		 * 
+		 * @param player Players in the game.
+		 */
 		protected EndView(Player[] player) {
 			Pane EndScreenBackground = new Pane();
 			EndScreenBackground
@@ -84,7 +135,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			String winnerName = "player 1";
 			for (int i = 0; i < player.length; i++) {
 				Label playerScore = new Label(player[i].getName() + "'s score = "
-						+ String.format("%3.1f", Math.floor(player[i].getKingTime()) / 60));
+						+ String.format("%3.0f", Math.floor(player[i].getKingTime()) / 60));
 				playerScore.setFont(new Font(25));
 				playerScore.setTextFill(Color.BLACK);
 				scoreBoard.getChildren().add(playerScore);

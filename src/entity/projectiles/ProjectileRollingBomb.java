@@ -11,28 +11,40 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 public class ProjectileRollingBomb extends Projectile implements Updatable, Collidable {
-	
+
 	/**
-	 *  size.
+	 * Its size.
 	 */
 	public final static double SIZE = 0.6;
-	
+
 	/**
-	 *  size.
+	 * Its speed.
 	 */
 	private final static double SPEED = 0.3;
-	
+
 	/**
 	 * Player who uses this skill.
 	 */
 	private final Player kicker;
-	
+
 	/**
-	 * Player who uses this skill.
+	 * Bomb flame radius {@link entity.bomb.BombObject}.
 	 */
 	private final int radius;
+
+	/**
+	 * Check if the bomb exploded.
+	 */
 	private boolean exploded;
 
+	/**
+	 * 
+	 * @param x         Its X position.
+	 * @param y         Its Y position.
+	 * @param direction The direction it is going.
+	 * @param kicker    Player who uses this skill.
+	 * @param radius    Bomb flame radius
+	 */
 	public ProjectileRollingBomb(double x, double y, Direction direction, Player kicker, int radius) {
 		super(x, y, SIZE, SPEED, direction);
 		this.kicker = kicker;
@@ -40,6 +52,10 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 		this.exploded = false;
 	}
 
+	/**
+	 * If the bomb exploded, do nothing. Otherwise, move it to the end of the
+	 * direction, then wait for it to explode @see {@link entity.bomb.BombPhantom}
+	 */
 	private void explode() {
 		if (this.exploded)
 			return;
@@ -51,9 +67,11 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 		phantom.startExplosion();
 	}
 
+	/**
+	 * Update every 1/60 second. Try to move. Move fail = stuck -> explode.
+	 */
 	@Override
 	public void update(double ticksPassed) {
-		// Try to move. Move fail = stuck -> explode.
 		if (!super.move(ticksPassed)) {
 			this.explode();
 		}
@@ -64,6 +82,11 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 
 	}
 
+	/**
+	 * Check if this entity can be pass through.
+	 * 
+	 * @return Always return false.
+	 */
 	@Override
 	public boolean getCanPassThrough() {
 		return false;

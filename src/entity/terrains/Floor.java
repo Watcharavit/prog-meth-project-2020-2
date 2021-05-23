@@ -8,6 +8,10 @@ import interfaces.Passable;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * 
+ *
+ */
 public class Floor extends StillObject implements Passable, Bombable {
 
 	@Override
@@ -20,6 +24,10 @@ public class Floor extends StillObject implements Passable, Bombable {
 
 	}
 
+	/**
+	 * {@link interfaces.Bombable}
+	 * @return Floor
+	 */
 	@Override
 	public StillObject getAfterBombed() {
 		return this;

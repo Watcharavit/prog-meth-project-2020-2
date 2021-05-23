@@ -8,8 +8,12 @@ import logic.Direction;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * This class provides information about Ghost Monster.
+ *
+ */
 public class MonsterGhost extends Monster implements Collidable, Updatable {
-	
+
 	/**
 	 * Size of Ghost Monster.
 	 */
@@ -29,7 +33,6 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	 * create Ghost Monster with given spawn tile, direction.
 	 * 
 	 * @param spawnTile Position that living being spawns.
-	 * @param direction Direction that this living being is going.
 	 */
 	public MonsterGhost(Tile spawnTile) {
 		super(spawnTile, SIZE, SPEED, Direction.random());

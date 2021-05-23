@@ -4,6 +4,10 @@ import game.GameSingleton;
 import game.Tile;
 import logic.Direction;
 
+/**
+ * This class is super class for all monster beings.
+ *
+ */
 abstract class Monster extends LivingBeing {
 
 	/** speed of this monster */

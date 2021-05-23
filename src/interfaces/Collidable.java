@@ -6,7 +6,7 @@ public interface Collidable {
 	// Do something to the other character upon collision
 	/**
 	 * 
-	 * @param otherBeing 
+	 * @param otherBeing Being that collides with this entity.
 	 */
 	public abstract void collide(Being otherBeing);
 	
