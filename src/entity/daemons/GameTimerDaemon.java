@@ -138,7 +138,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			String winnerName = "player 1";
 			for (int i = 0; i < player.length; i++) {
 				Label playerScore = new Label(player[i].getName() + "'s score = "
-						+ String.format("%3.0f", Math.floor(player[i].getKingTime()) / 60));
+						+ String.format("%3.1f", player[i].getKingTime() / 60));
 				playerScore.setFont(new Font(25));
 				playerScore.setTextFill(Color.BLACK);
 				scoreBoard.getChildren().add(playerScore);
