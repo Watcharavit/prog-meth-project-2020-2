@@ -35,24 +35,33 @@ class HelpScreen extends Screen {
 		ImageView title = new ImageView(new Image("images/how_to_play.png"));
 		title.setFitHeight(120);
 
-		String manualInformation = "Player 1 control: A, S, D, W, Spacebar = placing bomb , C = using equipment\r\n"
-				+ "Player2 control: Left, Right, Up, Down, Enter = placing bomb,  L = using equipment\r\n" + "\r\n"
-				+ "Equipment: get it according to the score \r\n" + "	Bombkicker = can kick a bomb\r\n"
-				+ "	mitt = can kill everything except thorn monster\r\n" + "\r\n"
-				+ "Item: Item drops randomly when you break the wall\r\n" + "	Item to increase bomb radius by 1\r\n"
-				+ "	Item to increase bomb's number you can place by 1\r\n" + "\r\n" + "Rules \r\n"
-				+ "1. There is King Floor in the middle of the map, you will get a score \r\n"
-				+ "   by standing on that floor.\r\n"
-				+ "2. Player who has lower score gets Puncher and higher score gets Bombkicker.\r\n"
-				+ "3. Game's time is 5 minutes,then the game ends.Player with higher score wins.\r\n"
-				+ "4. If you die, your bomb radius and bomb's number get reduce by 3. \r\n"
-				+ "   The lowest you can have is 1 so do not worry about not being able \r\n"
-				+ "   to place a bomb.\r\n"
-				+ "5. You can kill a ghost by using a bomb or a mitt, but you cannot do anything \r\n"
-				+ "   against thorn monster.\r\n" + "";
+		/* @formatter:off */
+		String manualInformation =
+				  "Player 1 control: W A S D = move, Spacebar = place bomb, C = use equipment\n"
+				+ "Player 2 control: Arrow keys = move, Enter = place bomb,  L = use equipment\n"
+				+ "\n"
+				+ "Equipments are given by the players' scores:\n"
+				+ "   Top player: Bombkicker = can kick bombs.\n"
+				+ "   Bottom player: Puncher = can punch other players and ghosts.\n"
+				+ "\n"
+				+ "Items appear randomly when you break walls. There are 2 items:\n"
+				+ "   One increases the number of active bombs you can have by 1.\n"
+				+ "   The other increases your bomb radius by 1 tile.\n"
+				+ "\n"
+				+ "Rules:\n"
+				+ "1. The tile in the middle of the map is the King Floor.\n"
+				+ "    You get score by standing on it.\n"
+				+ "2. Game's time is 5 minutes.\n"
+				+ "    When the game ends, the player with highest score wins.\n"
+				+ "4. If you die, your bomb radius and bombs number will be reduced by 3.\n"
+				+ "    But the minimum is 1, so don't worry about not being able to place bombs.\n"
+				+ "5. You can kill ghosts and other players by boming or punching them,\n"
+				+ "    but you cannot do anything to the thorn monsters.";
+		
+		/* @formatter:on */
 		Label manual = new Label(manualInformation);
 		manual.setPadding(new Insets(10, 20, 10, 20));
-		manual.setFont(Font.font("Courier New", FontWeight.BOLD, 15));
+		manual.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 
 		HBox buttonPane = new HBox();
 		buttonPane.setPrefHeight(40);
