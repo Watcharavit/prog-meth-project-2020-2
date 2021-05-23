@@ -1,5 +1,9 @@
 package resources;
 
+/**
+ * This class used to save all images. {@link resources.Sprite}
+ *
+ */
 public final class SpritesLibrary {
 	public static final Sprite BOMB = new Sprite(0);
 	public static final Sprite BOMB_FLAME = new Sprite(1);
