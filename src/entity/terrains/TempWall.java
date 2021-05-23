@@ -25,7 +25,7 @@ public class TempWall extends StillObject implements Bombable {
 	}
 
 	/**
-	 * {@link interfaces.Bombable}
+	 * When bombed, randomly spawn an item.
 	 * 
 	 * @return drop item {@link entity.drops.Drop} with rate of 20% each. If item
 	 *         does not spawn, then return Floor.

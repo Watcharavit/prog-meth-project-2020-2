@@ -9,15 +9,20 @@ import interfaces.Updatable;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * The bomb players place. It explodes after a specified amount of time, or when
+ * hit by blast from another bomb's explosion. It spawns a {@link BombPhantom}
+ * to create explosion.
+ */
 public class BombObject extends StillObject implements Updatable, Bombable {
 
 	/**
-	 * Player who place this bomb.
+	 * Player who placed this bomb.
 	 */
 	private final Player placer;
 
 	/**
-	 * Bomb radius.
+	 * The radius of this bomb.
 	 */
 	public final int radius;
 
@@ -27,7 +32,7 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	private double remainingTicks = 105;
 
 	/**
-	 * Boolean to make sure a bomb explode only once.
+	 * Lock to make sure a bomb explode only once.
 	 */
 	private boolean explosionLock = false;
 
@@ -50,7 +55,7 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this bomb should be explode or not. If yes,
+	 * Update on every frame: Check if this bomb should be explode or not. If yes,
 	 * then explode.
 	 */
 	@Override
@@ -63,7 +68,7 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	}
 
 	/**
-	 * Start the explosion of a bomb.
+	 * Start the explosion of the bomb.
 	 */
 	private void startExplosion() {
 		Tile tile = super.getTile();
@@ -72,10 +77,12 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	}
 
 	/**
-	 * If the bomb has not explode yet, then reduce number of bombs player can
-	 * place.
+	 * If the bomb has not explode yet, then remove this object form the map and
+	 * return the placed bomb quota (with {@link entity.livings.Player#returnBomb()}
+	 * to the placer.
 	 * 
-	 * @return True if the bomb has not explode. Otherwise return false.
+	 * @return True if the bomb has not explode (so it is eligible for explosion).
+	 *         Otherwise return false.
 	 */
 	public boolean prepareForExplosion() {
 		if (!explosionLock) {

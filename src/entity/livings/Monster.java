@@ -10,20 +10,28 @@ import logic.Direction;
  */
 abstract class Monster extends LivingBeing {
 
-	/** speed of this monster */
+	/** MOvement speed of this monster */
 	private final double SPEED;
 
-	/** create monster with given parameter */
+	/**
+	 * Create a monster.
+	 * 
+	 * @param spawnTile The tile at which this monster should spawn and respawn.
+	 * @param size      The body size of this monster. See
+	 *                  {@link entity.Being#halfSize}.
+	 * @param speed     The movement speed of this monster in tiles per tick.
+	 * @param direction The initial movement direction of this monster.
+	 */
 	protected Monster(Tile spawnTile, double size, double speed, Direction direction) {
 		super(spawnTile, size, direction);
 		this.SPEED = speed;
 	}
 
 	/**
-	 * move monster to the same direction as the constructor
+	 * Move the monster in the direction it is facing.
 	 * 
-	 * @param ticksPassed
-	 * @return move monster and change its position
+	 * @param ticksPassed The amount of time that has passed since last move.
+	 * @return Whether or not the move was successful.
 	 */
 	protected boolean move(double ticksPassed) {
 		Direction facing = super.getFacing();

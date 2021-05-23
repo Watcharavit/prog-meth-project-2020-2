@@ -151,7 +151,8 @@ public class BombPhantom extends PhantomEntity implements Updatable {
 	 *                  and choosing the right sprite.
 	 * @param radius    Distance of the target tile away from the bomb center.
 	 * @param lifetime  Amount of time (in ticks) the flame should live for.
-	 * @return
+	 * @return Whether the exploded tile was blast-stopping
+	 *         ({@link interfaces.Bombable#getCanStopBlast()}.
 	 */
 	private boolean explodeAt(Direction direction, int radius, double lifetime) {
 		int x = this.x + direction.getDeltaX() * radius;

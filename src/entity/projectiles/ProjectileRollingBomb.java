@@ -10,6 +10,11 @@ import logic.Direction;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * Projectile spawned by {@link entity.equipments.EquipmentBombKicker}. Moves in
+ * one direction until it hits something. Then explode.
+ *
+ */
 public class ProjectileRollingBomb extends Projectile implements Updatable, Collidable {
 
 	/**
@@ -68,7 +73,8 @@ public class ProjectileRollingBomb extends Projectile implements Updatable, Coll
 	}
 
 	/**
-	 * Update every 1/60 second. Try to move. Move fail = stuck -> explode.
+	 * Update on every frame: Try to move. Move fail = stuck = run
+	 * {@link #explode()}.
 	 */
 	@Override
 	public void update(double ticksPassed) {

@@ -26,6 +26,8 @@ public class InputManager {
 
 	/**
 	 * Add event filters that will update {@link #activeKeys}.
+	 * 
+	 * @param inputNode The JavaFX node to listen on.
 	 */
 	private void initialize(Node inputNode) {
 		inputNode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent e) -> {

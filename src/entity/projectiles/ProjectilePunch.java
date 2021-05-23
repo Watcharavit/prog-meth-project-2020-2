@@ -10,6 +10,10 @@ import logic.Direction;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * A punch spawned by {@link entity.equipments.EquipmentPuncher}. Moves in one
+ * direction killing beings it hits for 3 ticks (1/20 seconds).
+ */
 public class ProjectilePunch extends Projectile implements Updatable, Collidable {
 
 	/**
@@ -28,7 +32,7 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 	private double remainingMoveTicks;
 
 	/**
-	 * Player who uses this skill.
+	 * Player who spawned this punch.
 	 */
 	private final Player placer;
 
@@ -97,8 +101,8 @@ public class ProjectilePunch extends Projectile implements Updatable, Collidable
 	}
 
 	/**
-	 * Update every 1/60 second. If remaining move time hasn't run out yet, then
-	 * move it. Otherwise, remove it.
+	 * Update on every frame: If remaining move time hasn't run out yet, then move
+	 * it. Otherwise, remove it.
 	 */
 	@Override
 	public void update(double ticksPassed) {

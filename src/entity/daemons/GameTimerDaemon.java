@@ -77,8 +77,8 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	}
 
 	/**
-	 * Update the game. If remaining time run out, then end the game. If not, update
-	 * time showed on screen to be real remaining time left.
+	 * Update on every frame: If remaining time run out, then end the game. If not,
+	 * update time showed on screen to be real remaining time left.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -98,8 +98,8 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	}
 
 	/**
-	 * End this game {@link game.GameSingleton#destroy()}. Play soundtrack music of
-	 * the end scene.
+	 * End this game with {@link game.GameSingleton#destroy()}. Show the end UI on
+	 * {@link #endPane} Play soundtrack music of the end scene.
 	 */
 	private void end() {
 		GameSingleton.destroy();
@@ -108,8 +108,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 	}
 
 	/**
-	 * Create end screen and score board.
-	 *
+	 * The end screen and score board.
 	 */
 	class EndView extends StackPane {
 
@@ -137,8 +136,8 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 			Player winnerPlayer = player[0];
 			String winnerName = "player 1";
 			for (int i = 0; i < player.length; i++) {
-				Label playerScore = new Label(player[i].getName() + "'s score = "
-						+ String.format("%3.1f", player[i].getKingTime() / 60));
+				Label playerScore = new Label(
+						player[i].getName() + "'s score = " + String.format("%3.1f", player[i].getKingTime() / 60));
 				playerScore.setFont(new Font(25));
 				playerScore.setTextFill(Color.BLACK);
 				scoreBoard.getChildren().add(playerScore);

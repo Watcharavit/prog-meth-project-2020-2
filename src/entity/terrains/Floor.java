@@ -9,7 +9,7 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 /**
- * 
+ * Floor.
  *
  */
 public class Floor extends StillObject implements Passable, Bombable {
@@ -25,9 +25,9 @@ public class Floor extends StillObject implements Passable, Bombable {
 	}
 
 	/**
-	 * {@link interfaces.Bombable}
+	 * When bombed, floor is still floor.
 	 * 
-	 * @return Floor
+	 * @return this same instance.
 	 */
 	@Override
 	public StillObject getAfterBombed() {

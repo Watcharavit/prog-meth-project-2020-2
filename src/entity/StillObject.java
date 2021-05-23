@@ -3,18 +3,18 @@ package entity;
 import game.Tile;
 
 /**
- * This class is super class for those classes that cannot be move.
- *
+ * Non-moving object found in each {@link game.Tile}.
  */
 public abstract class StillObject extends PhysicalEntity {
 
 	/**
-	 * Its tile.
+	 * The containing tile.
 	 */
 	private Tile tile;
 
 	/**
-	 * Set tile.
+	 * Set the containing tile. Should only be called from
+	 * {@link game.Tile#setObject}.
 	 * 
 	 * @param tile Its tile.
 	 */
@@ -23,6 +23,7 @@ public abstract class StillObject extends PhysicalEntity {
 	}
 
 	/**
+	 * Getter for {@link #tile}.
 	 * 
 	 * @return Tile.
 	 */

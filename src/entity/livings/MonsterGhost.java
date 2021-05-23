@@ -9,8 +9,10 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 /**
- * This class provides information about Ghost Monster.
- *
+ * This class provides information about Ghost Monster. Unlike other living
+ * beings, the ghost monster disappears for a duration in spawning phase (see
+ * {@link LivingBeing}). We achieve this by returning an empty sprite for some
+ * time after spawn.
  */
 public class MonsterGhost extends Monster implements Collidable, Updatable {
 
@@ -39,8 +41,9 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this monster is dead or not. If it is
-	 * alive, then move it to random direction. Otherwise respawn it.
+	 * Update on every frame: Handle movement and the disappear-before-spawn logic.
+	 * If monster is dead, reduce {@link #hiddenTime}. If monster is alive, try to
+	 * move. If move fail, turn to a random direction.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -57,7 +60,7 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	}
 
 	/**
-	 * If it collides with player, kill the player.
+	 * Upon collision with a player, kill the player.
 	 */
 	@Override
 	public void collide(Being otherCharacter) {
@@ -68,14 +71,20 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 		}
 	}
 
+	/**
+	 * Ghosts are pass-through. Other beings can walk through them.
+	 */
 	@Override
 	public boolean getCanPassThrough() {
 		return true;
 	}
 
+	/**
+	 * 5 seconds spawn cooldown (during 4 of which this thing will be invisible),
+	 */
 	@Override
 	protected double getSpawnCooldown() {
-		return 240.0;
+		return 300.0;
 	}
 
 	@Override
@@ -83,9 +92,12 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 
 	}
 
+	/**
+	 * Upon entering spawning phase, start a 4 seconds hidden duration.
+	 */
 	@Override
 	protected void onSpawn() {
-		this.hiddenTime = 300.0;
+		this.hiddenTime = 240.0;
 	}
 
 	@Override
@@ -94,8 +106,7 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 	}
 
 	/**
-	 * @return return Transparent sprite if this entity is waiting for respawns.
-	 *         Otherwise, return living sprite.
+	 * @return return Transparent sprite if hidden, normal sprite otherwise.
 	 */
 	@Override
 	protected Sprite getAliveSprite() {

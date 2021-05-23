@@ -10,9 +10,13 @@ import interfaces.Updatable;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * Floor that increase the score of the players standing on it.
+ *
+ */
 public class KingFloor extends Floor implements Updatable, Passable {
 	/**
-	 * PLayer that is on this specific floor.
+	 * Players that are on this specific floor.
 	 */
 	private HashSet<Player> standingPlayers;
 
@@ -28,17 +32,14 @@ public class KingFloor extends Floor implements Updatable, Passable {
 		return SpritesLibrary.KING_FLOOR;
 	}
 
-	// Java is not smart so we need to provide this to set.toArray() to get the
-	// correct
-	// type.
 	/**
-	 * Array of players.
+	 * An empty array to specify type for set.toArray().
 	 */
 	private static final Player[] emptyPlayersArray = {};
 
 	/**
-	 * Update every 1/60 second. Check if any players stand on this floor. If yes,
-	 * then increase score of that player.
+	 * Update on every frame: Check if any players stand on this floor. If yes, then
+	 * increase score of that player.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -57,7 +58,7 @@ public class KingFloor extends Floor implements Updatable, Passable {
 	}
 
 	/**
-	 * Add player to standingPlayer if it pass this floor.
+	 * Add player to {@link #standingPlayers} if it pass this floor.
 	 * 
 	 * @param character Character that pass this floor.
 	 */

@@ -4,21 +4,25 @@ import entity.Being;
 import game.GameSingleton;
 import logic.Direction;
 
+/**
+ * Very simple being that only moves in one direction and has short lifetime.
+ *
+ */
 abstract class Projectile extends Being {
 
 	/**
-	 * Distance that it moves.
+	 * Delta of its movement.
 	 */
 	private final double moveDeltaX, moveDeltaY;
 
 	/**
-	 * Constructor for skill after using the equipment.
+	 * Constructor for the projectile.
 	 * 
-	 * @param x         Its X position.
-	 * @param y         Its Y position.
-	 * @param size      Its size.
-	 * @param speed     Its speed.
-	 * @param direction The direction it is going.
+	 * @param x         Initial X position.
+	 * @param y         Initial Y position.
+	 * @param size      Size.
+	 * @param speed     Movement speed.
+	 * @param direction Movement direction.
 	 */
 	public Projectile(double x, double y, double size, double speed, Direction direction) {
 		super(x, y, size);
@@ -27,8 +31,9 @@ abstract class Projectile extends Being {
 	}
 
 	/**
+	 * On every frame, move the projectile in its direction.
 	 * 
-	 * @param ticksPassed Time rate of game rendering.
+	 * @param ticksPassed Amount of time since last frame.
 	 * @return Method to move @see
 	 *         {@link game.GameSingleton#moveBeing(Being, double, double)}
 	 */

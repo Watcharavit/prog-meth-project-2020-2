@@ -11,12 +11,13 @@ import interfaces.Passable;
 import resources.SoundsLibrary;
 
 /**
- * Drop Item that can be picked by Player.
+ * Item that can be picked by Player.
  */
 abstract class Drop extends StillObject implements Passable, Bombable {
 
 	/**
-	 * If being that pass item is Player, then Player collects it.
+	 * If the being the pass item is a Player, run {@link #onPicked(Player)} for
+	 * that player.
 	 */
 	@Override
 	public void pass(Being character) {
@@ -31,13 +32,18 @@ abstract class Drop extends StillObject implements Passable, Bombable {
 	}
 
 	/**
+	 * Ran when a player picks this item up. Usually increment some of the player's
+	 * stats.
 	 * 
-	 * @param player Player that walk pass.
+	 * @param player The player that picks this item up.
 	 */
 	protected abstract void onPicked(Player player);
 
 	/**
-	 * Object after it picked.
+	 * Return a floor, because item should be destroyed and replaced with a floor
+	 * when bombed.
+	 * 
+	 * @return A new {@link entity.terrains.Floor} object.
 	 */
 	@Override
 	public StillObject getAfterBombed() {

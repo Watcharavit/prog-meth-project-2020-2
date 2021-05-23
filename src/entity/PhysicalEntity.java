@@ -3,14 +3,15 @@ package entity;
 import resources.Sprite;
 
 /**
- * This class shows that the sub class is visible for player.
+ * {@link Entity} that is rendered somewhere.
  */
 public abstract class PhysicalEntity extends Entity {
 
 	/**
-	 * Get the sprite to be rendered for this entity.
+	 * Get the sprite to render for this entity.
+	 * 
+	 * @return The sprite to render.
 	 */
 	public abstract Sprite getSprite();
-	// return image that should be rendered
 
 }

@@ -10,16 +10,17 @@ import interfaces.Updatable;
 public abstract class Equipment extends PhantomEntity implements Updatable {
 
 	/**
-	 * Cooldown for an equipment.
+	 * Cooldown for the equipment.
 	 */
 	private double cooldown = 0;
 
 	/**
-	 * Player who uses this equipment.
+	 * The player carrying this equipment.
 	 */
 	public final Player user;
 
 	/**
+	 * Constructor: save the given player to {@link #user}.
 	 * 
 	 * @param user Player who uses this equipment.
 	 */
@@ -28,12 +29,12 @@ public abstract class Equipment extends PhantomEntity implements Updatable {
 	}
 
 	/**
-	 * Override in sub class.
+	 * Ran when the equipment is used.
 	 */
 	protected abstract void useEquipment();
 
 	/**
-	 * Use equipment if it is possible.
+	 * Run {@link #useEquipment()} if there is no pending cooldown.
 	 */
 	public void tryUseEquipment() {
 		if (cooldown <= 0)
@@ -41,7 +42,9 @@ public abstract class Equipment extends PhantomEntity implements Updatable {
 	}
 
 	/**
-	 * Reduce cooldown.
+	 * Reduce cooldown as time passes.
+	 * 
+	 * @param ticksPassed Amount of time that passed since last frame.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -50,6 +53,12 @@ public abstract class Equipment extends PhantomEntity implements Updatable {
 		}
 	}
 
+	/**
+	 * Setter for {@link #cooldown}. To be used by subclass when the equipment was
+	 * activated.
+	 * 
+	 * @param cooldown The value to set.
+	 */
 	protected void setCooldown(double cooldown) {
 		this.cooldown = cooldown;
 	}

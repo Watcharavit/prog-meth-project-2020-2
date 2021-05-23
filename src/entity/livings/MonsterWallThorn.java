@@ -9,8 +9,8 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 /**
- * This class provides information about Wall Thorn Monster.
- *
+ * This class provides information about Wall Thorn Monster. The wall thorn
+ * monster cannot be killed by anything and only moves in one axis.
  */
 public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	/**
@@ -34,8 +34,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * Update every 1/60 second. Check if this monster is dead or not. If it is then
-	 * do nothing. Otherwise set the direction it is going.
+	 * Update on every frame: Move the monster and flip direction if stuck.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -49,8 +48,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * If this monster collide with other living beings, then kill them and move
-	 * pass them. Otherwise, move to the opposite direction.
+	 * If this monster collide with another living being, kill the other being.
 	 */
 	@Override
 	public void collide(Being otherCharacter) {
@@ -63,7 +61,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * This monster cannot die, so it does't do anything.
+	 * This monster cannot die, so this method is overridden to do nothing.
 	 */
 	@Override
 	public void die() {
@@ -71,7 +69,8 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * Check if this entity can be pass through.
+	 * Wall thorns are not pass-through: they can collide with each other,
+	 * {@link entity.projectiles.ProjectileRollingBomb} can be stopped by the, etc.
 	 * 
 	 * @return Always return false.
 	 */
@@ -81,7 +80,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * Return spawn cooldown.
+	 * As this being never dies, this function is actually not needed.
 	 * 
 	 * @return Always return 0.0
 	 */
@@ -90,16 +89,25 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 		return 0.0;
 	}
 
+	/**
+	 * Never dies, so do nothing on death.
+	 */
 	@Override
 	protected void onDeath() {
 
 	}
 
+	/**
+	 * Never dies, so do nothing on spawn.
+	 */
 	@Override
 	protected void onSpawn() {
 
 	}
 
+	/**
+	 * Never dies, so do nothing on alive.
+	 */
 	@Override
 	protected void onAlive() {
 
@@ -114,7 +122,9 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * @return return Wall Thorn monster dying sprite.
+	 * Never dies, so return nothing.
+	 * 
+	 * @return return transparent sprite.
 	 */
 	@Override
 	protected Sprite getDyingSprite() {

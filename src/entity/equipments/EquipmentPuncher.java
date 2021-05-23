@@ -5,9 +5,16 @@ import entity.projectiles.ProjectilePunch;
 import game.GameSingleton;
 import logic.Direction;
 
+/**
+ * An equipment that let its user punch other beings.
+ * 
+ * @author user
+ *
+ */
 public class EquipmentPuncher extends Equipment {
 
 	/**
+	 * Constructor: call super(...).
 	 * 
 	 * @param user Player who uses this equipment.
 	 */
@@ -16,8 +23,9 @@ public class EquipmentPuncher extends Equipment {
 	}
 
 	/**
-	 * Punch living being at the direction this user is facing. Then set cooldown
-	 * for an equipment.
+	 * Execute the punch process. Set the cooldown with
+	 * {@link Equipment#setCooldown(double)}. Spawn a
+	 * {@link entity.projectiles.ProjectilePunch}.
 	 */
 	@Override
 	protected void useEquipment() {

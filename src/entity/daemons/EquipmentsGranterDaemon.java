@@ -37,7 +37,7 @@ public class EquipmentsGranterDaemon extends PhantomEntity implements Updatable 
 	}
 
 	/**
-	 * Update every 1/60 second. Set highest score player to equip BombKicker
+	 * Update on every frame: Set highest score player to equip BombKicker
 	 * {@link entity.equipments.EquipmentBombKicker}. Set lowest score player to
 	 * equip Puncher {@link entity.equipments.EquipmentPuncher}
 	 */

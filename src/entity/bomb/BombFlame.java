@@ -11,15 +11,22 @@ import logic.Direction;
 import resources.Sprite;
 import resources.SpritesLibrary;
 
+/**
+ * The blast of the bomb. Kills things that step on it.
+ * 
+ */
 public class BombFlame extends Being implements Updatable, Collidable {
 
 	/**
-	 * Size of bomb flame.
+	 * Size of bomb flame being. The value is 1.0, meaning it occupies the entire
+	 * tile. Any being overlapping with the tile it is on will trigger
+	 * {@link #collide(Being)}.
 	 */
 	private static final double SIZE = 1.0;
 
 	/**
-	 * Player who place this bomb.
+	 * Player who place this bomb. This is currently unused. We may add a mechanic
+	 * to increase the placer's score when this flame kills other players.
 	 */
 	private final Player placer;
 
@@ -78,9 +85,11 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	}
 
 	/**
+	 * Get sprite for a flame tile.
 	 * 
-	 * @param direction
-	 * @param end       boolean, check if bomb flame is at the corner.
+	 * @param direction The direction of the flame tile.
+	 * @param end       Whether or not the flame tile is at the farthest reach of
+	 *                  the explosion.
 	 * @return Sprite for each position.
 	 */
 	protected static Sprite getSpriteFor(Direction direction, boolean end) {
@@ -118,8 +127,8 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this bomb flame should be gone. If yes,
-	 * then remove it and set tile to an specific object after it is gone.
+	 * Update on every frame: Check if this bomb flame should be gone. If yes, then
+	 * remove it and set tile to an specific object after it is gone.
 	 */
 	@Override
 	public void update(double ticksPassed) {

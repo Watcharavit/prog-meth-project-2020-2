@@ -23,7 +23,7 @@ import resources.SoundsLibrary;
 import resources.Sprite;
 
 /**
- * This class provides all information about each player.
+ * A player in the game.
  *
  */
 public class Player extends LivingBeing implements Updatable {
@@ -101,9 +101,9 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this player is dead or not. If it is then
-	 * respawn. Otherwise set the direction it is going and movement it is going to
-	 * do. Do the actions it from player (real life).
+	 * Update on every frame: If player is not dead, poll pressed keys
+	 * ({@link GameSingleton#getActiveKeys()} for control keys and move, place bomb,
+	 * or use equipment accordingly.
 	 */
 	@Override
 	public void update(double ticksPassed) {
@@ -138,7 +138,7 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Place the bomb if it is possible together with playing sound.
+	 * Place a bomb if possible and play bomb placed sound.
 	 */
 	private void placeBomb() {
 		int x = (int) super.getX();
@@ -156,7 +156,7 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Set the available equipment for this Player.
+	 * Set the equipment for this Player.
 	 * 
 	 * @param equipment Equipment that player is having.
 	 */
@@ -169,7 +169,7 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Return spawn cooldown.
+	 * Spawn cooldown for player is 1 second.
 	 * 
 	 * @return always return 60.0
 	 */
@@ -179,7 +179,8 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Penalty when Player is death.
+	 * Penalty when Player is death: reduce {@link #bombRadius} and
+	 * {@link #bombsNumber}.
 	 */
 	@Override
 	public void onDeath() {
@@ -199,7 +200,7 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Does't do anything.
+	 * Nothing to do here.
 	 */
 	@Override
 	protected void onAlive() {
@@ -223,7 +224,7 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Reduce bomb available number and shows on Player's board attribute.
+	 * To be called when a bomb goes off: reduce {@link #bombsPlacedNumber} by 1.
 	 */
 	public void returnBomb() {
 		bombsPlacedNumber -= 1;
@@ -231,7 +232,8 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Increase bomb available number and shows on Player's board attribute.
+	 * To be called upon picking {@link entity.drops.DropBombQuantityUpgrade}:
+	 * Increase bomb available number and show on Player's board attribute.
 	 */
 	public void incrementBombsNumber() {
 		bombsNumber += 1;
@@ -239,7 +241,8 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Increase bomb radius and shows on Player's board attribute.
+	 * To be called upon picking {@link entity.drops.DropBombFlameUpgrade}: Increase
+	 * bomb radius and show on Player's board attribute.
 	 */
 	public void incrementBombRadius() {
 		bombRadius += 1;
@@ -247,9 +250,9 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
-	 * Increase Player's score and shows on Player's board attribute.
+	 * Increase Player's score and show on Player's board attribute.
 	 * 
-	 * @param ticks Time increase.
+	 * @param ticks The amount of time to increase.
 	 */
 	public void incrementKingTime(double ticks) {
 		kingTime += ticks;
@@ -257,14 +260,16 @@ public class Player extends LivingBeing implements Updatable {
 	}
 
 	/**
+	 * Getter for {@link #kingTime} (which is the score).
 	 * 
-	 * @return Player's score.
+	 * @return Player's kingTime.
 	 */
 	public double getKingTime() {
 		return kingTime;
 	}
 
 	/**
+	 * Getter for {@link #name}.
 	 * 
 	 * @return Player's name
 	 */
@@ -272,16 +277,32 @@ public class Player extends LivingBeing implements Updatable {
 		return this.name;
 	}
 
+	/**
+	 * The left hand side UI that display the player's stats.
+	 *
+	 */
 	class PlayerUi extends VBox {
+		/**
+		 * The player object.
+		 */
 		private final Player player;
-		private final Label nameLabel;
-		private final Label bombsNumberLabel;
-		private final Label bombRadiusLabel;
-		private final Label kingTimeLabel;
+		/**
+		 * Label for a stat.
+		 */
+		private final Label nameLabel, bombsNumberLabel, bombRadiusLabel, kingTimeLabel;
+		/**
+		 * 1-decimal-point value for kingTime, so we only need to update
+		 * {@link #kingTimeLabel} every 1/10 second or so rather than every 1/60.
+		 */
 		private double kingTimeDebounced = -1;
 
 		/**
-		 * Create Player's board attribute and remaining time.
+		 * Create the UI for displaying the player's attributes. Shows
+		 * {@link Player#name}, {@link Player#bombRadius}, {@link Player#bombsNumber},
+		 * and {@link Player#kingTime}.
+		 * 
+		 * @param root   The JavaFX Pane to build the UI on.
+		 * @param player The player object itself.
 		 */
 		private PlayerUi(Pane root, Player player) {
 			this.player = player;
@@ -304,7 +325,7 @@ public class Player extends LivingBeing implements Updatable {
 		}
 
 		/**
-		 * Refresh bomb available number and shows on Player's board attribute.
+		 * Refresh bomb available number and show on Player's board attribute.
 		 */
 		protected void refreshBombsNumber() {
 			int total = player.bombsNumber;
@@ -316,7 +337,7 @@ public class Player extends LivingBeing implements Updatable {
 		}
 
 		/**
-		 * Refresh bomb radius and shows on Player's board attribute.
+		 * Refresh bomb radius and show on Player's board attribute.
 		 */
 		protected void refreshBombRadius() {
 			int radius = player.bombRadius;
@@ -327,7 +348,7 @@ public class Player extends LivingBeing implements Updatable {
 		}
 
 		/**
-		 * Refresh Player's score and shows on Player's board attribute.
+		 * Refresh Player's score and show on Player's board attribute.
 		 */
 		protected void refreshKingTime() {
 			double kingTime = player.kingTime;
