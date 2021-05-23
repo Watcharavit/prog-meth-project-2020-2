@@ -13,8 +13,8 @@ import javafx.scene.layout.StackPane;
 import resources.MusicsLibrary;
 
 /**
- * The screen containing the game itself. This screen also serves as background
- * for {@link HomeScreen}. This class passes a large Pane to
+ * Screen for the game itself. This screen also serves as background for
+ * {@link HomeScreen}. This class passes a large Pane to
  * {@link game.GameSingleton} to draw the game content. This class creates a
  * floating Pause button on the bottom left of the screen.
  *

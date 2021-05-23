@@ -7,9 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- * This is a singleton class that handles navigation between screens in the
- * application. It works as a stack navigator: screens are pushed on top and
- * popped of.
+ * Singleton class that handles screens navigation in the application. It works
+ * as a stack navigator: screens are pushed on top and popped of.
  * 
  * A trick we use here is to make the {@link HomeScreen} transparent, so we can
  * have the {@link GameScreen} below as moving background.

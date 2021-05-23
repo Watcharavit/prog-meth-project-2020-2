@@ -19,8 +19,8 @@ import javafx.scene.layout.VBox;
 import resources.MusicsLibrary;
 
 /**
- * The Home Screen displays a large logo, a Start Game button, and a How to Play
- * button. This screen uses {@link GameScreen} as animated background.
+ * Displays a large logo, a Start Game button, and a How to Play button. This
+ * screen uses {@link GameScreen} as animated background.
  *
  */
 class HomeScreen extends Screen {
