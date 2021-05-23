@@ -18,4 +18,8 @@ public class Main extends Application {
 		stage.setTitle("King of Bombs");
 		AppSingleton.start(stage);
 	}
+
+	public static void main(String... args) {
+		Application.launch(args);
+	}
 }

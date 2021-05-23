@@ -28,7 +28,7 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	 * Player who place this bomb. This is currently unused. We may add a mechanic
 	 * to increase the placer's score when this flame kills other players.
 	 */
-	private final Player placer;
+	//private final Player placer;
 
 	/**
 	 * Time left until bomb flame is gone.
@@ -58,7 +58,7 @@ public class BombFlame extends Being implements Updatable, Collidable {
 	 */
 	public BombFlame(int x, int y, Player placer, double lifetime, StillObject afterBomb, Sprite sprite) {
 		super(x + 0.5, y + 0.5, SIZE);
-		this.placer = placer;
+		//this.placer = placer;
 		this.remainingTicks = lifetime;
 		this.afterBomb = afterBomb;
 		this.sprite = sprite;
