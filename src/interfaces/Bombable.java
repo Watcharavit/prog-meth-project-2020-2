@@ -9,6 +9,7 @@ public interface Bombable {
 
 	/**
 	 * Check if the entity can stop bomb flame.
+	 * 
 	 * @return Default false.
 	 */
 	public default boolean getCanStopBlast() {

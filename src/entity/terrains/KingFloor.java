@@ -58,6 +58,7 @@ public class KingFloor extends Floor implements Updatable, Passable {
 
 	/**
 	 * Add player to standingPlayer if it pass this floor.
+	 * 
 	 * @param character Character that pass this floor.
 	 */
 	@Override

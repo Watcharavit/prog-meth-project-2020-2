@@ -16,6 +16,7 @@ public class TempWall extends StillObject implements Bombable {
 
 	/**
 	 * Check if the entity can stop bomb flame.
+	 * 
 	 * @return true.
 	 */
 	@Override
@@ -25,7 +26,9 @@ public class TempWall extends StillObject implements Bombable {
 
 	/**
 	 * {@link interfaces.Bombable}
-	 * @return drop item {@link entity.drops.Drop} with rate of 20% each. If item does not spawn, then return Floor.
+	 * 
+	 * @return drop item {@link entity.drops.Drop} with rate of 20% each. If item
+	 *         does not spawn, then return Floor.
 	 */
 	@Override
 	public StillObject getAfterBombed() {

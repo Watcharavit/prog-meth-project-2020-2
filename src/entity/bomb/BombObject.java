@@ -72,7 +72,8 @@ public class BombObject extends StillObject implements Updatable, Bombable {
 	}
 
 	/**
-	 * If the bomb has not explode yet, then reduce number of bombs player can place.
+	 * If the bomb has not explode yet, then reduce number of bombs player can
+	 * place.
 	 * 
 	 * @return True if the bomb has not explode. Otherwise return false.
 	 */

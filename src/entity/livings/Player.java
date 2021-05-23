@@ -27,7 +27,7 @@ import resources.Sprite;
  *
  */
 public class Player extends LivingBeing implements Updatable {
-	
+
 	/**
 	 * Size of Player.
 	 */
@@ -248,6 +248,7 @@ public class Player extends LivingBeing implements Updatable {
 
 	/**
 	 * Increase Player's score and shows on Player's board attribute.
+	 * 
 	 * @param ticks Time increase.
 	 */
 	public void incrementKingTime(double ticks) {

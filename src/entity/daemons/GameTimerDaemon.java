@@ -177,7 +177,7 @@ public class GameTimerDaemon extends PhantomEntity implements Updatable {
 				AppSingleton.resetToHome();
 			});
 			endGameMenu.getChildren().addAll(endLabel, scoreBoard, winner, restartButton, homeButton);
-			//endGameMenu.setPadding(new Insets(72, 0, 0, 95));
+			// endGameMenu.setPadding(new Insets(72, 0, 0, 95));
 			stack.getChildren().addAll(endScreenBackground, endGameMenu);
 			this.getChildren().addAll(stack);
 		}

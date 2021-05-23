@@ -13,6 +13,7 @@ public class Sound {
 
 	/**
 	 * Load sound effect from resources.
+	 * 
 	 * @param name URl for a sound effect file.
 	 */
 	public Sound(String name) {

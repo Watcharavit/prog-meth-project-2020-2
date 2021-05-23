@@ -9,7 +9,7 @@ public interface Collidable {
 	 * @param otherBeing Being that collides with this entity.
 	 */
 	public abstract void collide(Being otherBeing);
-	
+
 	/**
 	 * Check if the entity can be pass through.
 	 * 

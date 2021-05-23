@@ -26,6 +26,7 @@ public class Floor extends StillObject implements Passable, Bombable {
 
 	/**
 	 * {@link interfaces.Bombable}
+	 * 
 	 * @return Floor
 	 */
 	@Override

@@ -13,7 +13,7 @@ import javafx.util.Duration;
 public final class MusicsLibrary {
 
 	static class Music {
-		
+
 		/**
 		 * Soundtrack file.
 		 */
@@ -21,6 +21,7 @@ public final class MusicsLibrary {
 
 		/**
 		 * Load soundtrack from resources. If soundtrack ends, play again.
+		 * 
 		 * @param name URL of a soundtrack.
 		 */
 		public Music(String name) {
@@ -65,6 +66,7 @@ public final class MusicsLibrary {
 
 	/**
 	 * Control the soundtrack.
+	 * 
 	 * @param music Soundtrack music.
 	 */
 	public static void playMusic(Music music) {

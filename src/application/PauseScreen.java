@@ -73,7 +73,7 @@ class PauseScreen extends Screen {
 			GameSingleton.start(false);
 		});
 		homeButton.setPrefWidth(200);
-		
+
 		pauseMenu.getChildren().addAll(pausedLabel, resumeButton, restartButton, helpButton, homeButton);
 
 		stack.getChildren().addAll(pauseOverlayBackground, pauseMenu);

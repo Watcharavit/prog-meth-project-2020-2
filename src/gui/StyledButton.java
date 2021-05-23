@@ -14,7 +14,7 @@ public class StyledButton extends Button {
 	public StyledButton(String text) {
 		this(text, new CornerRadii(12));
 	}
-	
+
 	public StyledButton(String text, CornerRadii radii) {
 		super(text);
 		this.setBackground(new Background(new BackgroundFill(new Color(0.62, 0.22, 0.22, 1), radii, Insets.EMPTY)));
