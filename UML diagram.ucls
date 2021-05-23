@@ -399,7 +399,7 @@
   </class>  
   <class id="45" language="java" name="game.MapGenerator" project="ProgMeth Project" 
     file="/ProgMeth Project/src/game/MapGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3699" y="4266"/>    
+    <position height="-1" width="-1" x="3799" y="4306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -408,7 +408,7 @@
   </class>  
   <class id="46" language="java" name="game.MonsterGenerator" project="ProgMeth Project" 
     file="/ProgMeth Project/src/game/MonsterGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3286" y="4246"/>    
+    <position height="-1" width="-1" x="3386" y="4286"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
