@@ -9,6 +9,7 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 public class MonsterGhost extends Monster implements Collidable, Updatable {
+	
 	/**
 	 * Size of Ghost Monster.
 	 */
@@ -64,51 +65,34 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 		}
 	}
 
-	/**
-	 * Check if Ghost Monster can be pass through.
-	 * 
-	 * @return Always return true.
-	 */
 	@Override
 	public boolean getCanPassThrough() {
 		return true;
 	}
 
-	/**
-	 * @return Ghost Monster cooldown.
-	 */
 	@Override
 	protected double getSpawnCooldown() {
 		return 240.0;
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onDeath() {
 
 	}
 
-	/**
-	 * Time waiting before Ghost Monster respawns.
-	 */
 	@Override
 	protected void onSpawn() {
 		this.hiddenTime = 300.0;
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onAlive() {
 
 	}
 
 	/**
-	 * @return return Transparent image if Ghost Monster is waiting for respawns.
-	 *         Otherwise, return Ghost image.
+	 * @return return Transparent sprite if this entity is waiting for respawns.
+	 *         Otherwise, return living sprite.
 	 */
 	@Override
 	protected Sprite getAliveSprite() {
@@ -118,9 +102,6 @@ public class MonsterGhost extends Monster implements Collidable, Updatable {
 			return SpritesLibrary.GHOST;
 	}
 
-	/**
-	 * @return return dying image of Ghost Monster.
-	 */
 	@Override
 	protected Sprite getDyingSprite() {
 		return SpritesLibrary.GHOST_DYING;

@@ -18,7 +18,9 @@ public class EquipmentBombKicker extends Equipment {
 	}
 
 	/**
-	 * Kick bomb to the end of the direction this user is facing.
+	 * Kick bomb to the end of the direction this user is facing. Then set cooldown
+	 * for that equipment. Prepare for explosion if it is a bomb @see
+	 * {@link entity.bomb.BombObject}
 	 */
 	@Override
 	protected void useEquipment() {

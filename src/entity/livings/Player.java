@@ -23,6 +23,7 @@ import resources.SoundsLibrary;
 import resources.Sprite;
 
 public class Player extends LivingBeing implements Updatable {
+	
 	/**
 	 * Size of Player.
 	 */

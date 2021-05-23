@@ -10,7 +10,7 @@ import interfaces.Updatable;
 public abstract class Equipment extends PhantomEntity implements Updatable {
 
 	/**
-	 * Cooldown for equipment.
+	 * Cooldown for an equipment.
 	 */
 	private double cooldown = 0;
 

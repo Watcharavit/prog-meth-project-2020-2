@@ -30,7 +30,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * Update every 1/60 second Check if this monster is dead or not. If it is then
+	 * Update every 1/60 second. Check if this monster is dead or not. If it is then
 	 * do nothing. Otherwise set the direction it is going.
 	 */
 	@Override
@@ -67,9 +67,9 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * Check if this monster can be pass through.
+	 * Check if this entity can be pass through.
 	 * 
-	 * @return Always return false
+	 * @return Always return false.
 	 */
 	@Override
 	public boolean getCanPassThrough() {
@@ -79,39 +79,30 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	/**
 	 * Return spawn cooldown.
 	 * 
-	 * @return always return 0.0
+	 * @return Always return 0.0
 	 */
 	@Override
 	protected double getSpawnCooldown() {
 		return 0.0;
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onDeath() {
 
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onSpawn() {
 
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onAlive() {
 
 	}
 
 	/**
-	 * @return return Wall Thorn monster image.
+	 * @return return Wall Thorn monster sprite.
 	 */
 	@Override
 	protected Sprite getAliveSprite() {
@@ -119,7 +110,7 @@ public class MonsterWallThorn extends Monster implements Updatable, Collidable {
 	}
 
 	/**
-	 * @return return Wall Thorn monster dying image.
+	 * @return return Wall Thorn monster dying sprite.
 	 */
 	@Override
 	protected Sprite getDyingSprite() {

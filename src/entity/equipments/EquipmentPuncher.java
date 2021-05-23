@@ -16,7 +16,8 @@ public class EquipmentPuncher extends Equipment {
 	}
 
 	/**
-	 * Punch living being at the direction this user is facing.
+	 * Punch living being at the direction this user is facing. Then set cooldown
+	 * for an equipment.
 	 */
 	@Override
 	protected void useEquipment() {

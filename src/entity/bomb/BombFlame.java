@@ -112,9 +112,6 @@ public class BombFlame extends Being implements Updatable, Collidable {
 		return null;
 	}
 
-	/**
-	 * @return Its sprite.
-	 */
 	@Override
 	public Sprite getSprite() {
 		return sprite;

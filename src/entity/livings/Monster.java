@@ -7,12 +7,12 @@ import logic.Direction;
 abstract class Monster extends LivingBeing {
 
 	/** speed of this monster */
-	private final double speed;
+	private final double SPEED;
 
 	/** create monster with given parameter */
 	protected Monster(Tile spawnTile, double size, double speed, Direction direction) {
 		super(spawnTile, size, direction);
-		this.speed = speed;
+		this.SPEED = speed;
 	}
 
 	/**
@@ -23,22 +23,16 @@ abstract class Monster extends LivingBeing {
 	 */
 	protected boolean move(double ticksPassed) {
 		Direction facing = super.getFacing();
-		double du = speed * ticksPassed;
+		double du = SPEED * ticksPassed;
 		double dx = facing.getDeltaX() * du;
 		double dy = facing.getDeltaY() * du;
 		return GameSingleton.moveBeing(this, dx, dy);
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onDeath() {
 	}
 
-	/**
-	 * Does't do anything.
-	 */
 	@Override
 	protected void onSpawn() {
 

@@ -112,17 +112,17 @@ public abstract class LivingBeing extends Being implements Updatable {
 	}
 
 	/**
-	 * Override in sub class.
+	 * Do something when it is dead depends on sub class.
 	 */
 	protected abstract void onDeath();
 
 	/**
-	 * Override in sub class.
+	 * Do something when it is spawning depends on sub class.
 	 */
 	protected abstract void onSpawn();
 
 	/**
-	 * Override in sub class.
+	 * Do something when it is alive depends on sub class.
 	 */
 	protected abstract void onAlive();
 
@@ -139,17 +139,17 @@ public abstract class LivingBeing extends Being implements Updatable {
 	}
 
 	/**
-	 * Override in sub class.
+	 * Get the living sprite to be rendered for this entity.
 	 */
 	protected abstract Sprite getAliveSprite();
 
 	/**
-	 * Override in sub class.
+	 * Get the dying sprite to be rendered for this entity.
 	 */
 	protected abstract Sprite getDyingSprite();
 
 	/**
-	 * Override in sub class.
+	 * @return Cooldown time it takes to resapwn.
 	 */
 	protected double getSpawnCooldown() {
 		return 0.0;

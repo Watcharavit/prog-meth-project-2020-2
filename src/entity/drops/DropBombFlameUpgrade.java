@@ -6,9 +6,6 @@ import resources.SpritesLibrary;
 
 public class DropBombFlameUpgrade extends Drop {
 
-	/**
-	 * @return Specific sprite.
-	 */
 	@Override
 	public Sprite getSprite() {
 		return SpritesLibrary.BOMB_FLAME;

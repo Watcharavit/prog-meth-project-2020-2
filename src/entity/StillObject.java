@@ -2,6 +2,10 @@ package entity;
 
 import game.Tile;
 
+/**
+ * This class is super class for those classes that cannot be move.
+ *
+ */
 public abstract class StillObject extends PhysicalEntity {
 
 	/**

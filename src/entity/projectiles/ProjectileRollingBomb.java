@@ -11,9 +11,25 @@ import resources.Sprite;
 import resources.SpritesLibrary;
 
 public class ProjectileRollingBomb extends Projectile implements Updatable, Collidable {
+	
+	/**
+	 *  size.
+	 */
 	public final static double SIZE = 0.6;
+	
+	/**
+	 *  size.
+	 */
 	private final static double SPEED = 0.3;
+	
+	/**
+	 * Player who uses this skill.
+	 */
 	private final Player kicker;
+	
+	/**
+	 * Player who uses this skill.
+	 */
 	private final int radius;
 	private boolean exploded;
 
